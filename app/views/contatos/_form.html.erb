@@ -1,0 +1,72 @@
+<%= form_for(@contato) do |f| %>
+  <% if @contato.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contato.errors.count, "error") %> prohibited this contato from being saved:</h2>
+
+      <ul>
+      <% @contato.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :display_name %><br>
+    <%= f.text_field :display_name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email2 %><br>
+    <%= f.text_field :email2, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :home_fone %><br>
+    <%= f.text_field :home_fone, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :business_fone %><br>
+    <%= f.text_field :business_fone, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :mobile_fone %><br>
+    <%= f.text_field :mobile_fone, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :home_city %><br>
+    <%= f.text_field :home_city, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :home_state %><br>
+    <%= f.text_field :home_state, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :home_country %><br>
+    <%= f.text_field :home_country, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :notes %><br>
+    <%= f.text_field :notes, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :web_page %><br>
+    <%= f.text_field :web_page, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Enviar', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+

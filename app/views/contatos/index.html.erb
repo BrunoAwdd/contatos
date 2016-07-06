@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lista de Contatos</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Telefone Comercial</th>
+      <th>Celular</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contatos.each do |contato| %>
+      <tr>
+        <td><%= contato.display_name %></td>
+        <td><%= contato.email %></td>
+        <td><%= contato.home_fone %></td>
+        <td><%= contato.business_fone %></td>
+        <td><%= contato.mobile_fone %></td>
+
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Ações
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><%= link_to 'Ver Contato', contato %></li>
+              <li><%= link_to 'Editar', edit_contato_path(contato) %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Deletar', contato, method: :delete, data: { confirm: 'Você tem certeza?' } %></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contato', new_contato_path %>

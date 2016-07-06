@@ -1,0 +1,12 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "Alternative", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Listar Contatos",   contatos_path %></li>
+        <li><%= link_to "Adicionar Contatos",   new_contato_path %></li>
+        <li><%= link_to "Sobre o App",   about_path %></li>
+      </ul>
+    </nav>
+  </div>
+</header>

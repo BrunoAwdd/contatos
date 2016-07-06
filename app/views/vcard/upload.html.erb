@@ -1,0 +1,9 @@
+<h1>Vcard#upload</h1>
+<p>Find me in app/views/vcard/upload.html.erb</p>
+<%= form_for :vcard, url: vcard_create_path do |f|%>
+  <div class="field">
+    <%= f.label :file %>
+    <%= f.file_field :file %>
+  </div>
+    <%= f.submit %>
+<% end %>
