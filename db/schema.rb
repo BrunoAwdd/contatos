@@ -11,23 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706172547) do
+ActiveRecord::Schema.define(version: 20160707184406) do
 
   create_table "contatos", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email"
-    t.string   "email2"
-    t.string   "home_fone"
-    t.string   "business_fone"
-    t.string   "mobile_fone"
-    t.string   "home_city"
-    t.string   "home_state"
-    t.string   "home_country"
     t.string   "notes"
     t.string   "web_page"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "emails", force: :cascade do |t|
@@ -38,5 +30,28 @@ ActiveRecord::Schema.define(version: 20160706172547) do
   end
 
   add_index "emails", ["contato_id"], name: "index_emails_on_contato_id"
+
+  create_table "enderecos", force: :cascade do |t|
+    t.string   "tipo"
+    t.string   "cidade"
+    t.string   "estado"
+    t.string   "pais"
+    t.integer  "contato_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "enderecos", ["contato_id"], name: "index_enderecos_on_contato_id"
+
+  create_table "telefones", force: :cascade do |t|
+    t.string   "tipo"
+    t.string   "ddd"
+    t.string   "telefone"
+    t.integer  "contato_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "telefones", ["contato_id"], name: "index_telefones_on_contato_id"
 
 end

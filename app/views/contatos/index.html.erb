@@ -8,8 +8,6 @@
       <th>Nome</th>
       <th>Email</th>
       <th>Telefone</th>
-      <th>Telefone Comercial</th>
-      <th>Celular</th>
       <th></th>
     </tr>
   </thead>
@@ -18,10 +16,8 @@
     <% @contatos.each do |contato| %>
       <tr>
         <td><%= contato.full_name %></td>
-        <td><%= contato.email %></td>
-        <td><%= contato.home_fone %></td>
-        <td><%= contato.business_fone %></td>
-        <td><%= contato.mobile_fone %></td>
+        <td><%= contato.emails[0].blank? ? '' :  contato.emails[0].email%></td>
+        <td><%= contato.telefones[0].blank? ? '' :  contato.telefones[0].telefone %></td>
 
         <td>
           <div class="dropdown">

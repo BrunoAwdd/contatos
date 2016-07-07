@@ -1,79 +1,73 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @contato.first_name %>
-</p>
+<section id="dados">
+  <div class="row">
+    <div class="col-md-12"><h3><%= @contato.full_name %></h3></div>
+  </div>
+</section>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @contato.last_name %>
-</p>
+<section id="telefones">
+  <div class="row">
+    <div class="col-md-12"><h4><strong>Telefones</strong></h4></div>
+  </div>
 
-<p>
-  <strong>Display name:</strong>
-  <%= @contato.full_name %>
-</p>
+  <% @contato.telefones.each do |telefone| %>
+      <div class="row">
+        <div class="col-md-12"><p><%= telefone.ddd.blank? ? '' : "(#{telefone.ddd})"%> <%= "#{telefone.telefone} | #{telefone.tipo}" %></p></div>
+      </div>
+  <% end %>
+  <hr>
+</section>
 
-<p>
-  <strong>Email:</strong>
-  <%= @contato.email %>
-</p>
-
-<p>
-  <strong>Email2:</strong>
-  <%= @contato.email2 %>
-</p>
-
-<p>
-  <strong>Home fone:</strong>
-  <%= @contato.home_fone %>
-</p>
-
-<p>
-  <strong>Business fone:</strong>
-  <%= @contato.business_fone %>
-</p>
-
-<p>
-  <strong>Mobile fone:</strong>
-  <%= @contato.mobile_fone %>
-</p>
-
-<p>
-  <strong>Home city:</strong>
-  <%= @contato.home_city %>
-</p>
-
-<p>
-  <strong>Home state:</strong>
-  <%= @contato.home_state %>
-</p>
-
-<p>
-  <strong>Home country:</strong>
-  <%= @contato.home_country %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @contato.notes %>
-</p>
-
-<p>
-  <strong>Web page:</strong>
-  <%= @contato.web_page %>
-</p>
-
-<h2>Room Categories</h2>
-<% if @contato.emails.any? %>
-    <ul>
+<section id="emails">
+  <div class="row">
+    <div class="col-md-12"><h4><strong>Emails</strong></h4></div>
+  </div>
+  <% if @contato.emails.any? %>
       <% @contato.emails.each do |email| %>
-          <li><%= email.email %></li>
+          <div class="row">
+            <div class="col-md-12"><p><%= email.email %></p></div>
+          </div>
       <% end %>
-    </ul>
-<% else %>
-    <p>none available</p>
-<% end %>
+  <% else %>
+      <div class="row">
+        <div class="col-md-12"><p>Sem Emails Cadastrados</p></div>
+      </div>
+  <% end %>
+  <hr>
+</section>
+
+<section id="enderecos">
+  <div class="row">
+    <div class="col-md-12"><h4><strong>Endereços</strong></h4></div>
+  </div>
+  <% if @contato.enderecos.any? %>
+    <% @contato.enderecos.each do |endereco| %>
+        <div class="row">
+          <div class="col-md-12"><p><%= "#{endereco.cidade} - #{endereco.estado} | #{endereco.pais}" %></p></div>
+        </div>
+    <% end %>
+  <% else %>
+      <div class="row">
+        <div class="col-md-12"><p>Sem Endereços Cadastrados</p></div>
+      </div>
+  <% end %>
+  <hr>
+</section>
+
+<section id="adicionais">
+  <div class="row">
+    <div class="col-md-2"><p><strong>Web site</strong></p></div>
+    <div class="col-md-10"><p><%= @contato.web_page %></p></div>
+  </div>
+</section>
+
+<section id="Observações">
+  <div class="row">
+    <div class="col-md-2"><h4><strong>Observaçoes</strong></h4></div>
+    <div class="col-md-10"><h4><%= @contato.notes %></h4></div>
+  </div>
+</section>
+
 <%= link_to 'Edit', edit_contato_path(@contato) %> |
 <%= link_to 'Back', contatos_path %>

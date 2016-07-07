@@ -1,5 +1,6 @@
 class ContatosController < ApplicationController
   before_action :set_contato, only: [:show, :edit, :update, :destroy]
+  before_action :build_contato, only:[:new, :edit]
 
   # GET /contatos
   # GET /contatos.json
@@ -15,12 +16,10 @@ class ContatosController < ApplicationController
   # GET /contatos/new
   def new
     @contato = Contato.new
-    @contato.emails.build
   end
 
   # GET /contatos/1/edit
   def edit
-    @contato.emails.build
   end
 
   # POST /contatos
@@ -62,14 +61,77 @@ class ContatosController < ApplicationController
     end
   end
 
+  def migrate
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contato
       @contato = Contato.find(params[:id])
     end
 
+    def build_contato
+      @contato.emails.build
+      @contato.telefones.build
+      @contato.enderecos.build
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def contato_params
-      params.require(:contato).permit(:first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, emails_attributes:[:id, :email, :_destroy])
+      params.require(:contato).permit(:first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, emails_attributes:[:id, :email, :_destroy], telefones_attributes:[:id, :ddd, :tipo, :telefone, :_destroy], enderecos_attributes:[:id, :tipo, :endereco, :cidade, :estado, :pais])
     end
+
+
+  def migrate_email
+    @contatos = Contato.all
+    @contatos.each do |contato|
+      if !contato.email.blank?
+        contato.emails.push(Email.new ({'email' => contato.email}))
+      end
+      if !contato.email2.blank?
+        contato.emails.push(Email.new ({'email' => contato.email2}))
+      end
+    end
+    render plain: @contatos.to_json
+  end
+
+  def migrate_telefone
+    @contatos = Contato.all
+
+    @contatos.each do |contato|
+      if !contato.home_fone.blank?
+        telefone_number = contato.home_fone
+        telefone = {"tipo" => "Telefone Residencial", "telefone" => telefone_number,  "ddd" => ''}
+        contato.telefones.push(Telefone.new(telefone))
+      end
+      if !contato.mobile_fone.blank?
+        telefone_number = contato.mobile_fone
+        telefone = {"tipo" => "Celular", "telefone" => telefone_number,  "ddd" => ''}
+        contato.telefones.push(Telefone.new(telefone))
+      end
+      if !contato.business_fone.blank?
+        telefone_number = contato.business_fone
+        telefone = {"tipo" => "Telefone Comercial", "telefone" => telefone_number,  "ddd" => ''}
+        contato.telefones.push(Telefone.new(telefone))
+      end
+    end
+  end
+
+  def migrate_endereco
+    @contatos = Contato.all
+
+    @contatos.each do |contato|
+      if !contato.home_city.blank? || !contato.home_state.blank? || !contato.home_country.blank?
+        contato_cidade   = contato.home_city
+        contato_estado   = contato.home_state
+        contato_pais     = contato.home_country
+        endereco = {"tipo" => "residencial", "cidade" => contato_cidade, "estado" => contato_estado, "pais" => contato_pais}
+        contato.enderecos.push Endereco.new endereco
+      end
+    end
+
+    render plain: @contatos[1043].to_yaml
+
+  end
+
 end

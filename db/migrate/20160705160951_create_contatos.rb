@@ -3,8 +3,6 @@ class CreateContatos < ActiveRecord::Migration
     create_table :contatos do |t|
       t.string :first_name
       t.string :last_name
-      t.string :email
-      t.string :email2
       t.string :home_fone
       t.string :business_fone
       t.string :mobile_fone

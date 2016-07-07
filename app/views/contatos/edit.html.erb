@@ -1,7 +1,10 @@
-<h1>Editing Contato</h1>
-<%= link_to 'Show', @contato %> |
-<%= link_to 'Back', contatos_path %>
-<%= I18n.t('yes')  %>
+<h1>Editar Contato</h1>
+<div class="row" style="padding:20px 0px;">
+  <div class="col-md-2 col-md-offset-10">
+    <%= link_to 'ver', @contato %> |  <%= link_to 'voltar', contatos_path %>
+  </div>
+</div>
+
 <%= render 'form' %>
 
 

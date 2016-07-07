@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'about',controller:  :static_pages
 
   resources :contatos do
-    resource :emails
+    get 'migrate'
   end
   get 'vcard/upload'
   #post 'vcard/create'
