@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705160951) do
+ActiveRecord::Schema.define(version: 20160706172547) do
 
   create_table "contatos", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "display_name"
     t.string   "email"
     t.string   "email2"
     t.string   "home_fone"
@@ -30,5 +29,14 @@ ActiveRecord::Schema.define(version: 20160705160951) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "emails", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "contato_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "emails", ["contato_id"], name: "index_emails_on_contato_id"
 
 end

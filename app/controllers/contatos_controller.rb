@@ -15,17 +15,18 @@ class ContatosController < ApplicationController
   # GET /contatos/new
   def new
     @contato = Contato.new
+    @contato.emails.build
   end
 
   # GET /contatos/1/edit
   def edit
+    @contato.emails.build
   end
 
   # POST /contatos
   # POST /contatos.json
   def create
     @contato = Contato.new(contato_params)
-
     respond_to do |format|
       if @contato.save
         format.html { redirect_to @contato, notice: 'Contato was successfully created.' }
@@ -69,6 +70,6 @@ class ContatosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contato_params
-      params.require(:contato).permit(:first_name, :last_name, :display_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page)
+      params.require(:contato).permit(:first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, emails_attributes:[:id, :email, :_destroy])
     end
 end

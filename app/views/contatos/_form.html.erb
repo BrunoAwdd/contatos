@@ -1,4 +1,22 @@
 <%= form_for(@contato) do |f| %>
+
+
+    <div>
+    <%= f.fields_for :emails do |email| %>
+          <div class="emails_fields">
+            <%= email.hidden_field :id %><br>
+            <div class="field">
+              <%= email.label :email %><br>
+              <%= email.email_field :email %>
+              <%= email.check_box :_destroy %>
+              <%= email.label :_destroy, 'remove' %>
+            </div>
+          </div>
+    <% end %>
+    </div>
+
+
+
   <% if @contato.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@contato.errors.count, "error") %> prohibited this contato from being saved:</h2>
@@ -11,7 +29,6 @@
     </div>
   <% end %>
 
-
   <div class="form-group">
     <%= f.label :first_name %>
     <%= f.text_field :first_name, class: "form-control" %>
@@ -21,10 +38,6 @@
     <%= f.text_field :last_name, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :display_name %><br>
-    <%= f.text_field :display_name, class: "form-control" %>
-  </div>
-  <div class="form-group">
     <%= f.label :email %><br>
     <%= f.text_field :email, class: "form-control" %>
   </div>
@@ -32,6 +45,7 @@
     <%= f.label :email2 %><br>
     <%= f.text_field :email2, class: "form-control" %>
   </div>
+
   <div class="form-group">
     <%= f.label :home_fone %><br>
     <%= f.text_field :home_fone, class: "form-control" %>

@@ -29,6 +29,8 @@ gem 'vpim'
 
 gem 'rack-utf8_sanitizer'
 
+gem "cocoon"
+
 
 
 # Use ActiveModel has_secure_password

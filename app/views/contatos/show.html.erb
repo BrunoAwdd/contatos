@@ -12,7 +12,7 @@
 
 <p>
   <strong>Display name:</strong>
-  <%= @contato.display_name %>
+  <%= @contato.full_name %>
 </p>
 
 <p>
@@ -65,5 +65,15 @@
   <%= @contato.web_page %>
 </p>
 
+<h2>Room Categories</h2>
+<% if @contato.emails.any? %>
+    <ul>
+      <% @contato.emails.each do |email| %>
+          <li><%= email.email %></li>
+      <% end %>
+    </ul>
+<% else %>
+    <p>none available</p>
+<% end %>
 <%= link_to 'Edit', edit_contato_path(@contato) %> |
 <%= link_to 'Back', contatos_path %>
