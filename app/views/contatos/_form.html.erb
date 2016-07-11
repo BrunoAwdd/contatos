@@ -30,37 +30,13 @@
       <h4>Endereços</h4>
       <hr>
     </div><br>
-    <div>
+    <div class="fields">
       <%= f.fields_for :enderecos do |endereco| %>
-
-          <%= endereco.hidden_field :id %>
-          <div class="row">
-
-            <%= endereco.label :pais, class: "col-md-2 control-label" %>
-            <div class="form-group col-md-1">
-              <div class=""><%= endereco.text_field :pais, class: "form-control" %></div>
-            </div>
-
-
-            <%= endereco.label :estado, class: "col-md-1 control-label" %>
-            <div class="form-group col-md-1">
-              <%= endereco.text_field :estado, class: "form-control" %>
-            </div>
-
-            <%= endereco.label :cidade, class: "col-md-1 control-label" %>
-            <div class="form-group col-md-3">
-              <div class=""><%= endereco.text_field :cidade, class: "form-control" %></div>
-            </div>
-
-            <div class="checkbox col-md-3">
-              <label>
-                <%= endereco.check_box :_destroy %>
-                <%= endereco.label :_destroy, 'remove' %>
-              </label>
-            </div>
-          </div>
-
+          <%= render 'endereco_fields', :f => endereco %>
       <% end %>
+    </div>
+    <div class='links'>
+      <button class="btn" id="btn_enderecos"><%= link_to_add_association 'Adicionar Endereço', f, :enderecos %></button>
     </div>
     <hr>
   </fieldset>
@@ -70,19 +46,14 @@
       <h4>Emails</h4>
       <hr>
     </div><br>
-    <%= f.fields_for :emails do |email| %>
-        <%= email.hidden_field :id %>
-        <div class="form-group">
-          <%= email.label :email, class: "col-md-2 control-label" %>
-          <div class="col-md-6"><%= email.email_field :email, class: "form-control" %></div>
-          <div class="checkbox col-md-4">
-            <label>
-              <%= email.check_box :_destroy %>
-              <%= email.label :_destroy, 'remove' %>
-            </label>
-          </div>
-        </div>
-    <% end %>
+    <div class="fields">
+      <%= f.fields_for :emails do |email| %>
+          <%= render 'email_fields', :f => email %>
+      <% end %>
+    </div>
+    <div class='links'>
+      <button class="btn" id="btn_emails"><%= link_to_add_association 'Adicionar Emails', f, :emails %></button>
+    </div>
     <hr>
   </fieldset>
 
@@ -91,41 +62,24 @@
       <h4>Telefones</h4>
       <hr>
     </div><br>
-    <%= f.fields_for :telefones do |telefone| %>
-        <%= telefone.hidden_field :id %>
-        <div class="row">
-
-          <%= telefone.label :ddd, class: "col-md-2 control-label" %>
-          <div class="form-group col-md-1">
-            <div class=""><%= telefone.text_field :ddd, class: "form-control" %></div>
-          </div>
-
-
-          <%= telefone.label :telefone, class: "col-md-1 control-label" %>
-          <div class="form-group col-md-2">
-            <%= telefone.text_field :telefone, class: "form-control" %>
-          </div>
-
-          <%= telefone.label :tipo, class: "col-md-1 control-label" %>
-          <div class="form-group col-md-2">
-            <div class=""><%= telefone.text_field :tipo, class: "form-control" %></div>
-          </div>
-
-          <div class="checkbox col-md-3">
-            <label>
-              <%= telefone.check_box :_destroy %>
-              <%= telefone.label :_destroy, 'remove' %>
-            </label>
-          </div>
-        </div>
-    <% end %>
+    <div class="fields">
+      <%= f.fields_for :telefones do |telefone| %>
+          <%= render 'telefone_fields', :f => telefone %>
+      <% end %>
+    </div>
+    <div class='links'>
+      <button class="btn" id="btn_telefones"><%= link_to_add_association 'Adicionar Telefones', f, :telefones %></button>
+    </div>
     <hr>
   </fieldset>
 
   <div class="form-group">
-    <%= f.label :notes, 'Observações', class: "col-md-2 control-label" %>
-    <div class="col-md-10"><%= f.text_area :notes, class: "form-control" %></div>
+
+    <%= f.collection_check_boxes(:product_ids, Product.all, :id, :nome,  class: "form-control", :item_wrapper_class => 'checkbox_container') do |product| %>
+        <%= product.label  { product.check_box + product.text} %>
+    <% end %>
   </div>
+
   <div class="form-group">
     <%= f.label :web_page, class: "col-md-2 control-label" %>
     <div class="col-md-10"><%= f.text_field :web_page, class: "form-control" %></div>

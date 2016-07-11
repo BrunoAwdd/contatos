@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  resources :emails
+
+  resources :products
   root 'static_pages#home'
   get 'about',controller:  :static_pages
 
   resources :contatos do
     get 'migrate'
+    resources :notes
   end
+
   get 'vcard/upload'
   #post 'vcard/create'
 

@@ -9,5 +9,8 @@
       <secret-storage>master_key</secret-storage>
       <auth-required>false</auth-required>
     </data-source>
+    <data-source name="Rails contatos: development" uuid="64d9fd69-748d-4861-95cc-6d199b2aeebe">
+      <auth-required>false</auth-required>
+    </data-source>
   </component>
 </project>

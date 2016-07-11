@@ -74,11 +74,12 @@ class ContatosController < ApplicationController
       @contato.emails.build
       @contato.telefones.build
       @contato.enderecos.build
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contato_params
-      params.require(:contato).permit(:first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, emails_attributes:[:id, :email, :_destroy], telefones_attributes:[:id, :ddd, :tipo, :telefone, :_destroy], enderecos_attributes:[:id, :tipo, :endereco, :cidade, :estado, :pais])
+      params.require(:contato).permit(:first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, product_ids:[], emails_attributes:[:id, :email, :_destroy], telefones_attributes:[:id, :ddd, :tipo, :telefone, :_destroy], enderecos_attributes:[:id, :tipo, :endereco, :cidade, :estado, :pais])
     end
 
 

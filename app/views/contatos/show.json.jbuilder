@@ -1,1 +1,1 @@
-json.extract! @contato, :id, :first_name, :last_name, :full_name, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, :created_at, :updated_at, :emails, :telefones
+json.extract! @contato, :id, :full_name,  :web_page, :created_at, :updated_at, :emails, :telefones, :notes

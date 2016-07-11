@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707184406) do
+ActiveRecord::Schema.define(version: 20160711214149) do
 
   create_table "contatos", force: :cascade do |t|
     t.string   "first_name"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20160707184406) do
     t.string   "web_page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contatos_products", force: :cascade do |t|
+    t.integer "contatos_id"
+    t.integer "products_id"
   end
 
   create_table "emails", force: :cascade do |t|
@@ -42,6 +47,21 @@ ActiveRecord::Schema.define(version: 20160707184406) do
   end
 
   add_index "enderecos", ["contato_id"], name: "index_enderecos_on_contato_id"
+
+  create_table "notes", force: :cascade do |t|
+    t.string   "observacao"
+    t.integer  "contato_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "notes", ["contato_id"], name: "index_notes_on_contato_id"
+
+  create_table "products", force: :cascade do |t|
+    t.string   "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "telefones", force: :cascade do |t|
     t.string   "tipo"
