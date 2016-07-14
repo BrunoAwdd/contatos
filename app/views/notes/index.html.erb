@@ -1,29 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Notes</h1>
+<h1>Observações</h1> <h3><%= @contato.full_name %></h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Observacao</th>
-      <th>Contato</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= render 'index' %>
 
-  <tbody>
-    <% @notes.each do |note| %>
-      <tr>
-        <td><%= note.observacao %></td>
-        <td><%= note.contato %></td>
-        <td><%= link_to 'Show', note %></td>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
-        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<%= link_to 'New Note', new_note_path %>

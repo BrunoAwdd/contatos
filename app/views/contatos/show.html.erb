@@ -62,29 +62,30 @@
   </div>
 </section>
 
-<section id="Observações">
+<section id="Products">
   <div class="row">
-    <div class="col-md-8"><h4><strong>Observações</strong></h4></div>
-    <div class="col-md-2"><h4>Criada em</h4></div>
-    <div class="col-md-2"><h4>Atualizada em</h4></div>
+    <div class="col-md-12"><h4><strong>Trabalha com</strong></h4></div>
   </div>
-  <% if @contato.notes.any? %>
-      <% @contato.notes.each do |note| %>
-        <div class="row">
-          <div class="col-md-8"><p><%= note.observacao %></p></div>
-          <div class="col-md-2"><p><%= note.created_at %></p></div>
-          <div class="col-md-2"><p><%= note.updated_at %></p></div>
-        </div>
-          <hr>
+  <div class="row">
+    <% if @contato.products.any? %>
+      <% @contato.products.each do |produto| %>
+            <div class="col-md-3"><p><%= produto.nome %></p></div>
       <% end %>
-  <% else %>
-      <div class="row">
-        <div class="col-md-12"><h5><strong>Nenhuma Observação Cadastrada</strong></h5></div>
-      </div>
-  <% end %>
-
+    <% else %>
+        <div class="col-md-12"><h5>Nenhuma informação cadastrada</h5></div>
+    <% end %>
+  </div>
 </section>
 <hr>
+
+<section id="Observações">
+  <div class="row">
+    <div class="col-md-12"><h4><strong>Observações</strong></h4></div>
+  </div>
+  <%= render 'notes/index', :@notes => @contato.notes %>
+</section>
+<hr>
+
 <section id="ObservaçõesForm">
   <%= form_for([@contato, @contato.notes.build]) do |f| %>
       <div class="form-group">

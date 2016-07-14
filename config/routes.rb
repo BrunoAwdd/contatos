@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :contatos do
     get 'migrate'
-    resources :notes
+    resources :notes, :only => [:edit, :create, :index, :destroy]
   end
 
   get 'vcard/upload'

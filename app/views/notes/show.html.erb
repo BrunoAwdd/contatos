@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Observacao:</strong>
+  <strong>Observação:</strong>
   <%= @note.observacao %>
 </p>
 
 <p>
   <strong>Contato:</strong>
-  <%= @note.contato %>
+  <%= @note.contato.full_name %>
 </p>
 
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+<%= link_to 'Edit', edit_contato_note_path(:id=>@note.id,  :contato_id=>@note.contato_id) %> |
+<%= link_to 'Back', contato_notes_path %>

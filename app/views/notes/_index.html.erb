@@ -1,0 +1,22 @@
+<% if !@notes.blank? %>
+    <table class = "table table-striped">
+      <thead>
+      <tr>
+        <th>Observação</th>
+        <th colspan="2"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @notes.each do |note| %>
+          <tr>
+            <td><%= note.observacao %></td>
+            <td><%= link_to 'Edit', edit_contato_note_path({id: note.id, contato_id: note.contato.id}) %></td>
+            <td><%= link_to 'Destroy', contato_note_path({id: note.id, contato_id: note.contato.id}) , method: :delete, data: { confirm: 'Are you sure?' }
+            %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <h5>Nenhuma observação cadastrada</h5>
+<% end %>

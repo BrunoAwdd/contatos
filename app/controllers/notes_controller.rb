@@ -4,7 +4,8 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    @notes = Note.where(contato_id: params[:contato_id])
+    @contato = Contato.find(params[:contato_id])
   end
 
   # GET /notes/1
@@ -19,6 +20,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1/edit
   def edit
+    #render plain: @note.to_json
   end
 
   # POST /notes
@@ -47,9 +49,10 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   # DELETE /notes/1.json
   def destroy
+    @contato = Contato.find(params[:contato_id])
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
+      format.html { redirect_to contato_path(@contato), notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
