@@ -37,4 +37,11 @@ class Contato < ActiveRecord::Base
     end
   end
 
+  def filters
+    filter.id = ''
+    filter.name = ''
+    filter.email = ''
+    filter.telefone = ''
+  end
+
 end

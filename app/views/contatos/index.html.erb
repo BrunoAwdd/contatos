@@ -3,39 +3,71 @@
 <h1>Lista de Contatos</h1>
 
 <table class="table table-striped">
+  <%= form_for :filter, url: contatos_path, method: :get do |f| %>
   <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Email</th>
-      <th>Telefone</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @contatos.each do |contato| %>
       <tr>
-        <td><%= contato.full_name %></td>
-        <td><%= contato.emails[0].blank? ? '' :  contato.emails[0].email%></td>
-        <td><%= contato.telefones[0].blank? ? '' :  contato.telefones[0].telefone %></td>
+        <% per_page =  params[:filter].blank? ? 50 : params[:filter]['per_page'] %>
 
-        <td>
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              Ações
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><%= link_to 'Ver Contato', contato %></li>
-              <li><%= link_to 'Editar', edit_contato_path(contato) %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to 'Deletar', contato, method: :delete, data: { confirm: 'Você tem certeza?' } %></li>
-            </ul>
-          </div>
-        </td>
+        <% if per_page != 'Todos' %>
+          <th colspan="5">
+            <%= will_paginate @contatos, :renderer => ContatosHelper::LinkRenderer, :previous_label => '<<', :next_label => '>>', :class => ''  %>
+          </th>
+        <% else %>
+          <th colspan="5"></th>
+        <% end %>
+
+
+
+        <th colspan="1"><%= f.select :per_page, ['10', '20', '30', '50', '100', 'Todos'], {:selected => per_page}, :class => 'form-control' %></th>
       </tr>
+      <tr>
+        <th></th>
+        <th><%= f.text_field :id, class: "form-control"  %></th>
+        <th><%= f.text_field :name, class: "form-control" %></th>
+        <th><%= f.text_field :email, class: "form-control"  %></th>
+        <th><%= f.text_field :telefone, class: "form-control"  %></th>
+        <th><%= f.submit 'Filtrar', class: "btn btn-primary" %></th>
+      </tr>
+
+  </thead>
+  <% end %>
+
+  <%= form_for :mass, url: contatos_path, method: :get do |f| %>
+  <tbody>
+      <tr>
+        <th><input type="checkbox" id="filter[mass][all]" name="filter[mass][]" /></th>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th><%= f.submit 'Ação', class: "btn btn-primary" %></th>
+      </tr>
+      <% @contatos.each do |contato| %>
+        <tr>
+          <td><input type="checkbox" id="filter[mass][<%= contato.id %>]" name="filter[mass][]" value="<%= contato.id %>" /></td>
+          <td><%= contato.id %></td>
+          <td><%= contato.full_name %></td>
+          <td><%= contato.emails[0].blank? ? '' :  contato.emails[0].email%></td>
+          <td><%= contato.telefones[0].blank? ? '' :  contato.telefones[0].telefone %></td>
+
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Ações
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><%= link_to 'Ver Contato', contato %></li>
+                <li><%= link_to 'Editar', edit_contato_path(contato) %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to 'Deletar', contato, method: :delete, data: { confirm: 'Você tem certeza?' } %></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
     <% end %>
   </tbody>
+  <% end %>
 </table>
 
 <br>

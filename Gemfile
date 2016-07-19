@@ -31,6 +31,9 @@ gem 'rack-utf8_sanitizer'
 
 gem "cocoon"
 
+#To Paginate
+gem 'will_paginate', '~> 3.1.0'
+
 
 
 # Use ActiveModel has_secure_password

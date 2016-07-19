@@ -2,10 +2,34 @@ class ContatosController < ApplicationController
   before_action :set_contato, only: [:show, :edit, :update, :destroy]
   before_action :build_contato, only:[:new, :edit]
 
+
+  def initialize
+    super
+    @where = ''
+  end
+
+
   # GET /contatos
   # GET /contatos.json
   def index
-    @contatos = Contato.all
+    if params[:filter].blank?
+      @contatos = Contato.paginate(:page => params[:page], :per_page => 50)
+    else
+      if params[:filter]['per_page'] != 'Todos'
+        @contatos = Contato.joins(
+            "LEFT JOIN telefones ON telefones.contato_id = contatos.id
+            LEFT JOIN emails ON emails.contato_id = contatos.id ")
+                        .where(filterWhere(params[:filter]))
+                        .group('contatos.id')
+                        .paginate(:page => params[:page], :per_page => params[:filter]['per_page'])
+      else
+        @contatos = Contato.joins(
+            "LEFT JOIN telefones ON telefones.contato_id = contatos.id
+            LEFT JOIN emails ON emails.contato_id = contatos.id ")
+                        .where(filterWhere(params[:filter]))
+                        .group('contatos.id')
+      end
+    end
   end
 
   # GET /contatos/1
@@ -61,6 +85,12 @@ class ContatosController < ApplicationController
     end
   end
 
+  #MASS /contatos/1
+  #MASS /contatos/1.json
+  def mass
+
+  end
+
   def migrate
   end
 
@@ -79,7 +109,7 @@ class ContatosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contato_params
-      params.require(:contato).permit(:first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, product_ids:[], emails_attributes:[:id, :email, :_destroy], telefones_attributes:[:id, :ddd, :tipo, :telefone, :_destroy], enderecos_attributes:[:id, :tipo, :endereco, :cidade, :estado, :pais])
+      params.require(:contato).permit(:first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, :filter, product_ids:[], emails_attributes:[:id, :email, :_destroy], telefones_attributes:[:id, :ddd, :tipo, :telefone, :_destroy], enderecos_attributes:[:id, :tipo, :endereco, :cidade, :estado, :pais])
     end
 
 
@@ -134,5 +164,35 @@ class ContatosController < ApplicationController
     render plain: @contatos[1043].to_yaml
 
   end
+
+  def filterWhere(params)
+    if !params['id'].blank?
+      addWhere("contatos.id LIKE \"%#{params['id']}%\"")
+    end
+
+    if !params['name'].blank?
+      addWhere("(first_name LIKE \"%#{params['name']}%\" OR last_name LIKE \"%#{params['name']}%\")")
+    end
+
+    if !params['telefone'].blank?
+      addWhere("telefones.telefone LIKE \"%#{params['telefone']}%\"")
+    end
+
+    if !params['email'].blank?
+      addWhere(" emails.email LIKE \"%#{params['email']}%\"")
+    end
+
+    @where
+
+  end
+
+  def addWhere (clause)
+    if !@where.blank?
+      @where = @where + ' AND ' + clause
+    else
+      @where =  clause
+    end
+  end
+
 
 end
