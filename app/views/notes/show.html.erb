@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Observação:</strong>
+  <strong><%= t('Note.model.Note') %>:</strong>
   <%= @note.observacao %>
 </p>
 
 <p>
-  <strong>Contato:</strong>
+  <strong><%= t('Contact.model.Contact') %>:</strong>
   <%= @note.contato.full_name %>
 </p>
 
-<%= link_to 'Edit', edit_contato_note_path(:id=>@note.id,  :contato_id=>@note.contato_id) %> |
-<%= link_to 'Back', contato_notes_path %>
+<%= link_to t('Edit'), edit_contato_note_path(:id => @note.id,  :contato_id => @note.contato_id) %> |
+<%= link_to t('Back'), contato_notes_path %>

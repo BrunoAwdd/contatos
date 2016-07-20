@@ -1,6 +1,6 @@
-<h1>Editar Observação</h1>
+<h1><%= t('Edit_Note') %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', contato_note_path(:id=>@note.id,  :contato_id=>@note.contato_id) %> |
-<%= link_to 'Back', contato_notes_path %>
+<%= link_to t('Show'), contato_note_path(:id=>@note.id,  :contato_id=>@note.contato_id) %> |
+<%= link_to t('Back'), contato_notes_path %>

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'about',controller:  :static_pages
 
   resources :contatos do
-    get 'migrate'
+    collection do
+      post :mass_action
+    end
     resources :notes, :only => [:edit, :create, :index, :destroy]
   end
 

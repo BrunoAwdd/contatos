@@ -1,29 +1,29 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "Alternative", root_path, id: "logo" %>
+    <%= link_to 'Alternative', root_path, id: 'logo' %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Sobre", about_path %></li>
+        <li><%= link_to t('About'), about_path %></li>
 
         <li class="dropdown">
-          <%= link_to contatos_path, :class => "dropdown-toggle", :"data-toggle" => "dropdown", :role => "button", :"aria-haspopup" => "true", :"aria-expanded" => "true" do  %>
-              Contatos <span class="caret"></span>
+          <%= link_to contatos_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+              <%= t('Contact.model.Contact') %> <span class="caret"></span>
           <% end %>
           <ul class="dropdown-menu">
-            <li><%= link_to "Listar Contatos", contatos_path %></li>
+            <li><%= link_to t('Contact.view.List_Contacts'), contatos_path %></li>
             <li role="separator" class="divider"></li>
-            <li><%= link_to "Adicionar Contato", new_contato_path %></li>
+            <li><%= link_to t('Contact.view.Add_Contact'), new_contato_path %></li>
           </ul>
         </li>
 
         <li class="dropdown">
-          <%= link_to products_path, :class => "dropdown-toggle", :"data-toggle" => "dropdown", :role => "button", :"aria-haspopup" => "true", :"aria-expanded" => "true" do  %>
-              Produtos <span class="caret"></span>
+          <%= link_to products_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+              <%= t('Product.model.Product') %> <span class="caret"></span>
           <% end %>
           <ul class="dropdown-menu">
-            <li><%= link_to "Listar Produtos", products_path %></li>
+            <li><%= link_to t('Product.view.Add_Product'), products_path %></li>
             <li role="separator" class="divider"></li>
-            <li><%= link_to "Adicionar Produtos", new_product_path %></li>
+            <li><%= link_to t('Product.view.List_Products'), new_product_path %></li>
           </ul>
         </li>
 

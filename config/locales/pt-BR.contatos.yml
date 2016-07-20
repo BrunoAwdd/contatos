@@ -1,0 +1,103 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+pt-BR:
+  #Basicos
+  About: Sobre
+  Are_you_sure?: Você tem certeza?
+  Back: Voltar
+  Destroy: Deletar
+  Edit: Editar
+  Send: Enviar
+  Show: Ver
+  Actions: Ações
+  remove: Remover
+  cant_save: "O(A) %{model} não pode ser salvo(a)."
+
+  #Contatos
+
+  Contact:
+    model:
+      Address: Endereço
+      Addresses: Endereços
+      Contact: Contatos
+      Email: Email
+      Emails: Emails
+      First_name: Primeiro Nome
+      Full_name: Nome
+      Last_name: Sobrenome
+      Note: Observação
+      Notes: Observações
+      Phone: Telefone
+      Phones: Telefones
+      Product: Produto
+      Products: Produtos
+
+    view:
+      Action: Ação
+      Add_Address: Adicionar Endereço
+      Add_Contact: Adicionar Contato
+      Add_Email: Adicionar Email
+      Add_Note: Adicionar Observação
+      Add_Phone: Adicionar Telefone
+      All: Todos
+      Contact_Information: Informações do Contato
+      Edit_Contact: Editar Contato
+      List_Contacts: Listar Contatos
+      Listing_Contacts: Lista de Contatos
+      New_Contact: Adicionar Contato
+      no_registred: "Nenhum(a) %{entitie} não registrado"
+
+  Address:
+    model:
+      Country: País
+      State: Estado
+      City: Cidade
+
+  Email:
+    model:
+      Email: Email
+
+  Telefone:
+    model:
+      STD: DDD
+      Phone: Telefone
+      Type: Tipo
+
+  Note:
+    model:
+      Note: Observação
+      Notes: Observações
+    view:
+      Add_Note: Adiconar Observação
+      Edit_Note: Editar Observação
+
+  #Products
+  Product:
+    model:
+      Product: Produto
+      Name: Nome
+    view:
+      Add_Product: Adicionar Produto
+      List_Products: Listar Produtos
+      Listing_Products: Lista de Produtos
+      New_Product: Adicionar Produto
+
+

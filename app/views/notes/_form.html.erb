@@ -3,7 +3,7 @@
 
   <% if @note.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+      <h2><%= pluralize(@note.errors.count, 'error') %> <%= I18n.t('cant_save', model: t('Note.model.Note'))%></h2>
 
       <ul>
       <% @note.errors.full_messages.each do |message| %>
@@ -14,15 +14,15 @@
   <% end %>
 
     <div class="form-group">
-      <%= f.label :contato_id, class: "control-label"  %><br>
-      <%= f.collection_select(:contato_id, Contato.order(:first_name).all, :id, :full_name,{:prompt => 'Please select the author of this post'}, ({ :class=> "form-control", :disabled => 'disabled'}))  %>
+      <%= f.label :contato_id, class: 'control-label'  %><br>
+      <%= f.collection_select(:contato_id, Contato.order(:first_name).all, :id, :full_name,{:prompt => 'Please select the author of this post'}, ({ :class=> 'form-control', :disabled => 'disabled'}))  %>
     </div>
   <div class="form-group">
-    <%= f.label :observacao, 'Adicionar Observação', class: "control-label" %>
-    <%= f.text_area :observacao, class: "form-control" %>
+    <%= f.label :observacao, t('Contact.view.Add_Note'), class: 'control-label' %>
+    <%= f.text_area :observacao, class: 'form-control' %>
   </div>
 
   <div class="actions form-group">
-    <%= f.submit 'Editar Observação', class: "btn btn-primary" %>
+    <%= f.submit 'Editar Observação', class: 'btn btn-primary' %>
   </div>
 <% end %>

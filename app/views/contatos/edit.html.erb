@@ -1,7 +1,7 @@
-<h1>Editar Contato</h1>
+<h1><%= I18n.t('Contact.view.Edit_Contact') %></h1>
 <div class="row" style="padding:20px 0px;">
   <div class="col-md-2 col-md-offset-10">
-    <%= link_to 'ver', @contato %> |  <%= link_to 'voltar', contatos_path %>
+    <%= link_to I18n.t('Show'), @contato %> |  <%= link_to I18n.t('Back'), contatos_path %>
   </div>
 </div>
 

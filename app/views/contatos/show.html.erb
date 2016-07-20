@@ -8,20 +8,26 @@
 
 <section id="telefones" class="col-md-6">
   <div class="row">
-    <div class="col-md-12"><h4><strong>Telefones</strong></h4></div>
+    <div class="col-md-12"><h4><strong><%= I18n.t('Contact.model.Phones') %></strong></h4></div>
   </div>
-
-  <% @contato.telefones.each do |telefone| %>
+  <% if @contato.telefones.any? %>
+    <% @contato.telefones.each do |telefone| %>
+        <div class="row">
+          <div class="col-md-12"><p><%= telefone.ddd.blank? ? '' : "(#{telefone.ddd})"%> <%= "#{telefone.telefone} | #{telefone.tipo}" %></p></div>
+        </div>
+    <% end %>
+    <% else %>
       <div class="row">
-        <div class="col-md-12"><p><%= telefone.ddd.blank? ? '' : "(#{telefone.ddd})"%> <%= "#{telefone.telefone} | #{telefone.tipo}" %></p></div>
+        <div class="col-md-12"><p><%= I18n.t('Contact.view.no_registred', entitie: t('Contact.model.Phone')) %></p></div>
       </div>
-  <% end %>
+    <% end %>
+
   <hr>
 </section>
 
 <section id="emails" class="col-md-6">
   <div class="row">
-    <div class="col-md-12"><h4><strong>Emails</strong></h4></div>
+    <div class="col-md-12"><h4><strong><%= I18n.t('Contact.model.Emails') %></strong></h4></div>
   </div>
   <% if @contato.emails.any? %>
       <% @contato.emails.each do |email| %>
@@ -31,7 +37,7 @@
       <% end %>
   <% else %>
       <div class="row">
-        <div class="col-md-12"><p>Sem Emails Cadastrados</p></div>
+        <div class="col-md-12"><p><%= I18n.t('Contact.view.no_registred', entitie: t('Contact.model.Email')) %></p></div>
       </div>
   <% end %>
   <hr>
@@ -49,7 +55,7 @@
     <% end %>
   <% else %>
       <div class="row">
-        <div class="col-md-12"><p>Sem Endereços Cadastrados</p></div>
+        <div class="col-md-12"><p><%= I18n.t('Contact.view.no_registred', entitie: t('Contact.model.Address')) %></p></div>
       </div>
   <% end %>
   <hr>
@@ -72,7 +78,7 @@
             <div class="col-md-3"><p><%= produto.nome %></p></div>
       <% end %>
     <% else %>
-        <div class="col-md-12"><h5>Nenhuma informação cadastrada</h5></div>
+        <div class="col-md-12"><h5><%= I18n.t('Contact.view.no_registred', entitie: t('Contact.model.Product')) %></h5></div>
     <% end %>
   </div>
 </section>
@@ -89,15 +95,15 @@
 <section id="ObservaçõesForm">
   <%= form_for([@contato, @contato.notes.build]) do |f| %>
       <div class="form-group">
-        <%= f.label :observacao, 'Adicionar Observação', class: "control-label" %>
+        <%= f.label :observacao, t('Contact.view.Add_Note'), class: "control-label" %>
         <%= f.text_area :observacao, class: "form-control" %>
       </div>
       <div class="actions">
-        <%= f.submit 'Enviar', class: "btn btn-primary" %>
+        <%= f.submit t('Send'), class: "btn btn-primary" %>
       </div>
   <% end %>
 </section>
 
 
-<%= link_to 'Edit', edit_contato_path(@contato) %> |
-<%= link_to 'Back', contatos_path %>
+<%= link_to I18n.t('Edit'), edit_contato_path(@contato) %> |
+<%= link_to I18n.t('Back'), contatos_path %>

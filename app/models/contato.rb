@@ -29,6 +29,45 @@ class Contato < ActiveRecord::Base
     f_name + ' ' + l_name
   end
 
+  def get_telefones
+    str_telefones = ''
+    len_telefones = telefones.length
+    telefones.each do |telefone|
+      str_telefones += telefone.full_telefone
+      if len_telefones > 1
+        str_telefones += "<br>"
+      end
+    end
+    str_telefones
+  end
+
+  def get_emails
+    str_emails = ''
+    len_emails = emails.length
+
+    emails.each do |email|
+      str_emails += email.email
+      if len_emails > 1
+        str_emails += "<br>"
+      end
+    end
+    str_emails
+  end
+
+  def get_products
+    str_products = ''
+    len_products = products.length
+
+    products.each do |product|
+      str_products += product.nome
+      if len_products > 1
+        str_products += ", "
+      end
+    end
+    str_products
+
+  end
+
   def reject_enderecos(attributes)
     if attributes['pais'].blank? && attributes['estado'].blank? && attributes['cidade'].blank?
       true

@@ -1,7 +1,7 @@
 <%= form_for @contato,  html: {class: 'form-horizontal'} do |f| %>
   <% if @contato.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@contato.errors.count, "error") %> prohibited this contato from being saved:</h2>
+      <h2><%= pluralize(@contato.errors.count, 'error') %> <%= I18n.t('cant_save', model: t('Contact.model.Contact'))%></h2>
 
       <ul>
       <% @contato.errors.full_messages.each do |message| %>
@@ -12,22 +12,22 @@
   <% end %>
 
   <div class="col-md-12">
-    <h4>Informações de Contato</h4>
+    <h4><%= I18n.t('Contact.view.Contact_Information') %></h4>
     <hr>
   </div><br>
 
   <div class="form-group">
-    <%= f.label :first_name,'Nome', class: "col-md-2 control-label"%>
-    <div class="col-md-10"><%= f.text_field :first_name, class: "form-control" %></div>
+    <%= f.label :first_name, I18n.t('Contact.model.First_name'), class: 'col-md-2 control-label'%>
+    <div class="col-md-10"><%= f.text_field :first_name, class: 'form-control' %></div>
   </div>
   <div class="form-group">
-    <%= f.label :last_name, 'Sobrenome', class: "col-md-2 control-label" %><br>
-    <div class="col-md-10"><%= f.text_field :last_name, class: "form-control" %></div>
+    <%= f.label :last_name, I18n.t('Contact.model.Last_name'), class: 'col-md-2 control-label' %><br>
+    <div class="col-md-10"><%= f.text_field :last_name, class: 'form-control' %></div>
   </div>
 
   <fieldset id="enderecos">
     <div class="col-md-12">
-      <h4>Endereços</h4>
+      <h4><%= I18n.t('Contact.view.Add_Address') %></h4>
       <hr>
     </div><br>
     <div class="fields">
@@ -36,14 +36,14 @@
       <% end %>
     </div>
     <div class='links'>
-      <button class="btn" id="btn_enderecos"><%= link_to_add_association 'Adicionar Endereço', f, :enderecos %></button>
+      <button class="btn" id="btn_enderecos"><%= link_to_add_association I18n.t('Contact.view.Add_Address'), f, :enderecos %></button>
     </div>
     <hr>
   </fieldset>
 
   <fieldset id="emails">
     <div class="col-md-12">
-      <h4>Emails</h4>
+      <h4><%= I18n.t('Contact.model.Emails') %></h4>
       <hr>
     </div><br>
     <div class="fields">
@@ -52,14 +52,14 @@
       <% end %>
     </div>
     <div class='links'>
-      <button class="btn" id="btn_emails"><%= link_to_add_association 'Adicionar Emails', f, :emails %></button>
+      <button class="btn" id="btn_emails"><%= link_to_add_association I18n.t('Contact.view.Add_Email'), f, :emails %></button>
     </div>
     <hr>
   </fieldset>
 
   <fieldset id="telefones">
     <div class="col-md-12">
-      <h4>Telefones</h4>
+      <h4><%= I18n.t('Contact.model.Phones') %>%</h4>
       <hr>
     </div><br>
     <div class="fields">
@@ -68,24 +68,24 @@
       <% end %>
     </div>
     <div class='links'>
-      <button class="btn" id="btn_telefones"><%= link_to_add_association 'Adicionar Telefones', f, :telefones %></button>
+      <button class="btn" id="btn_telefones"><%= link_to_add_association I18n.t('Contact.view.Add_Phone'), f, :telefones %></button>
     </div>
     <hr>
   </fieldset>
 
   <div class="form-group">
 
-    <%= f.collection_check_boxes(:product_ids, Product.all, :id, :nome,  class: "form-control", :item_wrapper_class => 'checkbox_container') do |product| %>
+    <%= f.collection_check_boxes(:product_ids, Product.all, :id, :nome,  class: 'form-control', :item_wrapper_class => 'checkbox_container') do |product| %>
         <%= product.label  { product.check_box + product.text} %>
     <% end %>
   </div>
 
   <div class="form-group">
-    <%= f.label :web_page, class: "col-md-2 control-label" %>
-    <div class="col-md-10"><%= f.text_field :web_page, class: "form-control" %></div>
+    <%= f.label :web_page, class: 'col-md-2 control-label' %>
+    <div class="col-md-10"><%= f.text_field :web_page, class: 'form-control' %></div>
   </div>
   <div class="actions">
-    <%= f.submit 'Enviar', class: "btn btn-primary" %>
+    <%= f.submit I18n.t('Send'), class: 'btn btn-primary' %>
   </div>
 <% end %>
 

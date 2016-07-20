@@ -1,75 +1,83 @@
 <p id="notice"><%= notice %></p>
+<script>
+  $( document ).ready(function() {
+    $(document).on('change', "#massAll", function (){
+      if ($('#massAll:checked').length == 1){$('.filterMass').prop('checked',true);}
+      else {$('.filterMass').prop('checked',false);}
+    })
+  });
+</script>
 
-<h1>Lista de Contatos</h1>
+<h1><%= I18n.t('Contact.view.Listing_Contacts') %></h1>
 
 <table class="table table-striped">
   <%= form_for :filter, url: contatos_path, method: :get do |f| %>
   <thead>
       <tr>
-        <% per_page =  params[:filter].blank? ? 50 : params[:filter]['per_page'] %>
-
-        <% if per_page != 'Todos' %>
-          <th colspan="5">
+        <% if session[:pagination][:per_page] != 'Todos' %>
+          <th colspan="6">
             <%= will_paginate @contatos, :renderer => ContatosHelper::LinkRenderer, :previous_label => '<<', :next_label => '>>', :class => ''  %>
           </th>
         <% else %>
-          <th colspan="5"></th>
+          <th colspan="6"></th>
         <% end %>
-
-
-
-        <th colspan="1"><%= f.select :per_page, ['10', '20', '30', '50', '100', 'Todos'], {:selected => per_page}, :class => 'form-control' %></th>
+        <th colspan="2"><%= f.select :per_page, ['10', '20', '30', '50', '100', I18n.t('Contact.view.All')], {:selected => session[:pagination]['per_page']}, :class => 'form-control' %></th>
       </tr>
       <tr>
-        <th></th>
-        <th><%= f.text_field :id, class: "form-control"  %></th>
-        <th><%= f.text_field :name, class: "form-control" %></th>
-        <th><%= f.text_field :email, class: "form-control"  %></th>
-        <th><%= f.text_field :telefone, class: "form-control"  %></th>
-        <th><%= f.submit 'Filtrar', class: "btn btn-primary" %></th>
+        <th ></th>
+        <th width="5%"><%= f.text_field :id, class: 'form-control', value: session[:filter]['id'], placeholder: 'Id' %></th>
+        <th><%= f.text_field :name, class: 'form-control', value: session[:filter]['name'], placeholder: 'Nome' %></th>
+        <th><%= f.text_field :email, class: 'form-control', value: session[:filter]['email'], placeholder: 'Emails'  %></th>
+        <th><%= f.text_field :telefone, class: 'form-control', value: session[:filter]['telefone'], placeholder: 'Telefones'  %></th>
+        <th width="10%"><%= f.select :tag, Product.all.collect {|p| [ p.nome, p.id ] }, {include_blank: 'None', :selected => session[:filter]['tag']},  {class: 'form-control', placeholder: 'Tags' } %></th>
+        <th colspan="2"><%= f.submit 'Filtrar', class: 'btn btn-primary' %></th>
       </tr>
-
   </thead>
   <% end %>
-
-  <%= form_for :mass, url: contatos_path, method: :get do |f| %>
+  <%= form_for :mass, url: mass_action_contatos_path, data: { confirm: I18n.t('Are_you_sure?') } do |f| %>
   <tbody>
       <tr>
-        <th><input type="checkbox" id="filter[mass][all]" name="filter[mass][]" /></th>
+        <th><input type="checkbox" id="massAll" name="filter[mass][]" /></th>
         <th>Id</th>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Telefone</th>
-        <th><%= f.submit 'Ação', class: "btn btn-primary" %></th>
+        <th><%= I18n.t('Contact.model.Full_name') %></th>
+        <th><%= I18n.t('Contact.model.Email') %></th>
+        <th><%= I18n.t('Contact.model.Phone') %></th>
+        <th><%= I18n.t('Contact.model.Product') %></th>
+        <th width="10%">
+          <%= f.select :action, ['',I18n.t('Destroy')],{} , {:class => 'form-control'} %>
+        </th>
+        <th>
+          <%= f.submit I18n.t('Contact.view.Action'), class: 'btn btn-primary' %>
+        </th>
       </tr>
       <% @contatos.each do |contato| %>
         <tr>
-          <td><input type="checkbox" id="filter[mass][<%= contato.id %>]" name="filter[mass][]" value="<%= contato.id %>" /></td>
+          <td><input type="checkbox" class="filterMass" id="filter[mass][<%= contato.id %>]" name="mass[id][]" value="<%= contato.id %>" /></td>
           <td><%= contato.id %></td>
           <td><%= contato.full_name %></td>
-          <td><%= contato.emails[0].blank? ? '' :  contato.emails[0].email%></td>
-          <td><%= contato.telefones[0].blank? ? '' :  contato.telefones[0].telefone %></td>
+          <td><%= contato.get_emails.html_safe %></td>
+          <td><%= contato.get_telefones.html_safe %></td>
+          <td><%= contato.get_products %></td>
 
-          <td>
+          <td colspan="2">
             <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Ações
+                <%= I18n.t('Actions') %>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><%= link_to 'Ver Contato', contato %></li>
-                <li><%= link_to 'Editar', edit_contato_path(contato) %></li>
+                <li><%= link_to I18n.t('Show'), contato %></li>
+                <li><%= link_to I18n.t('Edit'), edit_contato_path(contato) %></li>
                 <li role="separator" class="divider"></li>
-                <li><%= link_to 'Deletar', contato, method: :delete, data: { confirm: 'Você tem certeza?' } %></li>
+                <li><%= link_to I18n.t('Destroy'), contato, method: :delete, data: { confirm: I18n.t('Are_you_sure?') } %></li>
               </ul>
             </div>
           </td>
         </tr>
     <% end %>
   </tbody>
-  <% end %>
 </table>
-
+<% end %>
 <br>
 
-<%= link_to 'New Contato', new_contato_path %>
+<%= link_to I18n.t('Contact.view.New_Contact'), new_contato_path %>

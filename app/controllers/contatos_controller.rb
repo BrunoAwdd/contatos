@@ -1,6 +1,7 @@
 class ContatosController < ApplicationController
   before_action :set_contato, only: [:show, :edit, :update, :destroy]
   before_action :build_contato, only:[:new, :edit]
+  before_action :seasson_controller, only:[:index]
 
 
   def initialize
@@ -12,23 +13,15 @@ class ContatosController < ApplicationController
   # GET /contatos
   # GET /contatos.json
   def index
-    if params[:filter].blank?
-      @contatos = Contato.paginate(:page => params[:page], :per_page => 50)
+    if !params[:filter].blank?
+      params[:filter] = nil
+      redirect_to contatos_path
+    end
+
+    if session[:filter].blank?
+      @contatos = Contato.paginate(:page => session[:pagination][:page], :per_page => session[:pagination][:per_page])
     else
-      if params[:filter]['per_page'] != 'Todos'
-        @contatos = Contato.joins(
-            "LEFT JOIN telefones ON telefones.contato_id = contatos.id
-            LEFT JOIN emails ON emails.contato_id = contatos.id ")
-                        .where(filterWhere(params[:filter]))
-                        .group('contatos.id')
-                        .paginate(:page => params[:page], :per_page => params[:filter]['per_page'])
-      else
-        @contatos = Contato.joins(
-            "LEFT JOIN telefones ON telefones.contato_id = contatos.id
-            LEFT JOIN emails ON emails.contato_id = contatos.id ")
-                        .where(filterWhere(params[:filter]))
-                        .group('contatos.id')
-      end
+      filtrar_contatos
     end
   end
 
@@ -50,15 +43,15 @@ class ContatosController < ApplicationController
   # POST /contatos.json
   def create
     @contato = Contato.new(contato_params)
-    respond_to do |format|
-      if @contato.save
-        format.html { redirect_to @contato, notice: 'Contato was successfully created.' }
-        format.json { render :show, status: :created, location: @contato }
-      else
-        format.html { render :new }
-        format.json { render json: @contato.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @contato.save
+          format.html { redirect_to @contato, notice: 'Contato was successfully created.' }
+          format.json { render :show, status: :created, location: @contato }
+        else
+          format.html { render :new }
+          format.json { render json: @contato.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # PATCH/PUT /contatos/1
@@ -85,9 +78,21 @@ class ContatosController < ApplicationController
     end
   end
 
-  #MASS /contatos/1
-  #MASS /contatos/1.json
-  def mass
+  # POST /contatos/1
+  # POST /contatos/1.json
+  def mass_action
+    if !params[:mass].blank?
+      if params[:mass]['action'] == 'delete'
+        Contato.destroy(params[:mass]['id'])
+
+        respond_to do |format|
+          format.html { redirect_to contatos_url, notice: 'Contatos deletados com sucesso' }
+          format.json { head :no_content }
+        end
+      else
+        redirect_to contatos_url
+      end
+    end
 
   end
 
@@ -100,11 +105,62 @@ class ContatosController < ApplicationController
       @contato = Contato.find(params[:id])
     end
 
+    #build contact relationships
     def build_contato
       @contato.emails.build
       @contato.telefones.build
       @contato.enderecos.build
+      @contato.products.build
+    end
 
+    #Inicia a Session para armazenar os valores de filtro
+    def seasson_controller
+      if session[:pagination].blank?
+        session[:pagination] = {:page => 1, :per_page => 50}
+        session[:filter] = {
+            :id => '',
+            :name => '',
+            :telefone => '',
+            :email => '',
+            :tag => '',
+        }
+      end
+
+      if !params[:page].blank?
+        session[:pagination][:page] = params['page']
+      end
+
+      if !params[:filter].blank?
+        session[:pagination] = {:per_page => params[:filter]['per_page']}
+        session[:filter] = {
+            :id => params[:filter]['id'],
+            :name => params[:filter]['name'],
+            :telefone => params[:filter]['telefone'],
+            :email => params[:filter]['email'],
+            :tag => params[:filter]['tag'],
+        }
+      end
+
+    end
+
+    def filtrar_contatos
+      if session[:pagination][:per_page] != 'Todos'
+        @contatos = Contato.joins(
+                               #LEFT JOIN contatos_products ON contatos_products.contato_id = contatos.id
+            "LEFT JOIN telefones ON telefones.contato_id = contatos.id
+            LEFT JOIN contatos_products ON contatos_products.contato_id = contatos.id
+            LEFT JOIN products ON contatos_products.product_id = products.id
+            LEFT JOIN emails ON emails.contato_id = contatos.id ")
+                        .where(filterWhere(session[:filter]))
+                        .group('contatos.id')
+                        .paginate(:page => session[:pagination][:page], :per_page => session[:pagination]['per_page'])
+      else
+        @contatos = Contato.joins(
+            "LEFT JOIN telefones ON telefones.contato_id = contatos.id
+            LEFT JOIN emails ON emails.contato_id = contatos.id ")
+                        .where(filterWhere(session[:filter]))
+                        .group('contatos.id')
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -166,6 +222,7 @@ class ContatosController < ApplicationController
   end
 
   def filterWhere(params)
+
     if !params['id'].blank?
       addWhere("contatos.id LIKE \"%#{params['id']}%\"")
     end
@@ -176,6 +233,10 @@ class ContatosController < ApplicationController
 
     if !params['telefone'].blank?
       addWhere("telefones.telefone LIKE \"%#{params['telefone']}%\"")
+    end
+
+    if !params['tag'].blank?
+      addWhere("products.nome LIKE \"%#{params['product']}%\"")
     end
 
     if !params['email'].blank?
