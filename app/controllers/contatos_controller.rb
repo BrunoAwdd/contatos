@@ -2,6 +2,7 @@ class ContatosController < ApplicationController
   before_action :set_contato, only: [:show, :edit, :update, :destroy]
   before_action :build_contato, only:[:new, :edit]
   before_action :seasson_controller, only:[:index]
+  before_action :authenticate_user!
 
 
   def initialize

@@ -1,0 +1,7 @@
+<p><%= t('.title', email: @resource.email)  %>!</p>
+
+<p><%= t('.attemps') %></p>
+
+<p><%= t('.unlock') %></p>
+
+<p><%= link_to t('.Unlock_account'), unlock_url(@resource, unlock_token: @token) %></p>

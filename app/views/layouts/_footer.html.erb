@@ -1,7 +1,8 @@
 <footer class="footer">
   <small>
-    <%= t('Contact.view.List_Contacts') %><a href="http://www.alternativefinance.com.br">Alternative</a>
+    <%= t('Contact.view.List_Contacts') %> <a href="http://www.alternativefinance.com.br">Alternative</a>
   </small>
+  <% if user_signed_in? %>
   <nav>
     <ul>
       <li><%= link_to t('About'),   about_path %></li>
@@ -9,4 +10,5 @@
       <li><%= link_to t('Product.model.Product'), products_path %></li>
     </ul>
   </nav>
+  <% end %>
 </footer>

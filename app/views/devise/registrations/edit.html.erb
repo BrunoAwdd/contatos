@@ -1,0 +1,44 @@
+<h2><%= t(".title", resource: t('User.model.User')) %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+    <div class="form-group">
+      <%= f.label :email, t('.email'), class: 'label-control' %>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div><%= t('.waiting_confirmation', email:resource.unconfirmed_email) %></div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :password, t('.password'), class: 'label-control' %> <i> <%= t('.leave blank if you don\'t want to change it') %></i>
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= t('.minimum_characters', minimum: @minimum_password_length) %></em>
+    <% end %>
+  </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, t('.confirm_password'), class: 'label-control' %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :current_password, t('.current_password'), class: 'label-control'%> <i></i>
+      <%= f.password_field :current_password, class: 'form-control' %>
+    </div>
+
+
+  <div class="actions">
+    <%= f.submit t(".update"), class: "btn brn-primary" %>
+  </div>
+<% end %>
+
+<h4><%= t(".cancel.title") %></h4>
+
+<p><%= t(".cancel.message") %> <%= button_to t(".cancel.action"), registration_path(resource_name), data: { confirm: t(".cancel.confirm") }, method: :delete %></p>
+
+<%= link_to t(".back"), :back %>

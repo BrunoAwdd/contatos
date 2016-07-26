@@ -100,4 +100,12 @@ pt-BR:
       Listing_Products: Lista de Produtos
       New_Product: Adicionar Produto
 
+  User:
+    model:
+      User: Usuário
+      Users: Usuários
+    view:
+      Edit_Registration: Editar Informações
+
+
 

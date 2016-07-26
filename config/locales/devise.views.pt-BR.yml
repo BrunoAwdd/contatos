@@ -1,0 +1,83 @@
+
+pt-BR:
+  devise:
+    confirmations:
+      new:
+        email: Email
+        title: Reenviar instruções de confirmação
+        submit: Reenviar instruções de confirmação
+      link: Não recebeu instruções de confirmação?
+    mailer:
+      confirmation_instructions:
+        title: 'Welcome %{email}'
+        confirm_email: 'Você pode confirmar seu email através do link abaixo:'
+        Confirm_my_account: Confirmar minha Conta
+      password_change:
+        title: 'Hello %{email}'
+        contact: Entraremos em contato para avisar quando sua senha for alterada.
+      reset_password_instructions:
+        title: 'Hello %{email}'
+        message: Para alterar sua senha clique no link abaixo.
+        change_password: Mudar minha senha
+        not_request: Se você não requisitou a alteração, por favor ignore esse email.
+        not_change: Sua senha não será alterada até você clicar neste link
+      unlock_instructions:
+        title: 'Hello %{email}'
+        attemps: Sua conta foi foi bloqueada devido ao excesso de logins falhos
+        unlock: Clique no link abaixo para desbloquear sua conta
+        Unlock_account: Desbloquear conta
+    passwords:
+      edit:
+        confirm_new_password: Confirmar Nova Senha
+        email: Email
+        minimum_characters: "Necessários no %{minimum} caracteres"
+        new_password: Nova Senha
+        off: desligado
+        submit: Mudar minha senha
+        title: Mudar sua senha
+      new:
+        confirm_password: Confirmar Nova Senha
+        current_password: Senha Atual
+        email: Email
+        password: Senha
+        leave blank if you don't want to change it: Deixe em branco se não deseja alterar sua senha
+        title: Esqueceu sua senha?
+        submit: Me enviar instruções para reiniciar minha senha
+    registrations:
+      edit:
+        title: "Editar %{resource}"
+        update: Atualizar
+        minimum_characters: "Necessários no %{minimum} caracteres"
+        cancel:
+          title: Cancelar minha conta
+          message: 'Deseja Cancelar sua conta, clique no link:'
+          action: Cancelar minha conta
+          confirm: Tem certeza?
+        back: Voltar
+        waiting_confirmation: "Esperando confirmação de %{email}"
+      new:
+        title: Registrar
+        email: "Email"
+        minimum_characters: "Necessários no %{minimum} caracteres"
+        password: "Senha"
+        password_confirmation: "Confirmar Senha"
+        submit: Registrar
+    recovery:
+      new:
+        title: 'Esqueci minha senha'
+    sessions:
+      new:
+        email: Email
+        title: Login
+        password: Senha
+        remember: Lembrar
+        submit: Login
+      link: Login com {provider}
+    shared:
+
+    unlocks:
+      new:
+        title: Reenviar instruções de desbloqueio
+        submit: Reenviar instruções de desbloqueio
+        email: 'Email'
+      link: Não recebeu instruções de desbloqueio?

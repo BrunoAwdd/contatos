@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
-  resources :products
+  devise_for :users
+
   root 'static_pages#home'
-  get 'about',controller:  :static_pages
+
+
+  resources :products
+
+  get 'about', controller:  :static_pages
 
   resources :contatos do
     collection do
@@ -12,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   get 'vcard/upload'
+
   #post 'vcard/create'
 
   # The priority is based upon order of creation: first created -> highest priority.
