@@ -29,7 +29,7 @@
         <th><%= f.text_field :name, class: 'form-control', value: session[:filter]['name'], placeholder: 'Nome' %></th>
         <th><%= f.text_field :email, class: 'form-control', value: session[:filter]['email'], placeholder: 'Emails'  %></th>
         <th><%= f.text_field :telefone, class: 'form-control', value: session[:filter]['telefone'], placeholder: 'Telefones'  %></th>
-        <th width="10%"><%= f.select :tag, Product.all.collect {|p| [ p.nome, p.id ] }, {include_blank: 'None', :selected => session[:filter]['tag']},  {class: 'form-control', placeholder: 'Tags' } %></th>
+        <th width="10%"><%= f.select :tag, Product.all.collect {|p| [ p.nome, p.id ] }, {include_blank: t('Contact.view.none'), :selected => session[:filter]['tag']},  {class: 'form-control', placeholder: 'Tags' } %></th>
         <th colspan="2"><%= f.submit 'Filtrar', class: 'btn btn-primary' %></th>
       </tr>
   </thead>

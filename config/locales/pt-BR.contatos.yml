@@ -64,6 +64,7 @@ pt-BR:
       Listing_Contacts: Lista de Contatos
       New_Contact: Adicionar Contato
       no_registred: "Nenhum(a) %{entitie} não registrado"
+      none: 'Nenhum'
 
   Address:
     model:
