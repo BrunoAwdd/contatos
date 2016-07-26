@@ -24,6 +24,10 @@
     <%= f.label :last_name, I18n.t('Contact.model.Last_name'), class: 'col-md-2 control-label' %><br>
     <div class="col-md-10"><%= f.text_field :last_name, class: 'form-control' %></div>
   </div>
+    <div class="form-group">
+      <%= f.label :web_page, class: 'col-md-2 control-label' %>
+      <div class="col-md-10"><%= f.text_field :web_page, class: 'form-control' %></div>
+    </div>
 
   <fieldset id="enderecos">
     <div class="col-md-12">
@@ -59,7 +63,7 @@
 
   <fieldset id="telefones">
     <div class="col-md-12">
-      <h4><%= I18n.t('Contact.model.Phones') %>%</h4>
+      <h4><%= I18n.t('Contact.model.Phones') %></h4>
       <hr>
     </div><br>
     <div class="fields">
@@ -73,17 +77,15 @@
     <hr>
   </fieldset>
 
-  <div class="form-group">
+  <div class="checkbox">
 
     <%= f.collection_check_boxes(:product_ids, Product.all, :id, :nome,  class: 'form-control', :item_wrapper_class => 'checkbox_container') do |product| %>
         <%= product.label  { product.check_box + product.text} %>
     <% end %>
   </div>
+    <hr>
 
-  <div class="form-group">
-    <%= f.label :web_page, class: 'col-md-2 control-label' %>
-    <div class="col-md-10"><%= f.text_field :web_page, class: 'form-control' %></div>
-  </div>
+
   <div class="actions">
     <%= f.submit I18n.t('Send'), class: 'btn btn-primary' %>
   </div>
