@@ -1,11 +1,21 @@
 Rails.application.routes.draw do
 
+  resources :newsletters do
+    get 'send_newsletter'
+  end
   devise_for :users
 
   root 'static_pages#home'
 
 
-  resources :products
+  namespace :products do
+    resources :documents
+  end
+
+  resources :products do
+
+  end
+
 
   get 'about', controller:  :static_pages
 

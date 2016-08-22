@@ -39,6 +39,9 @@ gem "cocoon"
 gem 'devise'
 #To Paginate
 gem 'will_paginate', '~> 3.1.0'
+#Tiny MCE
+gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

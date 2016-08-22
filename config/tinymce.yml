@@ -1,0 +1,25 @@
+toolbar:
+  - styleselect formatselect fontselect fontsizeselect
+  - bold italic | undo redo | insertfile | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image
+plugins:
+  - image
+  - link
+  - wordcount
+  - paste
+  - advlist
+  - autolink
+  - lists
+  - charmap
+  - print
+  - preview
+  - anchor
+  - searchreplace
+  - visualblocks
+  - code
+  - fullscreen
+  - insertdatetime
+  - media
+  - table
+  - contextmenu
+  - code
+language: "pt_BR"

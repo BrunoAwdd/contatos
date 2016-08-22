@@ -1,0 +1,39 @@
+<%= form_for(@newsletter) do |f| %>
+  <% if @newsletter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@newsletter.errors.count, "error") %> prohibited this newsletter from being saved:</h2>
+
+      <ul>
+      <% @newsletter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :subject, class: "label-control" %><br>
+    <%= f.text_field :subject, class: 'form-control'  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status, t('.status'), class:'label-control' %><br>
+    <%= f.select :status, [[t('newsletters.model.status.1'), 1], [I18n.t('newsletters.model.status.0'), 0]], {}, {class:'form-control'} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :html_message, class: 'label-control' %><br>
+    <%= f.text_area :html_message, class: 'form-control tinymce', :rows => 20, :cols => 120  %>
+    <%= tinymce %>
+  </div>
+  <div class="form-group">
+    <%= f.label :text_message, class: 'label-control' %><br>
+    <%= f.text_area :text_message, class: 'form-control ', :rows => 20, :cols => 120  %>
+  </div>
+  <h3>Produtos de Interesse</h3>
+  <div class="checkbox">
+    <%= f.collection_check_boxes(:product_ids, Product.all, :id, :nome,  class: 'form-control', :item_wrapper_class => 'checkbox_container') do |product| %>
+        <%= product.label  { product.check_box + product.text} %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary'%>
+  </div>
+<% end %>

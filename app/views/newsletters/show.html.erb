@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t('.status') %></strong>
+</p>
+<p>
+  <%= @newsletter.status_text%>
+</p>
+
+<p>
+  <strong><%= t('.subject') %>:</strong>
+</p>
+<p>
+  <%= @newsletter.subject %>
+</p>
+
+
+
+<strong><%= t('.html message') %></strong>
+<div class="bs-body">
+  <p><%= @newsletter.html_message.html_safe  %></p>
+</div>
+
+
+
+<strong><%= t('.text message') %></strong>
+<div class="bs-body">
+  <p><%= @newsletter.text_message %></p>
+</div>
+
+
+
+<h3>Produtos</h3>
+<ul>
+  <% @newsletter.products.each do |product| %>
+    <li>
+      <h4><%= product.nome %></h4>
+      <b>Clientes</b>
+      <ul>
+        <% product.contatos.each do |contato| %>
+           <li>-<%= contato.full_name %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to t('.edit'), edit_newsletter_path(@newsletter) %> |
+<%= link_to t('.back'), newsletters_path %>

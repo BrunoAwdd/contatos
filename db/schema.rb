@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720193732) do
+ActiveRecord::Schema.define(version: 20160817184751) do
 
   create_table "contatos", force: :cascade do |t|
     t.string   "first_name"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20160720193732) do
     t.integer "contato_id"
     t.integer "product_id"
   end
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "documents", ["product_id"], name: "index_documents_on_product_id"
 
   create_table "emails", force: :cascade do |t|
     t.string   "email"
@@ -47,6 +56,23 @@ ActiveRecord::Schema.define(version: 20160720193732) do
   end
 
   add_index "enderecos", ["contato_id"], name: "index_enderecos_on_contato_id"
+
+  create_table "newsletters", force: :cascade do |t|
+    t.string   "subject"
+    t.text     "html_message"
+    t.text     "text_message"
+    t.integer  "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "newsletters_products", force: :cascade do |t|
+    t.integer "newsletter_id"
+    t.integer "product_id"
+  end
+
+  add_index "newsletters_products", ["newsletter_id"], name: "index_newsletters_products_on_newsletter_id"
+  add_index "newsletters_products", ["product_id"], name: "index_newsletters_products_on_product_id"
 
   create_table "notes", force: :cascade do |t|
     t.string   "observacao"

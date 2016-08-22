@@ -15,6 +15,22 @@
     <%= f.label :nome, t('Product.model.Name'), class: 'label-control' %><br>
     <%= f.text_field :nome, class: 'form-control' %>
   </div>
+  <hr>
+  <fieldset id="telefones">
+    <div class="col-md-12">
+      <h4><%= t('.documents') %></h4>
+    </div><br><br><br>
+    <div class="fields">
+      <%= f.fields_for :documents do |document| %>
+          <%= render 'document_fields', :f => document %>
+      <% end %>
+    </div>
+    <div class='links'>
+      <button class="btn " id="btn_telefones"><%= link_to_add_association t('.add_document'), f, :documents %></button>
+    </div>
+    <hr>
+  </fieldset>
+
   <div class="actions">
     <%= f.submit I18n.t('Send'), class: 'btn btn-primary' %>
   </div>

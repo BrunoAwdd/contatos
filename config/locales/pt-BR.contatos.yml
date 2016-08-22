@@ -108,5 +108,58 @@ pt-BR:
     view:
       Edit_Registration: Editar Informações
 
+  products:
+    document_fields:
+      name: 'Nome'
+    edit:
+      title: 'Editar Produto'
+    form:
+      add_document: 'Adicionar Documento'
+      documents: 'Documentação Padrão'
+
+  newsletters:
+    model:
+      status:
+        '0': 'Inativo'
+        '1': 'Ativo'
+    index:
+      title: 'Lista de Emails'
+      subject: 'Assunto'
+      html message: 'Mensagem em Html'
+      text message: 'Mensagem em Texto'
+      status: 'Situação'
+      new newsletter: 'Novo Email'
+      show: 'Ver'
+      edit: 'Editar'
+      destroy: 'Deletar'
+      confirm: 'Você tem certeza?'
+    show:
+      title: 'Email'
+      subject: 'Assunto'
+      html message: 'Mensagem em Html'
+      text message: 'Mensagem em Texto'
+      status: 'Situação'
+      edit: 'Editar'
+      back: 'Voltar'
+    edit:
+      title: "Editar Email"
+      show: 'Ver'
+      back: 'Voltar'
+    new:
+      title: "Adicionar Email"
+      show: 'Ver'
+      back: 'Voltar'
+
+  helpers:
+    label:
+      newsletter:
+        subject: 'Assunto'
+        html_message: 'Mensagem em Html'
+        text_message: 'Mensagem em Texto'
+        status: 'Situação'
+
+
+
+
 
 

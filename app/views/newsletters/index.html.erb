@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= t('.title') %></h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('.subject') %></th>
+      <th><%= t('.html message') %></th>
+      <th><%= t('.text message') %></th>
+      <th><%= t('.status') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @newsletters.each do |newsletter| %>
+      <tr>
+        <td><%= newsletter.subject %></td>
+        <td><%= newsletter.html_message.html_safe %></td>
+        <td><%= newsletter.text_message %></td>
+        <td><%= newsletter.status %></td>
+        <td><%= link_to t('.show'), newsletter %></td>
+        <td><%= link_to t('.edit'), edit_newsletter_path(newsletter) %></td>
+        <td><%= link_to t('.destroy'), newsletter, method: :delete, data: { confirm: t('.confirm') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('.new newsletter'), new_newsletter_path %>

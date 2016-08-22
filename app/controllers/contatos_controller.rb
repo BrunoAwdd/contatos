@@ -58,6 +58,8 @@ class ContatosController < ApplicationController
   # PATCH/PUT /contatos/1
   # PATCH/PUT /contatos/1.json
   def update
+    #render plain: @contato.to_yaml
+    #ContatoMailer.hello_email(@contato).deliver_later
     respond_to do |format|
       if @contato.update(contato_params)
         format.html { redirect_to @contato, notice: 'Contato was successfully updated.' }
@@ -94,7 +96,6 @@ class ContatosController < ApplicationController
         redirect_to contatos_url
       end
     end
-
   end
 
   def migrate
