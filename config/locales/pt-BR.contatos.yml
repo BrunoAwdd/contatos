@@ -96,10 +96,17 @@ pt-BR:
       Product: Produto
       Name: Nome
     view:
-      Add_Product: Adicionar Produto
+      Add_Products: Adicionar Produto
       List_Products: Listar Produtos
       Listing_Products: Lista de Produtos
       New_Product: Adicionar Produto
+
+  Newsletter:
+    model:
+      Newsletter: "Emails"
+    view:
+      Add_Newsletter: "Criar Email"
+      List_Newsletter: "Listar Emails"
 
   User:
     model:
@@ -141,6 +148,7 @@ pt-BR:
       status: 'Situação'
       edit: 'Editar'
       back: 'Voltar'
+      send: 'Enviar Emails'
     edit:
       title: "Editar Email"
       show: 'Ver'

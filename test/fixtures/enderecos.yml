@@ -5,11 +5,11 @@ one:
   cidade: MyString
   estado: MyString
   pais: MyString
-  contato_id: 
+  contato_id: 1
 
 two:
   tipo: MyString
   cidade: MyString
   estado: MyString
   pais: MyString
-  contato_id: 
+  contato_id: 1

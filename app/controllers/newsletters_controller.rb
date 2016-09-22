@@ -1,5 +1,6 @@
 class NewslettersController < ApplicationController
   before_action :set_newsletter, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /newsletters
   # GET /newsletters.json
@@ -63,16 +64,47 @@ class NewslettersController < ApplicationController
 
   # GET /newsletters/1/send
   def send_newsletter
-      @newsletter = Newsletter.find(params[:newsletter_id])
-      @newsletter.products.each do |product|
-        product.contatos.each do |contato|
-          ContatoMailer.hello_email(contato, @newsletter).deliver_later
-        end
+    @newsletter = Newsletter.find(params[:newsletter_id])
+    @produtos = Product.joins(
+        "LEFT JOIN newsletters_products ON newsletters_products.newsletter_id = #{params[:newsletter_id]}
+         LEFT JOIN contatos_products ON contatos_products.product_id = products.id
+         LEFt JOIN contatos ON contatos_products.contato_id = contatos.id"
+    )
+    @contatos = @produtos[0].contatos
+  end
+
+  # POST /newsletters/1/send
+  def send_mail
+    @newsletter = Newsletter.find(params[:newsletter_id])
+    @email = Email.find(params[:id])
+    ContatoMailer.hello_email(email.contato, @newsletter).deliver_later
+
+    render plain: @email.contato.to_json
+=begin
+    @newsletter = Newsletter.find(params[:newsletter_id])
+    @emails = Email.find(params[:mass][:id])
+    @emails.each do |email|
+      #ContatoMailer.hello_email(email.contato, @newsletter).deliver_later
+    end
+    respond_to do |format|
+      format.html { redirect_to @newsletter, notice: 'Enviado com sucesso.' }
+      format.json { render :show, status: :ok, location: @newsletter }
+    end
+=end
+  end
+
+  # GET /newsletters/1/send
+  def send_newsletterbkp
+    @newsletter = Newsletter.find(params[:newsletter_id])
+    @newsletter.products.each do |product|
+      product.contatos.each do |contato|
+        ContatoMailer.hello_email(contato, @newsletter).deliver_later
       end
-      respond_to do |format|
-          format.html { redirect_to @newsletter, notice: 'Emviado com sucesso.' }
-          format.json { render :show, status: :ok, location: @newsletter }
-      end
+    end
+    respond_to do |format|
+      format.html { redirect_to @newsletter, notice: 'Emviado com sucesso.' }
+      format.json { render :show, status: :ok, location: @newsletter }
+    end
   end
 
   private

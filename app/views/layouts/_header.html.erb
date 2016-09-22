@@ -23,9 +23,20 @@
                   <%= t('Product.model.Product') %> <span class="caret"></span>
               <% end %>
               <ul class="dropdown-menu">
-                <li><%= link_to t('Product.view.List_Product'), products_path %></li>
+                <li><%= link_to t('Product.view.List_Products'), products_path %></li>
                 <li role="separator" class="divider"></li>
                 <li><%= link_to t('Product.view.Add_Products'), new_product_path %></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <%= link_to products_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+                  <%= t('Newsletter.model.Newsletter') %> <span class="caret"></span>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li><%= link_to t('Newsletter.view.List_Newsletter'), newsletters_path %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to t('Newsletter.view.Add_Newsletter'), new_newsletter_path %></li>
               </ul>
             </li>
 

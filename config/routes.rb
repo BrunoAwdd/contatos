@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :newsletters do
     get 'send_newsletter'
+    post 'send_mail'
   end
   devise_for :users
 

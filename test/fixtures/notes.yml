@@ -2,8 +2,8 @@
 
 one:
   observacao: MyString
-  contato_id: 
+  contato_id: 1
 
 two:
   observacao: MyString
-  contato_id: 
+  contato_id: 1

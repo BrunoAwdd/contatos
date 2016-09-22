@@ -46,4 +46,5 @@
 </ul>
 
 <%= link_to t('.edit'), edit_newsletter_path(@newsletter) %> |
-<%= link_to t('.back'), newsletters_path %>
+<%= link_to t('.back'), newsletters_path %> |
+<%= link_to t('.send'), newsletter_send_newsletter_path(@newsletter) %>

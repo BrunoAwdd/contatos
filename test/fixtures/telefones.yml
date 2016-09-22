@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  type: 
+  tipo: residencia
   ddd: MyString
   telefone: MyString
-  contato_id: 
+  contato_id: 1
 
 two:
-  type: 
+  tipo: celular
   ddd: MyString
   telefone: MyString
-  contato_id: 
+  contato_id: 1

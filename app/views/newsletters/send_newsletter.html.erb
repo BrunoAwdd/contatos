@@ -1,0 +1,33 @@
+
+
+<p id="notice"><%= notice %></p>
+
+<h1><%= t('.title') %></h1>
+<%= form_tag  url: newsletter_send_mail_path, method: :post do  %>
+    <%= submit_tag 'Send', {class: 'btn btn-primary', id:'sendMails'} %>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th><input type="checkbox" id="sendAll" name="mailler[mass][]" /></th>
+      <th><%= t('.name') %></th>
+      <th><%= t('.emails') %></th>
+      <th>Status</th>
+    </tr>
+    </thead>
+
+    <tbody>
+      <% @contatos.each do |contato| %>
+          <% contato.emails.each do |email| %>
+            <tr>
+              <td><input type="checkbox" class="mailerMass" id="mailler[mass][<%= email.id %>]" name="mass[id][]" value="<%= email.id %>" /></td>
+              <td><%= contato.full_name %></td>
+              <td><%= email.email %></td>
+              <td class="status">-</td>
+            </tr>
+          <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+<%= link_to t('.back'), @newsletter %>

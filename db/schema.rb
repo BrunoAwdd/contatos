@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817184751) do
+ActiveRecord::Schema.define(version: 20160817180656) do
 
   create_table "contatos", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "notes"
     t.string   "web_page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160817184751) do
 
   create_table "enderecos", force: :cascade do |t|
     t.string   "tipo"
+    t.string   "endereco"
     t.string   "cidade"
     t.string   "estado"
     t.string   "pais"

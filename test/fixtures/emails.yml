@@ -2,8 +2,8 @@
 
 one:
   email: MyString
-  contato_id: 
+  contato_id: 1
 
 two:
   email: MyString
-  contato_id: 
+  contato_id: 1
