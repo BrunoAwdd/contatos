@@ -1,0 +1,87 @@
+<section id="dados">
+  <div class="row">
+    <div class="col-md-12">
+      <p><strong><%= t('.number') %></strong> <%= @juridico_processo.number %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p><strong><%= t('.classe') %></strong> <%= @juridico_processo.classe %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p><strong><%= t('.category') %></strong>
+      <%= @juridico_processo.category_text %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p><strong><%= t('.date') %></strong>
+      <%= @juridico_processo.date.to_date.strftime("%d/%m/%Y") %></p>
+      <p><%= @juridico_processo.shire %> - <%= @juridico_processo.circuit %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p><strong><%= t('.judge') %></strong><%= @juridico_processo.judge %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p><strong><%= t('.value') %></strong>
+        <%= @juridico_processo.value %></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h4><strong><%= t('.process_parts') %></strong></h4>
+    </div>
+    <div class="col-md-6">
+      <p><strong><%= t('.author') %></strong>
+      <%= @juridico_processo.author %></p>
+    </div>
+    <div class="col-md-6">
+      <p><strong><%= t('.defendant') %></strong>
+      <%= @juridico_processo.defendant %></p>
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+      <h4><strong><%= t('.notes') %></strong></h4>
+    </div>
+    <div class="col-md-12">
+      <p><%= @juridico_processo.notes %></p>
+    </div>
+  </div>
+</section>
+<hr>
+<section id="notes">
+  <div class="row">
+    <div class="col-md-12"><h4><strong><%= t('.andamento') %></strong></h4></div>
+  </div>
+  <% if @juridico_processo.andamentos.any? %>
+      <% @juridico_processo.andamentos.each do |andamento| %>
+          <div class="row">
+            <div class="col-md-2"><%= andamento.data.to_date.strftime("%d/%m/%Y") %></div>
+            <div class="col-md-10"><%= andamento.nota %></div>
+          </div>
+      <% end %>
+  <% else %>
+      <div class="row">
+        <div class="col-md-12"><p><%= I18n.t('Contact.view.no_registred', entitie: t('Contact.model.Phone')) %></p></div>
+      </div>
+  <% end %>
+
+  <hr>
+</section>
+
+
+
+<div class="hidden-print">
+<%= link_to t('.edit'), edit_juridico_processo_path(@juridico_processo) %> |
+<%= link_to t('.back'), juridico_processos_path %>
+</div>

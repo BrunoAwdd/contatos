@@ -1,0 +1,29 @@
+<%= form_for(@juridico_andamento) do |f| %>
+  <% if @juridico_andamento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@juridico_andamento.errors.count, "error") %> prohibited this juridico_andamento from being saved:</h2>
+
+      <ul>
+      <% @juridico_andamento.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nota %><br>
+    <%= f.text_area :nota %>
+  </div>
+  <div class="field">
+    <%= f.label :data %><br>
+    <%= f.datetime_select :data %>
+  </div>
+  <div class="field">
+    <%= f.label :processo_id %><br>
+    <%= f.text_field :processo_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

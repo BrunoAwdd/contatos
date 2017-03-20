@@ -1,0 +1,2 @@
+module Juridico::ProcessosHelper
+end

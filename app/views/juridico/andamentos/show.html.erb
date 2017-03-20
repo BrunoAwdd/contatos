@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nota:</strong>
+  <%= @juridico_andamento.nota %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @juridico_andamento.data %>
+</p>
+
+<p>
+  <strong>Processo:</strong>
+  <%= @juridico_andamento.processo %>
+</p>
+
+<%= link_to 'Edit', edit_juridico_andamento_path(@juridico_andamento) %> |
+<%= link_to 'Back', juridico_andamentos_path %>

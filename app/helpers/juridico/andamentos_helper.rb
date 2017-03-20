@@ -1,0 +1,2 @@
+module Juridico::AndamentosHelper
+end

@@ -1,0 +1,68 @@
+pt-BR:
+  activerecord:
+    models:
+      juridico/processo: "Processos Jurídicos"
+    attributes:
+      juridico/processo:
+        number: "Número do Processo"
+        category: "Tipo de Processo"
+        author: "Autor"
+        defendant: "Réu"
+        date: "Distribuição"
+        shire: "Comarca"
+        circuit: "Vara"
+        value: "Valor da Ação"
+        notes: "Observações"
+        free: "Justiça Gratúita"
+        classe: "Classe"
+        judge: "Juiz"
+  juridico:
+    processos:
+      index:
+        number: "Número do Processo"
+        category: "Tipo de Processo"
+        author: "Autor"
+        defendant: "Réu"
+        date: "Distribuição"
+        shire: "Comarca"
+        circuit: "Vara"
+        value: "Valor da Ação"
+        class: "Classe"
+        judge: "Juiz"
+        notes: "Observações"
+        free: "Justiça Gratúita"
+        title: "Lista de Processos"
+        add: "Adicionar Processo"
+      edit:
+        title: "Editar Processo"
+        show: "Ver"
+        back: "Voltar"
+      new:
+        title: "Novo Processo"
+        back: "Voltar"
+      form:
+        andamento: "Andamento"
+        add_andamento: "Adicionar Andamento"
+        free_justice: "Obtida?"
+      show:
+        andamento: "Andamento"
+        author: "Requerente:"
+        back: "Voltar"
+        category: "Tipo de Processo:"
+        classe: "Classe:"
+        circuit: "Vara:"
+        date: "Distribuição:"
+        defendant: "Requerido:"
+        edit: "Editar"
+        judge: "Juiz:"
+        notes: "Observações"
+        number: "Número do Processo:"
+        process_parts: "Partes do Processo"
+        shire: "Comarca:"
+        value: "Valor da Ação:"
+
+
+
+
+
+

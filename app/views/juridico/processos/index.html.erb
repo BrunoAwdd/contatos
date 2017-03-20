@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= t('.title') %></h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('.category') %></th>
+      <th><%= t('.author') %></th>
+      <th><%= t('.defendant') %></th>
+      <th><%= t('.free') %></th>
+      <th><%= t('.shire') %></th>
+      <th><%= t('.circuit') %></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @juridico_processos.each do |juridico_processo| %>
+      <tr>
+        <td><%= juridico_processo.category_text %></td>
+        <td><%= juridico_processo.author %></td>
+        <td><%= juridico_processo.defendant %></td>
+        <td><%= juridico_processo.free_text %></td>
+        <td><%= juridico_processo.shire %></td>
+        <td><%= juridico_processo.circuit %></td>
+        <td colspan="2">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <%= I18n.t('Actions') %>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><%= link_to I18n.t('Show'), juridico_processo %></li>
+              <li><%= link_to I18n.t('Edit'),  edit_juridico_processo_path(juridico_processo) %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to I18n.t('Destroy'), juridico_processo, method: :delete, data: { confirm: I18n.t('Are_you_sure?') } %></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('.add'), new_juridico_processo_path %>

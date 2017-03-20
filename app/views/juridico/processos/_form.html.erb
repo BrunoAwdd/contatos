@@ -1,0 +1,105 @@
+
+<%= form_for(@juridico_processo) do |f| %>
+  <% if @juridico_processo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@juridico_processo.errors.count, "error") %> prohibited this juridico_processo from being saved:</h2>
+
+      <ul>
+      <% @juridico_processo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="groupo">
+    <div class="col-md-6 form-group">
+      <%= f.label :number, class: 'control-label' %>
+      <%= f.text_field :number, class: 'form-control' %>
+    </div>
+    <div class="col-md-6 form-group">
+      <%= f.label :category, class: 'control-label' %>
+      <%= f.select :category, [['Civil', 1], ['Trabalhista',2]], {}, {class:'form-control'} %>
+    </div>
+  </div>
+    <div class="groupo">
+      <div class="col-md-4 form-group">
+        <%= f.label :judge, class: 'control-label' %>
+        <%= f.text_field :judge, class: 'form-control' %>
+      </div>
+      <div class="col-md-4 form-group">
+        <%= f.label :classe, class: 'control-label' %>
+        <%= f.text_field :classe, class:'form-control' %>
+      </div>
+    </div>
+  <div class="groupo">
+    <div class="col-md-5 form-group">
+    <%= f.label :author, class: 'control-label' %>
+    <%= f.text_field :author, class: 'form-control' %>
+    </div>
+    <div class="col-md-5 form-group">
+      <%= f.label :defendant, class: 'control-label' %>
+      <%= f.text_field :defendant, class: 'form-control' %>
+    </div>
+    <div class="col-md-2 form-group">
+      <%= f.label :free, class: 'control-label' %>
+      <div>
+      <%= label_tag :free, class: 'checkbox-inline' do %>
+          <%= f.check_box :free, class: 'checkbox' %>
+          <%= t('.free_justice') %>
+      <% end %>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="groupo">
+    <div class="col-md-4 form-group form-inline">
+      <%= f.label :date, class: 'control-label' %><br>
+      <%= f.date_select :date,
+                      {:order => [:day, :month, :year],
+                      :start_year => 2000,
+                      :end_year => Time.current.year},
+                      {:class => 'form-control'}
+      %>
+    </div>
+    <div class="col-md-3 form-group">
+      <%= f.label :shire, class: 'control-label' %><br>
+      <%= f.text_field :shire, class: 'form-control' %>
+    </div>
+    <div class="col-md-3 form-group">
+      <%= f.label :circuit, class: 'control-label' %><br>
+      <%= f.text_field :circuit, class: 'form-control' %>
+    </div>
+    <div class="col-md-2 form-group">
+      <%= f.label :value, class: 'control-label' %><br>
+      <%= f.text_field :value, class: 'form-control' %>
+    </div>
+
+  </div>
+
+    <fieldset id="andamentos" class="col-md-12">
+      <div class="col-md-12">
+        <h4><%= t('.andamento') %></h4>
+        <hr>
+      </div><br>
+      <div class="fields row">
+        <%= f.fields_for :andamentos do |andamento| %>
+            <%= render 'andamento_fields', :f => andamento %>
+        <% end %>
+      </div>
+      <div class='links row'>
+        <button class="btn" id="btn_andamentos"><%= link_to_add_association t('.add_andamento'), f, :andamentos %></button>
+      </div>
+      <hr>
+    </fieldset>
+  <div class="col-md-12 form-group">
+    <%= f.label :notes, class: 'control-label' %><br>
+    <%= f.text_area :notes, class: 'form-control' %>
+  </div>
+
+
+
+  <div class="actions col-md-12 form-group">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

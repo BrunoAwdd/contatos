@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :juridico do
+    resources :andamentos
+  end
+  namespace :juridico do
+    resources :processos
+  end
   resources :newsletters do
     get 'send_newsletter'
     post 'send_mail'

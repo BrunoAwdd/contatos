@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817180656) do
+ActiveRecord::Schema.define(version: 20170301211626) do
 
   create_table "contatos", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "notes"
     t.string   "web_page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -46,7 +47,6 @@ ActiveRecord::Schema.define(version: 20160817180656) do
 
   create_table "enderecos", force: :cascade do |t|
     t.string   "tipo"
-    t.string   "endereco"
     t.string   "cidade"
     t.string   "estado"
     t.string   "pais"
@@ -56,6 +56,33 @@ ActiveRecord::Schema.define(version: 20160817180656) do
   end
 
   add_index "enderecos", ["contato_id"], name: "index_enderecos_on_contato_id"
+
+  create_table "juridico_andamentos", force: :cascade do |t|
+    t.text     "nota"
+    t.datetime "data"
+    t.integer  "processo_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "juridico_andamentos", ["processo_id"], name: "index_juridico_andamentos_on_processo_id"
+
+  create_table "juridico_processos", force: :cascade do |t|
+    t.string   "number"
+    t.integer  "category"
+    t.string   "author"
+    t.string   "defendant"
+    t.datetime "date"
+    t.string   "shire"
+    t.string   "circuit"
+    t.string   "value"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "free"
+    t.string   "judge"
+    t.string   "classe"
+  end
 
   create_table "newsletters", force: :cascade do |t|
     t.string   "subject"

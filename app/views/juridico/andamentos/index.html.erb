@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Juridico Andamentos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nota</th>
+      <th>Data</th>
+      <th>Processo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @juridico_andamentos.each do |juridico_andamento| %>
+      <tr>
+        <td><%= juridico_andamento.nota %></td>
+        <td><%= juridico_andamento.data %></td>
+        <td><%= juridico_andamento.processo %></td>
+        <td><%= link_to 'Show', juridico_andamento %></td>
+        <td><%= link_to 'Edit', edit_juridico_andamento_path(juridico_andamento) %></td>
+        <td><%= link_to 'Destroy', juridico_andamento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Andamento', new_juridico_andamento_path %>
