@@ -1,4 +1,4 @@
-class Products::DocumentsController < ApplicationController
+class Product::DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
   # GET /documents
