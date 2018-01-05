@@ -1,0 +1,152 @@
+<style>
+  .square{
+    color: #555555;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+  }
+  .top_square{
+    color: #555555;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+  }
+  .title_square{
+    color: #555555;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+  }
+</style>
+<div class="row" style="margin: 40px 0;">
+  <div class="col-xs-12">
+    <img src="<%= request.base_url %>/img/logo.png">
+  </div>
+</div>
+<div class="row top_square">
+  <div class="col-xs-8">
+    <strong><%= t('.name') %>:</strong>
+    <%= @credit_client_general.name %>
+  </div>
+  <div class="col-xs-4">
+    <strong><%= t('.cnpj') %>:</strong>
+    <%= @credit_client_general.format_cnpj %>
+  </div>
+  <div class="col-xs-8">
+    <strong><%= t('.brand') %></strong>
+    <%= @credit_client_general.brand %>
+  </div>
+  <div class="col-xs-4">
+    <strong><%= t('.contato') %></strong>
+    <%= @credit_client_general.contato.full_name %>
+  </div>
+</div>
+
+<div class="row title_square">
+  <div class="col-xs-6"><h4>Emails</h4></div>
+  <div class="col-xs-6"><h4>Telefones</h4> </div>
+</div>
+
+<div class="row square">
+  <div class="col-xs-6">
+    <%  @credit_client_general.emails.each do |email| %>
+        <p><%= email.email %> - <%= email.contact %></p>
+    <% end %>
+  </div>
+  <div class="col-xs-6">
+    <% @credit_client_general.phones.each do |phone| %>
+        <p><%= "(#{phone.ddd}) #{phone.phone} - #{phone.model}" %></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="row title_square">
+  <div class="col-xs-12"><h4>Endereços</h4></div>
+</div>
+
+<div class="row square">
+  <div class="col-xs-12">
+    <% @credit_client_general.addresses.each do |address| %>
+        <p>
+          <%= "#{address.country} - #{address.state}, #{address.city}.
+      #{address.street} #{address.number} - #{address.neighborhood}, #{address.zipcode}" %>
+        </p>
+    <% end %>
+  </div>
+</div>
+
+<div class="row title_square">
+  <div class="col-xs-12">
+    <h4>Linhas de Crédito</h4>
+  </div>
+</div>
+
+<div class="row square">
+  <% @credit_client_general.lines.each do |line| %>
+      <div class="col-xs-4"><strong> <%= line.name %></strong></div>
+      <div class="col-xs-2"> <%= line.format_number %></div>
+      <div class="col-xs-2"> <%= line.date.strftime("%d/%m/%Y") %></div>
+      <div class="col-xs-2"> <%= line.get_status %></div>
+      </br></br>
+      <div class="col-xs-12"> <%= line.note %></div>
+  <% end %>
+</div>
+
+<div class="row  title_square">
+  <div class="col-xs-12">
+    <h4>Jurídico</h4>
+  </div>
+</div>
+<div class="row square">
+  <% @credit_client_general.legals.each do |legal| %>
+      <div class="col-xs-6">Número do Processo: <%= legal.number %></div>
+      <div class="col-xs-3">Data: <%= legal.date.strftime("%d/%m/%Y")  %></div>
+      <div class="col-xs-12"><h5><strong>Última movimentação</strong></h5></div>
+      <div class="col-xs-12"><%= legal.note %></div>
+  <% end %>
+</div>
+
+<div class="row title_square">
+  <div class="col-xs-12">
+    <h4>Documentação</h4>
+  </div>
+</div>
+<div class="row square">
+  <% @credit_client_general.documents.each do |document| %>
+      <div class="row">
+        <div class="col-xs-4"><%= document.credit_document.name %></div>
+        <div class="col-xs-3">
+          <% if (document.date != nil) %>
+              Data: <%= document.date.strftime("%d/%m/%Y") %>
+              <%= document.expired? %>
+          <% end %>
+        </div>
+        <div class="col-xs-2"><%= document.statusText.html_safe %></div>
+        <div class="col-xs-2"><%= document.exemptionText.html_safe %></div>
+      </div>
+
+  <% end %>
+</div>
+
+<div class="row title_square">
+  <div class="col-xs-12">
+    <h4><%= t('.notes') %></h4>
+  </div>
+</div>
+<div class="row square">
+  <% @credit_client_general.notes.each do |note| %>
+      <div class="col-xs-3">Data: <%= note.date.strftime("%d/%m/%Y") %></div>
+      <div class="col-xs-9"><%= note.note %></div>
+  <% end %>
+</div>
+
+
+
+
+<div class="hidden-print">
+  <%= link_to t('.edit'), edit_credit_client_general_path(@credit_client_general) %> |
+  <%= link_to t('.back'), credit_client_generals_path %>
+</div>
+

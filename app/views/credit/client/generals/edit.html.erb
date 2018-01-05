@@ -1,0 +1,6 @@
+<h1><%= t('.title') %></h1>
+
+<%= render 'form', credit_client_general: @credit_client_general %>
+
+<%= link_to t('.show'), @credit_client_general %> |
+<%= link_to t('.back'), credit_client_generals_path %>
