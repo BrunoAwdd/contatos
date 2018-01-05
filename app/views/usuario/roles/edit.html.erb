@@ -1,0 +1,26 @@
+<%= simple_form_for(@usuario_message) do |f| %>
+<div class="tab-content clearfix" style="color: #555555; background-color: #fff;     padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 40px;">
+
+  <div class="row">
+    <div class="col-xs-4"><strong>De:</strong> <%= @usuario_message.from.myName %></div>
+    <div class="col-xs-8"><strong>Assunto:</strong> <%= @usuario_message.subject.html_safe %></div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12"><%= @usuario_message.message.html_safe %></div>
+  </div>
+
+  <div class="form-inline">
+    <%= f.input :status, :collection => { 'Pendente' => 0, 'Resolvido' => 1}, :include_blank => false %>
+    <%= f.button :submit %>
+  </div>
+
+
+</div>
+<% end %>
+
+<%= link_to 'Show', @usuario_message %> |
+<%= link_to 'Back', usuario_messages_path %>

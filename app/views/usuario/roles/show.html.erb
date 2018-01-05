@@ -1,0 +1,21 @@
+
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-xs-4"><strong>De: </strong><%= @usuario_message.from.myName %></div>
+    <div class="col-xs-4"><strong>Para: </strong><%= @usuario_message.to.blank? ? 'Mensagem para todos' : @usuario_message.to.myName %></div>
+    <div class="col-xs-4"><strong>Data: </strong><%= @usuario_message.updated_at.strftime("%d/%m/%Y") %></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-8"><strong>Assunto: </strong><%= @usuario_message.subject.html_safe %></div>
+    <div class="col-xs-4"><strong>Status: </strong><%= @usuario_message.statusText %></div>
+    <br><br>
+    <div class="col-xs-12"> <%= @usuario_message.message.html_safe %></div>
+  </div>
+</div>
+
+
+
+
+
+<%= link_to 'Edit', edit_usuario_message_path(@usuario_message) %> |
+<%= link_to 'Back', usuario_messages_path %>

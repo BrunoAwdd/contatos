@@ -1,0 +1,14 @@
+<%= simple_form_for(@usuario_message) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :to, :label_method => :myName, :disabled => current_user.id %>
+    <%= f.input :subject %>
+    <%= f.input :message %>
+    <%= f.input :status, :collection => { 'Pendente' => 0, 'Resolvido' => 1}, :include_blank => false %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
