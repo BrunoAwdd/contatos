@@ -15,5 +15,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require tinymce
+//= require jquery.validate
+//= require jquery.validate.localization/messages_pt_BR
 //= require_tree .
+
 

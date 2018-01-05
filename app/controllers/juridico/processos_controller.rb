@@ -1,5 +1,6 @@
 class Juridico::ProcessosController < ApplicationController
   before_action :set_juridico_processo, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
 
   # GET /juridico/processos

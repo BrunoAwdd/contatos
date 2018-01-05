@@ -1,0 +1,71 @@
+<%= simple_form_for(@credit_bank_general) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-md-4"><%= f.input :name%></div>
+    <div class="col-md-4"><%= f.input :agency%></div>
+    <div class="col-md-4"><%= f.association :contato, :label_method => :full_name %></div>
+  </div>
+    <fieldset id="enderecos">
+      <div class="col-md-12">
+        <h4>
+          <button class="btn" id="btn_enderecos">
+            <%= link_to_add_association '+', f, :addresses %>
+          </button>
+          <%= I18n.t('Contact.view.Add_Address') %>
+        </h4>
+        <hr>
+      </div><br>
+      <div class="fields">
+        <%= f.simple_fields_for :addresses do |endereco| %>
+            <%= render 'address_fields', :f => endereco %>
+
+        <% end %>
+      </div>
+
+
+    </fieldset>
+
+    <fieldset id="emails">
+      <div class="col-md-12">
+        <h4>
+          <button class="btn" id="btn_emails">
+            <%= link_to_add_association '+', f, :emails%>
+          </button>
+          <%= I18n.t('Contact.model.Emails') %>
+        </h4>
+        <hr>
+      </div><br>
+      <div class="fields">
+        <%= f.simple_fields_for :emails do |email| %>
+            <%= render 'email_fields', :f => email %>
+        <% end %>
+      </div>
+
+    </fieldset>
+
+    <fieldset id="telefones">
+      <div class="col-md-12">
+        <h4>
+          <button class="btn" id="btn_telefones">
+            <%= link_to_add_association '+', f, :phones %>
+          </button>
+          <%= I18n.t('Contact.model.Phones') %>
+        </h4>
+        <hr>
+      </div><br>
+      <div class="fields">
+        <%= f.simple_fields_for :phones do |telefone| %>
+            <%= render 'phone_fields', :f => telefone %>
+        <% end %>
+      </div>
+
+      <hr>
+    </fieldset>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+
+
+<% end %>

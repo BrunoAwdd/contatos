@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <section id="dados">
   <div class="row">
     <div class="col-md-12"><h3><%= @contato.full_name %></h3></div>
@@ -21,7 +19,6 @@
         <div class="col-md-12"><p><%= I18n.t('Contact.view.no_registred', entitie: t('Contact.model.Phone')) %></p></div>
       </div>
     <% end %>
-
   <hr>
 </section>
 
@@ -73,8 +70,8 @@
     <div class="col-md-12"><h4><strong>Trabalha com</strong></h4></div>
   </div>
   <div class="row">
-    <% if @contato.products.any? %>
-      <% @contato.products.each do |produto| %>
+    <% if @contato.product_generals.any? %>
+      <% @contato.product_generals.each do |produto| %>
             <div class="col-md-3"><p><%= produto.nome %></p></div>
       <% end %>
     <% else %>

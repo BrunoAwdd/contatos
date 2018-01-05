@@ -11,7 +11,7 @@ class CreateNewsletters < ActiveRecord::Migration
 
     create_table :newsletters_products do |t|
       t.references :newsletter, index: true, foreign_key: true
-      t.references :product, index: true, foreign_key: true
+      t.references :product_general, index: true, foreign_key: true
     end
   end
 end

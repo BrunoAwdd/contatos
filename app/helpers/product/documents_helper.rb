@@ -1,2 +1,2 @@
-module DocumentsHelper
+module Product::DocumentsHelper
 end

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t('.date_entry') %></strong>
+  <%= @business_general.date_entry %>
+</p>
+
+<p>
+  <strong><%= t('.subject') %></strong>
+  <%= @business_general.subject %>
+</p>
+
+<p>
+  <strong><%= t('.contato') %></strong>
+  <%= @business_general.contato.to_json %>
+</p>
+
+<p>
+  <strong><%= t('.product') %></strong>
+  <%= @business_general.product %>
+</p>
+
+<%= link_to t('.edit'), edit_business_general_path(@business_general) %> |
+<%= link_to t('.back'), business_generals_path %>

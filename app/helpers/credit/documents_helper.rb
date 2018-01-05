@@ -1,0 +1,2 @@
+module Credit::DocumentsHelper
+end

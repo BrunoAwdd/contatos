@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @credit_document.name %>
+</p>
+
+<p>
+  <strong>Frequency unity:</strong>
+  <%= @credit_document.frequency_unity %>
+</p>
+
+<p>
+  <strong>Frequency number:</strong>
+  <%= @credit_document.frequency_number %>
+</p>
+
+<%= link_to 'Edit', edit_credit_document_path(@credit_document) %> |
+<%= link_to 'Back', credit_documents_path %>

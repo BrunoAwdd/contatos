@@ -1,1 +1,1 @@
-json.partial! "usuario_messages/usuario_message", usuario_message: @usuario_message
+json.partial! "usuario_roles/usuario_role", usuario_role: @usuario_role

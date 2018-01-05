@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t('.name') %></strong>
+  <%= @credit_bank_general.name %>
+</p>
+
+<p>
+  <strong><%= t('.agency') %></strong>
+  <%= @credit_bank_general.agency %>
+</p>
+
+<p>
+  <strong><%= t('.contato') %></strong>
+  <%= @credit_bank_general.contato %>
+</p>
+<hr>
+<h4>Linhas Aprovadas</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Linha</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @credit_bank_general.lines.each do |line| %>
+      <tr>
+        <td><%= link_to line.credit_client_general.brand, line.credit_client_general %></td>
+        <td><%= line.name %></td>
+        <td><%= line.format_number %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+
+<%= link_to t('.edit'), edit_credit_bank_general_path(@credit_bank_general) %> |
+<%= link_to t('.back'), credit_bank_generals_path %>

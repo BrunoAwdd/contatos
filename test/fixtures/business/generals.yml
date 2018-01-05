@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_entry: 2017-07-07 16:43:55
+  subject: MyString
+  contact: one
+  product: one
+
+two:
+  date_entry: 2017-07-07 16:43:55
+  subject: MyString
+  contact: two
+  product: two

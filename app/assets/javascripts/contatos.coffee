@@ -23,6 +23,18 @@ $ ->
       #Adiciona um campo novo ao fieldset
       fieldset.children('.fields').append(template)
 
-  add("andamentos")
+  add("addresses")
+  add("documents")
+  add("emails")
+  add("enderecos")
+  add("legals")
+  add("lines")
+  add("notes")
+  add("phones")
+  add("telefones")
+
+
+
+
 
 

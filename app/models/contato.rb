@@ -1,24 +1,25 @@
 class Contato < ActiveRecord::Base
-
-
   #One-to-Many
-  #One Contato has many emails
-  has_many :emails, inverse_of: :contato, dependent: :destroy
-  accepts_nested_attributes_for :emails, reject_if: proc { |attributes| attributes['email'].blank? }, :allow_destroy => true
+    #One Contato has many emails
+    has_many :emails, inverse_of: :contato, dependent: :destroy
+    accepts_nested_attributes_for :emails, reject_if: proc { |attributes| attributes['email'].blank? }, :allow_destroy => true
 
-  #One Contato has many telefones
-  has_many :telefones, inverse_of: :contato, dependent: :destroy
-  accepts_nested_attributes_for :telefones, reject_if: proc { |attributes| attributes['telefone'].blank? }, :allow_destroy => true
+    #One Contato has many telefones
+    has_many :telefones, inverse_of: :contato, dependent: :destroy
+    accepts_nested_attributes_for :telefones, reject_if: proc { |attributes| attributes['telefone'].blank? }, :allow_destroy => true
 
-  #One Contato has many endereços
-  has_many :enderecos, inverse_of: :contato, dependent: :destroy
-  accepts_nested_attributes_for :enderecos, reject_if: :reject_enderecos, :allow_destroy => true
+    #One Contato has many endereços
+    has_many :enderecos, inverse_of: :contato, dependent: :destroy
+    accepts_nested_attributes_for :enderecos, reject_if: :reject_enderecos, :allow_destroy => true
 
-  #One Contato
-  has_many :notes
+    #One Contato
+    has_many :notes
+
+    has_many :business, class_name: 'Business::General'
 
   #Many-to-Many
-  has_and_belongs_to_many :products
+    has_and_belongs_to_many :product_generals, class_name:'Product::General',
+                            association_foreign_key: 'product_generals_id'
 
 
 
@@ -56,9 +57,9 @@ class Contato < ActiveRecord::Base
 
   def get_products
     str_products = ''
-    len_products = products.length
+    len_products = product_generals.length
 
-    products.each do |product|
+    product_generals.each do |product|
       str_products += product.nome
       if len_products > 1
         str_products += ", "

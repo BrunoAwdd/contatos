@@ -9,6 +9,9 @@ class CreateJuridicoProcessos < ActiveRecord::Migration
       t.string :shire
       t.string :circuit
       t.string :value
+      t.string :judge
+      t.string :classe
+      t.integer :free
       t.text :notes
 
       t.timestamps null: false

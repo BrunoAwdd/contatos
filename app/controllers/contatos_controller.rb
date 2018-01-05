@@ -1,8 +1,8 @@
 class ContatosController < ApplicationController
   before_action :set_contato, only: [:show, :edit, :update, :destroy]
-  before_action :build_contato, only:[:new, :edit]
   before_action :seasson_controller, only:[:index]
   before_action :authenticate_user!
+  require 'csv'
 
 
   def initialize
@@ -29,36 +29,41 @@ class ContatosController < ApplicationController
   # GET /contatos/1
   # GET /contatos/1.json
   def show
+    logger.debug "----------------------Show--------------------------:"
   end
 
   # GET /contatos/new
   def new
     @contato = Contato.new
+    build_contato
   end
 
   # GET /contatos/1/edit
   def edit
+    @contato.emails.build
+    @contato.telefones.build
+    @contato.enderecos.build
+    @contato.product_generals.build
   end
 
   # POST /contatos
   # POST /contatos.json
   def create
     @contato = Contato.new(contato_params)
-      respond_to do |format|
-        if @contato.save
-          format.html { redirect_to @contato, notice: 'Contato was successfully created.' }
-          format.json { render :show, status: :created, location: @contato }
-        else
-          format.html { render :new }
-          format.json { render json: @contato.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @contato.save
+        format.html { redirect_to @contato, notice: 'Contato was successfully created.' }
+        format.json { render :show, status: :created, location: @contato }
+      else
+        format.html { render :new }
+        format.json { render json: @contato.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   # PATCH/PUT /contatos/1
   # PATCH/PUT /contatos/1.json
   def update
-    #render plain: @contato.to_yaml
     #ContatoMailer.hello_email(@contato).deliver_later
     respond_to do |format|
       if @contato.update(contato_params)
@@ -75,8 +80,9 @@ class ContatosController < ApplicationController
   # DELETE /contatos/1.json
   def destroy
     @contato.destroy
+    url = get_page_url
     respond_to do |format|
-      format.html { redirect_to contatos_url, notice: 'Contato was successfully destroyed.' }
+      format.html { redirect_to url, notice: 'Contato was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -84,12 +90,13 @@ class ContatosController < ApplicationController
   # POST /contatos/1
   # POST /contatos/1.json
   def mass_action
+    url = get_page_url
     if !params[:mass].blank?
       if params[:mass]['action'] == 'delete'
         Contato.destroy(params[:mass]['id'])
 
         respond_to do |format|
-          format.html { redirect_to contatos_url, notice: 'Contatos deletados com sucesso' }
+          format.html { redirect_to url, notice: 'Contatos deletados com sucesso' }
           format.json { head :no_content }
         end
       else
@@ -99,6 +106,11 @@ class ContatosController < ApplicationController
   end
 
   def migrate
+
+    csv_text = File.read('public/contacts.csv')
+    csv = CSV.parse(csv_text, :headers => true)
+    #render plain: csv.to_json
+    render plain: csv["Name"].to_json
   end
 
   private
@@ -107,12 +119,20 @@ class ContatosController < ApplicationController
       @contato = Contato.find(params[:id])
     end
 
+    def get_page_url
+      if session[:pagination]["page"].blank?
+        url = contatos_url
+      else
+        url = contatos_url + '?page=' + session[:pagination]["page"]
+      end
+    end
+
     #build contact relationships
     def build_contato
       @contato.emails.build
       @contato.telefones.build
       @contato.enderecos.build
-      @contato.products.build
+      @contato.product_generals.build
     end
 
     #Inicia a Session para armazenar os valores de filtro
@@ -146,16 +166,17 @@ class ContatosController < ApplicationController
     end
 
     def filtrar_contatos
-      if session[:pagination][:per_page] != 'Todos'
+      if session[:pagination]['per_page'] != 'Todos'
         @contatos = Contato.joins(
-                               #LEFT JOIN contatos_products ON contatos_products.contato_id = contatos.id
+                               #LEFT JOIN contatos_product_generals ON contatos_products.contato_id = contatos.id
             "LEFT JOIN telefones ON telefones.contato_id = contatos.id
-            LEFT JOIN contatos_products ON contatos_products.contato_id = contatos.id
-            LEFT JOIN products ON contatos_products.product_id = products.id
+            LEFT JOIN contatos_product_generals ON contatos_product_generals.contato_id = contatos.id
+            LEFT JOIN product_generals ON contatos_product_generals.product_generals_id = product_generals.id
             LEFT JOIN emails ON emails.contato_id = contatos.id ")
                         .where(filterWhere(session[:filter]))
                         .group('contatos.id')
                         .paginate(:page => session[:pagination][:page], :per_page => session[:pagination]['per_page'])
+                        #.order('contatos.first_name ASC')
       else
         @contatos = Contato.joins(
             "LEFT JOIN telefones ON telefones.contato_id = contatos.id
@@ -167,7 +188,14 @@ class ContatosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contato_params
-      params.require(:contato).permit(:first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, :filter, product_ids:[], emails_attributes:[:id, :email, :_destroy], telefones_attributes:[:id, :ddd, :tipo, :telefone, :_destroy], enderecos_attributes:[:id, :tipo, :endereco, :cidade, :estado, :pais])
+      params.require(:contato).permit(
+            :first_name, :last_name, :email, :email2, :home_fone, :business_fone, :mobile_fone, :home_city, :home_state, :home_country, :notes, :web_page, :filter,
+            {product_general_ids:[]},
+            {emails_attributes:[:id, :email, :_destroy]},
+            {enderecos_attributes:[:id, :tipo, :endereco, :cidade, :estado, :pais, :_destroy]},
+            {telefones_attributes: [:id, :ddd, :tipo, :telefone, :_destroy]}
+      )
+
     end
 
 
@@ -238,7 +266,7 @@ class ContatosController < ApplicationController
     end
 
     if !params['tag'].blank?
-      addWhere("products.nome LIKE \"%#{params['product']}%\"")
+      addWhere("product_generals.nome LIKE \"%#{params['product']}%\"")
     end
 
     if !params['email'].blank?

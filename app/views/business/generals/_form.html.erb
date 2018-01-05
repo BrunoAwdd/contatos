@@ -1,0 +1,75 @@
+<%= form_for(business_general) do |f| %>
+  <% if business_general.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(business_general.errors.count, "error") %> prohibited this business_general from being saved:</h2>
+
+      <ul>
+      <% business_general.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group row">
+    <div class="col-md-12">
+        <%= f.label :subject, class: 'control-label' %>
+        <%= f.text_field :subject, class: 'form-control col-md-10'%>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="form-inline col-md-3">
+      <%= f.label :date_entry %>
+      <%= f.date_select :date_entry, {:order => [:day, :month, :year],
+                                      :use_month_numbers => true,
+                                      :start_year => 2000,
+                                      :end_year => Time.current.year},
+                        {:class => 'form-control'} %>
+    </div>
+      <div class="form-inline col-md-5">
+        <%= f.label :contato_id, class: 'control-label'  %>
+        <%= f.select( :contato_id, Contato.all.collect {|p| [ p.full_name, p.id ] }, {prompt: t('.select_contato')}, class: 'form-control') %>
+      </div>
+      <div class="col-md-4">
+
+        <%= f.label :product_id, class: 'control-label' %>
+        <%= f.select( :product_id, Product.all.collect {|p| [ p.nome, p.id ] }, {prompt: t('.select_product')}, class: 'form-control') %>
+      </div>
+  </div>
+
+
+  <hr>
+  <fieldset id="notes">
+    <div class="col-md-12">
+      <h4><%= t('.add_note') %></h4>
+
+    </div><br>
+    <div class="fields">
+      <%= f.fields_for :notes do |note| %>
+          <%= render 'note_fields', :f => note %>
+      <% end %>
+    </div>
+    <div class='links'>
+      <button class="btn" id="btn_notes"><%= link_to_add_association t('.add_note'), f, :notes %></button>
+    </div>
+    <hr>
+  </fieldset>
+  <hr>
+  <fieldset id="histories">
+    <div class="col-md-12">
+      <h4><%= t('.add_history') %></h4>
+    </div><br>
+    <div class="fields">
+      <%= f.fields_for :histories do |history| %>
+          <%= render 'history_fields', :f => history %>
+      <% end %>
+    </div>
+    <div class='links'>
+      <button class="btn" id="btn_histories"><%= link_to_add_association t('.add_history'), f, :histories %></button>
+    </div>
+    <hr>
+  </fieldset>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

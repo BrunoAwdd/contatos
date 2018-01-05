@@ -1,5 +1,6 @@
 class Juridico::AndamentosController < ApplicationController
   before_action :set_juridico_andamento, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /juridico/andamentos
   # GET /juridico/andamentos.json

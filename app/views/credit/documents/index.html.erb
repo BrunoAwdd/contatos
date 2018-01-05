@@ -1,0 +1,29 @@
+<h1><%= t('.title') %></h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t('activerecord.attributes.credit/document.name') %></th>
+      <th><%= t('activerecord.attributes.credit/document.frequency_unity') %></th>
+      <th><%= t('activerecord.attributes.credit/document.frequency_number') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @credit_documents.each do |credit_document| %>
+      <tr>
+        <td><%= credit_document.name %></td>
+        <td><%= credit_document.frequencyUnityText %></td>
+        <td><%= credit_document.frequency_number %></td>
+        <td><%= link_to t('show'), credit_document %></td>
+        <td><%= link_to t('edit'), edit_credit_document_path(credit_document) %></td>
+        <td><%= link_to t('destroy'), credit_document, method: :delete, data: { confirm: t('Are_you_sure?') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('.add_document'), new_credit_document_path %>

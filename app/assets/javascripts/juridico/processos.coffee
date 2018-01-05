@@ -23,4 +23,4 @@ $ ->
       #Adiciona um campo novo ao fieldset
       fieldset.children('.fields').append(template)
 
-  add("emails")
+  add("andamentos")

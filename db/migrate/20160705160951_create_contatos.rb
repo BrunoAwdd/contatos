@@ -7,5 +7,10 @@ class CreateContatos < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    create_table :product_generals do |t|
+      t.string :nome
+      t.timestamps null: false
+    end
   end
 end

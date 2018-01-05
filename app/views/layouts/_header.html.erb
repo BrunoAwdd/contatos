@@ -8,6 +8,21 @@
             <li><%= link_to t('About'), about_path %></li>
 
             <li class="dropdown">
+              <%= link_to credit_client_generals_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+                  <%= t('.credito') %> <span class="caret"></span>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li><%= link_to t('.clientes'), credit_client_generals_path %></li>
+                <li><%= link_to t('.add_cliente'), new_credit_client_general_path %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to t('.bancos'), credit_bank_generals_path %></li>
+                <li><%= link_to t('.add_banco'), new_credit_bank_general_path %></li><li role="separator" class="divider"></li>
+                <li><%= link_to t('.documents'), credit_documents_path %></li>
+                <li><%= link_to t('.add_documents'), new_credit_document_path %></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
               <%= link_to contatos_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
                   <%= t('Contact.model.Contact') %> <span class="caret"></span>
               <% end %>
@@ -17,22 +32,26 @@
                 <li><%= link_to t('Contact.view.Add_Contact'), new_contato_path %></li>
               </ul>
             </li>
-
+            
             <li class="dropdown">
-              <%= link_to products_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+              <%= link_to product_generals_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
                   <%= t('Product.model.Product') %> <span class="caret"></span>
               <% end %>
+
+
               <ul class="dropdown-menu">
-                <li><%= link_to t('Product.view.List_Products'), products_path %></li>
+                <li><%= link_to t('Product.view.List_Products'), product_generals_path %></li>
                 <li role="separator" class="divider"></li>
-                <li><%= link_to t('Product.view.Add_Products'), new_product_path %></li>
+                <li><%= link_to t('Product.view.Add_Products'), new_product_general_path %></li>
               </ul>
             </li>
 
             <li class="dropdown">
-              <%= link_to products_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+              <%= link_to newsletters_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
                   <%= t('Newsletter.model.Newsletter') %> <span class="caret"></span>
               <% end %>
+
+
               <ul class="dropdown-menu">
                 <li><%= link_to t('Newsletter.view.List_Newsletter'), newsletters_path %></li>
                 <li role="separator" class="divider"></li>
@@ -41,15 +60,27 @@
             </li>
 
             <li class="dropdown">
+              <%= link_to juridico_processos_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+                  <%= t('.juridico') %> <span class="caret"></span>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li><%= link_to t('.list_process'), juridico_processos_path %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to t('.new_process'), new_juridico_processo_path %></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
               <%= link_to contatos_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
                   <%= current_user.email %> <span class="caret"></span>
               <% end %>
               <ul class="dropdown-menu">
-                <li>
-                  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-                </li>
+                <li> <%= link_to('Editar Informações', edit_usuario_general_path(current_user.id) )%></li>
+                <li> <%= link_to('Mensagens', usuario_messages_path )%></li>
+                <li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
               </ul>
             </li>
+
 
         <% else %>
             <li>

@@ -1,25 +1,49 @@
 
 <div class="row form-item">
   <%= f.hidden_field :id %>
-  <%= f.label :pais, I18n.t('Address.model.Country'), class: 'col-md-2 control-label' %>
+  <%= f.label :country, class: 'col-md-1 control-label' %>
   <div class="form-group col-md-1">
-    <div class=""><%= f.text_field :pais, class: 'form-control' %></div>
+    <div class=""><%= f.text_field :country, class: 'form-control' %></div>
   </div>
 
-  <%= f.label :estado, I18n.t('Address.model.State'), class: "col-md-1 control-label" %>
+  <%= f.label :state, class: "col-md-1 control-label" %>
   <div class="form-group col-md-1">
-    <%= f.text_field :estado, class: 'form-control' %>
+    <%= f.text_field :state, class: 'form-control' %>
   </div>
 
-  <%= f.label :cidade,I18n.t('Address.model.City'), class: "col-md-1 control-label" %>
-  <div class="form-group col-md-3">
-    <div class=""><%= f.text_field :cidade, class: 'form-control' %></div>
+  <%= f.label :city,class: "col-md-1 control-label" %>
+  <div class="form-group col-md-2">
+    <div class=""><%= f.text_field :city, class: 'form-control' %></div>
+  </div>
+  <%= f.label :neighborhood, class: 'col-md-1 control-label' %>
+  <div class="form-group col-md-2">
+    <div class=""><%= f.text_field :neighborhood, class: 'form-control' %></div>
   </div>
 
-  <div class="checkbox col-md-3">
+  <div class="checkbox col-md-2">
     <label>
       <%= f.check_box :_destroy %>
       <%= f.label :_destroy, I18n.t('remove') %>
     </label>
   </div>
 </div>
+<div class="row form-item">
+
+
+  <%= f.label :street, class: "col-md-1 control-label" %>
+  <div class="form-group col-md-4">
+    <%= f.text_field :street, class: 'form-control' %>
+  </div>
+
+  <%= f.label :number, class: "col-md-1 control-label" %>
+  <div class="form-group col-md-1">
+    <div class=""><%= f.text_field :number, class: 'form-control' %></div>
+  </div>
+
+  <%= f.label :zipcode, class: "col-md-1 control-label" %>
+  <div class="form-group col-md-2">
+    <div class=""><%= f.text_field :zipcode, class: 'form-control' %></div>
+  </div>
+
+</div>
+<hr>

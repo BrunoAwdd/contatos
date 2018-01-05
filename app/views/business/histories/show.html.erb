@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Data entry:</strong>
+  <%= @business_history.data_entry %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @business_history.note %>
+</p>
+
+<p>
+  <strong>Business general:</strong>
+  <%= @business_history.business_general %>
+</p>
+
+<%= link_to 'Edit', edit_business_history_path(@business_history) %> |
+<%= link_to 'Back', business_histories_path %>

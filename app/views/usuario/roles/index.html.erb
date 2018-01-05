@@ -1,114 +1,27 @@
-<script>
-    $( document ).ready(function() {
-        $('#myTabs a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
-    });
-</script>
+<p id="notice"><%= notice %></p>
 
-<h1><%= t('.title') %></h1>
+<h1>Usuario Roles</h1>
 
-<ul class="nav nav-tabs" id="myTabs">
-  <li class="active"><a class="tablink " href="#all" data-turbolinks="false"><%= t('.system') %></a></li>
-  <li><a class="tablink" href="#to" data-turbolinks="false"><%= t('.recived') %></a></li>
-  <li><a class="tablink" href="#from" data-turbolinks="false"><%= t('.send') %></a></li>
-</ul>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<div class="tab-content clearfix" style="color: #555555;
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    margin-bottom: 40px;
-    border-top-color: transparent;">
-  <div class="tab-pane active" id="all">
-    <table class="table table-striped">
-      <thead >
-        <tr>
-          <th></th>
-          <th><%= t('.date') %></th>
-          <th><%= t('.subject') %></th>
-          <th><%= t('.status') %></th>
-          <th><%= t('.from') %></th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-      <% @all_messages.each do |usuario_message| %>
-          <tr class="<%= usuario_message.statusClass %>">
-            <td><i class="fa fa-check" aria-hidden="true" style="color: <%= usuario_message.visualizedStyle %>"></i></td>
-            <td><%= usuario_message.updated_at.strftime("%d/%m/%Y") %></td>
-            <td><%= usuario_message.subject.html_safe %></td>
-            <td><%= usuario_message.statusText %></td>
-            <td><%= usuario_message.fromName %></td>
-            <td><%= usuario_message.visualizedText %></td>
-            <td><%= link_to 'Show', usuario_message %></td>
-            <td><%= link_to 'Edit', edit_usuario_message_path(usuario_message) %></td>
-            <td><%= link_to 'Destroy', usuario_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="tab-pane" id="to">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th></th>
-          <th><%= t('.date') %></th>
-          <th><%= t('.subject') %></th>
-          <th><%= t('.status') %></th>
-          <th><%= t('.from') %></th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @usuario_messages.each do |usuario_message| %>
-            <tr class="<%= usuario_message.statusClass %>">
-              <td><i class="fa fa-check" aria-hidden="true" style="color: <%= usuario_message.visualizedStyle %>"></i></td>
-              <td><%= usuario_message.updated_at.strftime("%d/%m/%Y") %></td>
-              <td><%= usuario_message.subject.html_safe %></td>
-              <td><%= usuario_message.statusText %></td>
-              <td><%= usuario_message.fromName %></td>
-              <td><%= link_to 'Show', usuario_message %></td>
-              <td><%= link_to 'Edit', edit_usuario_message_path(usuario_message) %></td>
-              <td><%= link_to 'Destroy', usuario_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="tab-pane" id="from">
-    <table class="table table-striped">
-      <thead>
+  <tbody>
+    <% @usuario_roles.each do |usuario_role| %>
       <tr>
-        <th></th>
-        <th><%= t('.date') %></th>
-        <th><%= t('.subject') %></th>
-        <th><%= t('.status') %></th>
-        <th><%= t('.to') %></th>
-        <th colspan="3"></th>
+        <td><%= usuario_role.name %></td>
+        <td><%= link_to 'Show', usuario_role %></td>
+        <td><%= link_to 'Edit', edit_usuario_role_path(usuario_role) %></td>
+        <td><%= link_to 'Destroy', usuario_role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-      </thead>
-      <tbody>
-      <% @from_messages.each do |usuario_message| %>
-          <tr class="<%= usuario_message.statusClass %>">
-            <td><i class="fa fa-check" aria-hidden="true" style="color: <%= usuario_message.visualizedStyle %>"></i></td>
-            <td><%= usuario_message.updated_at.strftime("%d/%m/%Y") %></td>
-            <td><%= usuario_message.subject.html_safe %></td>
-            <td><%= usuario_message.statusText %></td>
-            <td><%= usuario_message.toName %></td>
-            <td><%= usuario_message.visualizedText %></td>
-            <td><%= link_to 'Show', usuario_message %></td>
-            <td><%= link_to 'Edit', edit_usuario_message_path(usuario_message) %></td>
-            <td><%= link_to 'Destroy', usuario_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
-<%= link_to 'New Usuario Message', new_usuario_message_path %>
+
+<%= link_to 'New Usuario Role', new_usuario_role_path %>

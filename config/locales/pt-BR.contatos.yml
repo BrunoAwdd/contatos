@@ -19,14 +19,232 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 pt-BR:
+  activerecord:
+    models:
+      business/general: 'Negócios'
+      business/history: 'Histórico do Negócio'
+      business/notes: 'Anotações do Negócio'
+      credit/bank/general: 'Banco'
+      credit/bank/address: 'Endereço'
+      credit/bank/email: 'Email'
+      credit/bank/phone: 'Telefone'
+      credit/client/general: 'Cliente'
+      credit/client/address: 'Endereço'
+      credit/client/email: 'Email'
+      credit/client/phone: 'Telefone'
+      credit/client/intermediary: 'Intermediário'
+      credit/client/document: 'Documentos do Cliente'
+      credit/line: 'Linha de Crédito'
+      credit/document: 'Documentos'
+      usuario/general: 'Informação de Usuário'
+    attributes:
+      business/general:
+        date_entry: 'Data de Entrada'
+        subject: 'Cliente'
+        contato_id: 'Contato'
+        product_id: 'Produto'
+      business/history:
+        date_entry: 'Data de Entrada'
+        note: 'Acontecimento'
+      credit/bank/general:
+        agency: 'Agência'
+        contato_id: 'Contato'
+        name: 'Banco'
+      credit/bank/address:
+        country: 'País'
+        neighborhood: 'Bairro'
+        number: 'Número'
+        state: 'Estado'
+        street: 'Endereço'
+        zipcode: 'CEP'
+      credit/bank/email:
+        email: 'Email'
+      credit/bank/phone:
+        ddd: 'DDD'
+        phone: 'Telefone'
+        model: 'Tipo'
+      credit/client/general:
+        name: 'Razão Social'
+        brand: 'Nome Fantasia'
+        cnpj: 'CNPJ'
+      credit/client/address:
+        country: 'País'
+        city: 'Cidade'
+        neighborhood: 'Bairro'
+        number: 'Número'
+        state: 'Estado'
+        street: 'Endereço'
+        zipcode: 'CEP'
+      credit/client/document:
+        credit_document: 'Nome do documento'
+        status: 'Enviado?'
+        exemption: 'Isento?'
+        date: 'Data'
+      credit/client/email:
+        email: 'Email'
+      credit/client/intermediary:
+        name: 'Intermediário'
+        note: 'Observações'
+      credit/client/phone:
+        ddd: 'DDD'
+        phone: 'Telefone'
+        model: 'Tipo'
+      credit/document:
+        name: 'Nome do Documento'
+        frequency_unity: 'Periodicidade'
+        frequency_number: 'Intervalo'
+      credit/line:
+        name: 'Nome'
+        value: 'Valor'
+        credit_bank_general_id: 'Banco'
+        credit_bank_general: 'Banco'
+        date: 'Data'
+        note: 'Anotações'
+      usuario/general:
+        name: 'Nome'
+        last_name: 'Sobrenome'
+        role: 'Função'
+  layouts:
+    header:
+      add_banco: 'Adicionar Banco'
+      add_cliente: 'Adicionar Cliente'
+      add_documents: 'Adicionar Documento'
+      bancos: 'Ver Bancos'
+      clientes: 'Ver Clientes'
+      credito:  'Crédito'
+      documents: 'Documentos'
+  business:
+    generals:
+      index:
+        contato: 'Contato'
+        date_entry: 'Data de Entrada'
+        destroy: 'Deletar'
+        destroy_msg: 'Tem certeza que deseja deletar'
+        edit: 'Editar'
+        new: 'Novo Negócio'
+        product: 'Produto'
+        show: 'Ver'
+        subject: 'Negócio'
+        title: 'Lista de Negócios'
+      new:
+        back: 'Voltar'
+        title: 'Novo Negócio'
+      edit:
+        back: 'Voltar'
+        show: 'Ver'
+        title: 'Editar Negócio'
+      show:
+        back: 'Voltar'
+        contato: 'Contato'
+        date_entry: 'Data de Entrada'
+        edit: 'Editar'
+        product: 'Produto'
+        subject: 'Negócio'
+        title: 'Lista de Negócios'
+      history_fields:
+        note: 'Anotação'
+        date_entry: 'Data'
+      form:
+        add_history: 'Adicionar Histórico'
+        add_note: 'Adicionar Anotação'
+        select_product: 'Selecionar Produto'
+        select_contato: 'Selectionar Contato'
+  credit:
+    bank:
+      generals:
+        index:
+          agency: 'Agência'
+          name: 'Banco'
+          contato: 'Contato'
+          title: 'Lista de Bancos'
+          new: 'Adicionar Banco'
+          edit: 'Editar'
+          destroy: 'Deletar'
+          show: 'Mostrar'
+          message: 'Você tem certeza que deseja deletar?'
+        new:
+          back: 'Voltar'
+          title: 'Adicionar Banco'
+        edit:
+          back: 'Voltar'
+          show: 'Ver Banco'
+          title: 'Adicionar Banco'
+        show:
+          agency: 'Agência'
+          contato: 'Contato'
+          back: 'Voltar'
+          edit: 'Editar'
+          name: 'Banco'
+    client:
+      generals:
+        index:
+          brand: 'Nome Fantasia'
+          contato: 'Contato'
+          name: 'Razão Social'
+          cnpj: 'CNPJ'
+          title: 'Lista de Clientes'
+          new: 'Adicionar Cliente'
+          edit: 'Editar'
+          destroy: 'Deletar'
+          show: 'Mostrar'
+          message: 'Você tem certeza que deseja deletar?'
+        new:
+          back: 'Voltar'
+          title: 'Adicionar Cliente'
+        edit:
+          back: 'Voltar'
+          show: 'Ver Cliente'
+          title: 'Adicionar Cliente'
+        show:
+          brand: 'Nome Fantasia'
+          contato: 'Contato'
+          name: 'Razão Social'
+          notes: 'Histórico'
+          cnpj: 'CNPJ'
+          title: 'Lista de Bancos'
+          edit: 'Editar'
+        form:
+          lines: 'Linhas de Crédito'
+          notes: 'Histórico'
+          legal: 'Jurídico'
+          documents: 'Documentação'
+          intermediary: 'Intermediario'
+    documents:
+      index:
+        add_document: 'Adicionar Documento'
+        title: 'Lista de Documentos'
+  usuario:
+    messages:
+      index:
+        date: 'Data'
+        from: 'De'
+        read: 'Lida'
+        recived: 'Recebidas'
+        send: 'Enviadas'
+        status: 'Status'
+        subject: 'Assunto'
+        system: 'Mensages de Sistema'
+        title: 'Mensagens'
+        to: 'Para'
+  product:
+    generals:
+      edit:
+        title: 'Editar Produto'
+      new:
+        title: 'Adicionar Produto'
+
+
   #Basicos
   About: Sobre
   Are_you_sure?: Você tem certeza?
   Back: Voltar
   Destroy: Deletar
+  destroy: 'Deletar'
   Edit: Editar
+  edit: 'Editar'
   Send: Enviar
   Show: Ver
+  show: 'Ver'
   Actions: Ações
   remove: Remover
   cant_save: "O(A) %{model} não pode ser salvo(a)."
@@ -49,6 +267,8 @@ pt-BR:
       Phones: Telefones
       Product: Produto
       Products: Produtos
+
+
 
     view:
       Action: Ação
@@ -161,10 +381,48 @@ pt-BR:
   helpers:
     label:
       newsletter:
-        subject: 'Assunto'
         html_message: 'Mensagem em Html'
         text_message: 'Mensagem em Texto'
         status: 'Situação'
+        subject: 'Assunto'
+      credit/client/intermediary:
+        name: 'Intermediário'
+        note: 'Observações'
+    placeholder:
+      credit/client/general:
+        name: 'Razão Social'
+        brand: 'Fantasia'
+        cnpj: 'CNPJ'
+      credit/client/document:
+        credit_document: 'Tipo de Documento'
+        date: 'Data'
+        status: 'Status'
+      credit/client/address:
+        country: 'País'
+        city: 'Cidade'
+        neighborhood: 'Bairro'
+        number: 'Número'
+        state: 'Estado'
+        street: 'Endereço'
+        zipcode: 'CEP'
+      credit/client/email:
+        email: 'Email'
+        contact: 'Contato'
+      credit/client/intermediary:
+        name: 'Intermediário'
+        note: 'Observações'
+      credit/client/phone:
+        ddd: 'DDD'
+        phone: 'Telefone'
+        model: 'Tipo'
+      credit/line:
+        name: 'Nome'
+        value: 'Valor'
+        credit_bank_general: 'Banco'
+        date: 'Data'
+        note: 'Anotações'
+
+
 
 
 

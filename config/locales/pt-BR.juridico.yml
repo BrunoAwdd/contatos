@@ -16,6 +16,11 @@ pt-BR:
         free: "Justiça Gratúita"
         classe: "Classe"
         judge: "Juiz"
+  layouts:
+    header:
+      juridico: "Jurídico"
+      list_process: "Listar Processos"
+      new_process: "Adicionar Processo"
   juridico:
     processos:
       index:

@@ -1,0 +1,195 @@
+<script>
+    $( document ).ready(function() {
+        $('#myTabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    });
+</script>
+<%= simple_form_for(@credit_client_general) do |f| %>
+    <% if @credit_client_general.errors.any? %>
+        <div class="error_explanation">
+          <h2><%= pluralize(@credit_client_general.errors.count, "error") %> prevented this record from being saved:</h2>
+          <ul>
+            <% @credit_client_general.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <ul class="nav nav-tabs" id="myTabs">
+      <li class="active"><a class="tablink " href="#data" data-turbolinks="false">Dados Cadastrais</a></li>
+      <li><a class="tablink" href="#line" data-turbolinks="false"><%= t('.lines') %></a></li>
+      <li><a class="tablink" href="#document" data-turbolinks="false"><%= t('.documents') %></a></li>
+      <li><a class="tablink" href="#note" data-turbolinks="false"><%= t('.notes') %></a></li>
+      <li><a class="tablink" href="#legal" data-turbolinks="false"><%= t('.legal') %></a></li>
+      <li><a class="tablink" href="#intermediary" data-turbolinks="false"><%= t('.intermediary') %></a></li>
+    </ul>
+
+    <div class="tab-content clearfix" style="color: #555555;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        margin-bottom: 40px;
+        border-top-color: transparent;">
+      <div class="tab-pane active" id="data">
+        <div class="row">
+          <div class="col-md-6"><%= f.input :name%></div>
+          <div class="col-md-6"><%= f.input :brand%></div>
+          <div class="col-md-6"><%= f.input :cnpj%></div>
+          <div class="col-md-6"><%= f.association :contato, :label_method => :full_name %></div>
+        </div>
+
+        <fieldset id="addresses">
+          <div class="col-md-12">
+            <h4>
+              <button class="btn" id="btn_addresses">
+                <%= link_to_add_association '+', f, :addresses %>
+              </button>
+              <%= I18n.t('Contact.view.Add_Address') %>
+            </h4>
+            <hr>
+          </div><br>
+          <div class="fields">
+            <%= f.simple_fields_for :addresses do |endereco| %>
+                <%= render 'address_fields', :f => endereco %>
+
+            <% end %>
+          </div>
+        </fieldset>
+
+        <fieldset id="emails">
+          <div class="col-md-12">
+            <h4>
+              <button class="btn" id="btn_emails">
+                <%= link_to_add_association '+', f, :emails%>
+              </button>
+              <%= I18n.t('Contact.model.Emails') %>
+            </h4>
+            <hr>
+          </div><br>
+          <div class="fields">
+            <%= f.simple_fields_for :emails do |email| %>
+                <%= render 'email_fields', :f => email %>
+            <% end %>
+          </div>
+
+        </fieldset>
+
+        <fieldset id="phones">
+          <div class="col-md-12">
+            <h4>
+              <button class="btn" id="btn_phones">
+                <%= link_to_add_association '+', f, :phones%>
+              </button>
+              <%= I18n.t('Contact.model.Phones') %>
+            </h4>
+            <hr>
+          </div><br>
+          <div class="fields">
+            <%= f.simple_fields_for :phones do |phone| %>
+                <%= render 'phone_fields', :f => phone %>
+            <% end %>
+          </div>
+
+        </fieldset>
+
+      </div>
+      <div class="tab-pane" id="line">
+        <fieldset id="lines">
+          <div class="col-md-12">
+            <h4>
+              <button class="btn" id="btn_lines">
+                <%= link_to_add_association '+', f, :lines %>
+              </button>
+              <%= t('.lines') %>
+            </h4>
+            <hr>
+          </div><br>
+          <div class="fields">
+            <%= f.simple_fields_for :lines do |lines| %>
+                <%= render 'line_fields', :f => lines %>
+            <% end %>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <div class="tab-pane" id="document">
+        <fieldset id="documents">
+          <div class="col-md-12">
+            <h4>
+              <%= t('.documents') %>
+            </h4>
+          </div><br>
+          <div class="fields">
+            <%= f.simple_fields_for :documents do |documents| %>
+                <%= render 'document_fields', :f => documents %>
+            <% end %>
+          </div>
+        </fieldset>
+      </div>
+      <div class="tab-pane" id="note">
+
+        <fieldset id="notes" class="col-md-12">
+          <div class="col-md-12">
+            <h4><button class="btn" id="btn_notes">
+              <%= link_to_add_association '+', f, :notes %>
+            </button>
+              <%= t('.notes') %>
+            </h4>
+          </div><br>
+          <div class="fields row">
+            <%= f.simple_fields_for :notes do |note| %>
+                <%= render 'note_fields', :f => note %>
+            <% end %>
+          </div>
+        </fieldset>
+
+
+      </div>
+
+      <div class="tab-pane" id="legal">
+        <fieldset id="legals" class="col-md-12">
+          <div class="col-md-12">
+            <h4><button class="btn" id="btn_legals">
+              <%= link_to_add_association '+', f, :legals %>
+            </button>
+              <%= t('.legal') %></h4>
+          </div><br>
+          <div class="fields row">
+            <%= f.simple_fields_for :legals do |legal| %>
+                <%= render 'legal_fields', :f => legal %>
+            <% end %>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <div class="tab-pane" id="intermediary">
+        <fieldset id="intermediarys" class="col-md-12">
+          <div class="row">
+            <%= f.simple_fields_for :intermediary do |inter| %>
+                <div class="form-group col-md-12">
+                  <%= inter.hidden_field :id %>
+                  <%= inter.input :name, placeholder:true %>
+                </div>
+                <div class="form-group col-md-12">
+                  <%= inter.text_area :note, rows: "5", class: 'form-control', placeholder:true%>
+                </div>
+            <% end %>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+
+
+
+
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

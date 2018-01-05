@@ -7,14 +7,13 @@
     })
   });
 </script>
-
 <h1><%= I18n.t('Contact.view.Listing_Contacts') %></h1>
 
 <table class="table table-striped">
   <%= form_for :filter, url: contatos_path, method: :get do |f| %>
   <thead>
       <tr>
-        <% if session[:pagination][:per_page] != 'Todos' %>
+        <% if session[:pagination]['per_page'] != 'Todos' %>
           <th colspan="6">
             <%= will_paginate @contatos, :renderer => ContatosHelper::LinkRenderer, :previous_label => '<<', :next_label => '>>', :class => ''  %>
           </th>
@@ -29,18 +28,20 @@
         <th><%= f.text_field :name, class: 'form-control', value: session[:filter]['name'], placeholder: 'Nome' %></th>
         <th><%= f.text_field :email, class: 'form-control', value: session[:filter]['email'], placeholder: 'Emails'  %></th>
         <th><%= f.text_field :telefone, class: 'form-control', value: session[:filter]['telefone'], placeholder: 'Telefones'  %></th>
-        <th width="10%"><%= f.select :tag, Product.all.collect {|p| [ p.nome, p.id ] }, {include_blank: t('Contact.view.none'), :selected => session[:filter]['tag']},  {class: 'form-control', placeholder: 'Tags' } %></th>
+        <th width="10%"><%= f.select :tag, Product::General.all.collect {|p| [ p.nome, p.id ] }, {include_blank: t('Contact.view.none'), :selected => session[:filter]['tag']},  {class: 'form-control', placeholder: 'Tags' } %></th>
         <th colspan="2"><%= f.submit 'Filtrar', class: 'btn btn-primary' %></th>
       </tr>
   </thead>
   <% end %>
+
+
   <%= form_for :mass, url: mass_action_contatos_path, data: { confirm: I18n.t('Are_you_sure?') } do |f| %>
   <tbody>
       <tr>
         <th><input type="checkbox" id="massAll" name="filter[mass][]" /></th>
         <th>Id</th>
-        <th><%= I18n.t('Contact.model.Full_name') %></th>
-        <th><%= I18n.t('Contact.model.Email') %></th>
+        <th><%= f.button icon('long-arrow-up'), class: 'btn' %><%= icon('long-arrow-down')  %> <%= I18n.t('Contact.model.Full_name') %> </th>
+        <th><%= I18n.t('Contact.model.Email') %> <%= request.original_url %></th>
         <th><%= I18n.t('Contact.model.Phone') %></th>
         <th><%= I18n.t('Contact.model.Product') %></th>
         <th width="10%">
@@ -54,7 +55,7 @@
         <tr>
           <td><input type="checkbox" class="filterMass" id="filter[mass][<%= contato.id %>]" name="mass[id][]" value="<%= contato.id %>" /></td>
           <td><%= contato.id %></td>
-          <td><%= contato.full_name %></td>
+          <td><%= contato.full_name %> </td>
           <td><%= contato.get_emails.html_safe %></td>
           <td><%= contato.get_telefones.html_safe %></td>
           <td><%= contato.get_products %></td>

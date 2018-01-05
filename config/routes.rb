@@ -1,39 +1,61 @@
 Rails.application.routes.draw do
 
-  namespace :juridico do
-    resources :andamentos
-  end
-  namespace :juridico do
-    resources :processos
-  end
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  root 'static_pages#home'
+  get 'about', controller:  :static_pages
+  get 'vcard/upload'
+
   resources :newsletters do
     get 'send_newsletter'
     post 'send_mail'
   end
   devise_for :users
 
-  root 'static_pages#home'
-
-
-  namespace :products do
-    resources :documents
-  end
-
-  resources :products do
-
-  end
-
-
-  get 'about', controller:  :static_pages
-
   resources :contatos do
+    get 'migrate'
     collection do
       post :mass_action
     end
     resources :notes, :only => [:edit, :create, :index, :destroy]
   end
 
-  get 'vcard/upload'
+  namespace :usuario do
+    resources :generals
+    resources :messages
+    resources :roles
+  end
+
+  namespace :credit do
+    resources :documents
+    namespace :bank do
+      resources :generals
+    end
+    namespace :client do
+      resources :generals do
+        get 'find_expired'
+      end
+    end
+  end
+
+  namespace :business do
+    resources :notes
+    resources :histories
+    resources :generals
+  end
+
+
+  namespace :juridico do
+    resources :andamentos
+    resources :processos
+  end
+
+  namespace :product do
+    resources :documents
+    resources :generals
+  end
+
+
+
 
   #post 'vcard/create'
 

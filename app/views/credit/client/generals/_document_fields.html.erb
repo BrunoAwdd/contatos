@@ -1,15 +1,27 @@
-
 <div class="row form-item">
   <%= f.hidden_field :id %>
-  <%= f.label :name, class: 'col-md-1 form-label' %>
-  <div class="form-group col-md-5">
-    <div class=""><%= f.text_field :name, class: 'form-control' %></div>
+
+  <div class="col-md-4">
+    <%= f.association :credit_document, :label_method => :name, placeholder: true, :readonly => true %>
   </div>
 
-  <%= f.label :value, class: "col-md-1  form-label" %>
-  <div class="form-group col-md-3">
-    <%= f.number_field :value, class: 'form-control' %>
+  <div class="form-group col-md-2">
+    <%= f.label :status, class: 'form-label' %>
+    <div class=""><%= f.check_box :status, class: 'checkbox', placeholder: true %></div>
   </div>
+
+  <div class="form-group col-md-2">
+    <%= f.label :exemption, class: 'form-label' %>
+    <div class=""><%= f.check_box :exemption, class: 'checkbox', placeholder: true %></div>
+  </div>
+
+
+  <div class="form-group col-md-2">
+    <%= f.label :date, class: "form-label" %>
+    <%= f.date_field :date, class: 'form-control', placeholder: true %>
+  </div>
+
+
 
   <div class="checkbox col-md-2">
     <label>
@@ -18,27 +30,5 @@
     </label>
   </div>
 </div>
-<div class="row form-item">
-  <%= f.label :credit_bank_general, class: 'col-md-1  form-label' %>
-  <div class="form-group col-md-4">
-    <div class=""><%= f.select :credit_bank_general, Credit::Bank::General.all.collect {|p| [p.full_name, p.id]}, {include_blank: t('Contact.view.none')}, {class: 'form-control', placeholder: 'Tags' } %></div>
-  </div>
 
-  <%= f.label :date, class: "col-md-1  form-label" %>
-  <div class="form-group col-md-3">
-    <div class=""><%= f.date_field :date, class: 'form-control'%></div>
-  </div>
 
-  <%= f.label :status, class: "col-md-1  form-label" %>
-  <div class="form-group col-md-2">
-    <div class=""><%= f.select :status, [[ 'Pendente', 0], [ 'Aprovado', 1]],{include_blank: t('Contact.view.none')}, {class: 'form-control', placeholder: 'Tags' } %></div>
-
-  </div>
-</div>
-<div class="row form-item">
-  <%= f.label :note, class: 'col-md-1  form-label' %>
-  <div class="form-group col-md-11">
-    <div class=""><%= f.text_area :note, rows: "5", class: 'form-control' %></div>
-  </div>
-</div>
-<hr>

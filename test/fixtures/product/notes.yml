@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nota: MyText
+  data: 2017-06-01 16:29:55
+  product: one
+
+two:
+  nota: MyText
+  data: 2017-06-01 16:29:55
+  product: two
