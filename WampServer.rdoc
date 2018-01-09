@@ -1,0 +1,71 @@
+I installed Ruby on Rails alongside WampServer. Here is how to do it:
+
+Replace C:\wamp\ in the following text by your own WampServer's install repository.
+
+Installing Ruby:
+
+Download Ruby. Use the Windows binary version, not the "one click installer" because it contains MySQL and Apache which we don't need.
+Extract the zip to C:\wamp\ruby\.
+Add Ruby's bin repository in your PATH environment variable:
+
+Right click "Computer / Properties".
+Click "Advanced System Settings".
+Advanced tab / Environment Variables.
+Append ;C:\wamp\ruby\bin to the Path variable.
+Installing DevKit:
+
+Download DevKit:
+
+Extract DevKit to c:\wamp\ruby\DevKit.
+cd /d c:\wamp\ruby\DevKit.
+ruby dk.rb init.
+
+Add - c:\wamp\ruby to the end of config.yml.
+ruby dk.rb install
+
+Installing Rails and the Mongrel server:
+
+Open the command line and type:
+
+gem install rails
+Create your first Rails application by opening the command line from C:\wamp\www\rails\ and typing:
+
+rails hello
+Install the Mongrel server and Windows Mongrel service, making sure to run the command line as administrator:
+
+gem install mongrel and
+gem install mongrel_service
+Install a Windows service for your Rails application:
+
+mongrel_rails service::install -N ruby-hello -c c:\wamp\www\rails\hello -p 3001 -e development
+Start your Mongrel service:
+
+net start ruby-hello
+You can now access your Rails application at http://localhost:3001/.
+
+Integrating with Apache
+
+Enable mod_proxy in httpd.conf
+
+Open httpd.conf (c:\wamp\bin\apache\Apache2.x.x\conf\httpd.conf) and uncomment the following line:
+
+LoadModule proxy_module modules/mod_proxy.so
+Forward your traffic to your Mongrel server. Add the following text to your httpd.conf (or extra/httpd-vhosts.conf if it's included in your httpd.conf):
+
+<VirtualHost *:80>
+ServerName hello.com
+ServerAlias *.hello.com
+ProxyPass / http://localhost:3001/
+ProxyPassReverse / http://localhost:3001
+</VirtualHost>
+Add hello.com to your hosts file. Open c:\windows\system32\drivers\etc\hosts in Notepad and add the following line:
+
+127.0.0.1 www.hello.com hello.com
+You can now go to http://www.hello.com and it should load your Rails application.
+
+References:
+
+http://rubyinstaller.org/downloads
+http://www.wampserver.com
+http://www.ruby-lang.org
+http://mongrel.rubyforge.org and http://mongrel.rubyforge.org/wiki/Win32
