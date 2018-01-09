@@ -1,10 +1,16 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Versão Alpha 0.3 do aplicativo de Contato
 
-Things you may want to cover:
+<h3>Requisitos:</h3>
+<ul>
+    <li>Ruby 2.3.1</li>
+    <li>Rails 5.0</li>
+</ul>
 
+
+
+<!--
 * Ruby version
 
 * System dependencies
@@ -26,3 +32,4 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+-->
