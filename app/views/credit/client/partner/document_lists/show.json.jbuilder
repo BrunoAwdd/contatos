@@ -1,0 +1,1 @@
+json.partial! "credit_client_partner_document_lists/credit_client_partner_document_list", credit_client_partner_document_list: @credit_client_partner_document_list
