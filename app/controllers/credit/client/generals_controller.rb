@@ -103,6 +103,12 @@ class Credit::Client::GeneralsController < ApplicationController
                   emails_attributes: [:id, :email, :contact, :_destroy],
                   lines_attributes: [:id, :name, :value, :credit_bank_general_id, :date, :status, :note, :_destroy],
                   documents_attributes: [:id, :status, :date, :exemption, :credit_document_id, :_destroy],
+                  partners_attributes: [:id, :name,
+                            partner_documents_attributes: [:id, :document_list_id, :status, :exemption, :date, :_destroy]
+                  ],
+                  warranties_attributes: [:id, :name,
+                            warranty_documents_attributes: [:id, :document_list_id, :status, :exemption, :date, :_destroy]
+                  ],
                   notes_attributes: [:id, :date, :note, :_destroy],
                   legals_attributes: [:id, :number, :date, :_destroy, :note],
                   intermediary_attributes: [:name, :note]
