@@ -1,0 +1,37 @@
+<div class="row form-item">
+  <%= f.hidden_field :id %>
+
+  <div class="col-md-4">
+    <%= f.hidden_field :document_list %>
+    <%= f.association :document_list, :label_method => :name, placeholder: true, :disabled => true %>
+  </div>
+
+  <div class="form-group col-md-2">
+    <%= f.label :status, class: 'form-label' %>
+    <div class=""><%= f.check_box :status, class: 'checkbox', placeholder: true %></div>
+  </div>
+
+  <div class="form-group col-md-2">
+    <%= f.label :exemption, class: 'form-label' %>
+    <div class=""><%= f.check_box :exemption, class: 'checkbox', placeholder: true %></div>
+  </div>
+
+
+  <div class="form-group col-md-2">
+    <%= f.label :date, class: "form-label" %>
+    <%= f.date_field :date, class: 'form-control', placeholder: true %>
+  </div>
+
+
+
+  <div class="checkbox col-md-2">
+    <label>
+      <%= f.check_box :_destroy %>
+      <%= f.label :_destroy, I18n.t('remove') %>
+    </label>
+  </div>
+</div>
+
+
+
+

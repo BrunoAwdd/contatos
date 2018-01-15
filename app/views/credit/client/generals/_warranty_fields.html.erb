@@ -1,0 +1,56 @@
+<div class="row form-item">
+  <%= f.hidden_field :id %>
+  <div class="form-group col-md-12">
+    <div class=""><%= f.input :name, placeholder:true %></div>
+  </div>
+  <div class="form-group col-md-12">
+    <fieldset id="documents_partner">
+      <div class="col-md-12">
+        <h4>
+          <%= t('.documents') %>
+        </h4>
+        <hr>
+      </div><br>
+      <div class="fields">
+
+        <% f.object.documents_build %>
+        <%= f.simple_fields_for :warranty_documents do |document| %>
+            <div class="row">
+              <%= document.hidden_field :id %>
+              <div class="col-md-4">
+                  <%= document.hidden_field :document_list %>
+                  <%= document.object.document_list.name %>
+              </div>
+
+
+              <div class="form-group col-md-2">
+                <%= document.label :status, class: 'form-label' %>
+                <div class=""><%= document.check_box :status, class: 'checkbox', placeholder: true %></div>
+              </div>
+
+              <div class="form-group col-md-2">
+                <%= document.label :exemption, class: 'form-label' %>
+                <div class=""><%= document.check_box :exemption, class: 'checkbox', placeholder: true %></div>
+              </div>
+
+              <div class="form-group col-md-2">
+                <%= document.label :date, class: "form-label" %>
+                <%= document.date_field :date, class: 'form-control', placeholder: true %>
+              </div>
+
+              <div class="checkbox col-md-2">
+                <label>
+                  <%= document.check_box :_destroy %>
+                  <%= document.label :_destroy, I18n.t('remove') %>
+                </label>
+              </div>
+
+            </div>
+      <% end %>
+      </div>
+
+    </fieldset>
+  </div>
+
+</div>
+<hr>
