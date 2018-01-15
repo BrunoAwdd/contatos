@@ -30,6 +30,11 @@ class Credit::Client::General < ApplicationRecord
   has_one :intermediary, inverse_of: :credit_client_general, foreign_key: 'credit_client_general_id', dependent: :destroy
   accepts_nested_attributes_for :intermediary, :allow_destroy => true, :reject_if => :all_blank
 
+  has_many :partners, inverse_of: :credit_client_general, foreign_key: 'credit_client_general_id', dependent: :destroy, index_errors: true, class_name: "Credit::Client::Partner::Base"
+  accepts_nested_attributes_for :partners, :allow_destroy => true, :reject_if => :all_blank
+
+  has_many :warranties, inverse_of: :credit_client_general, foreign_key: 'credit_client_general_id', dependent: :destroy, index_errors: true, class_name: "Credit::Client::Warranty::Base"
+  accepts_nested_attributes_for :warranties, :allow_destroy => true, :reject_if => :all_blank
 
   #VALIDATIONS
   validate :raw_cnpj=

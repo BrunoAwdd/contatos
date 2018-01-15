@@ -1,6 +1,7 @@
 class Credit::Client::GeneralsController < ApplicationController
   before_action :set_credit_client_general, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :hidrateEdit, only: [:new, :edit]
 
   # GET /credit/client/generals
   # GET /credit/client/generals.json
@@ -18,11 +19,11 @@ class Credit::Client::GeneralsController < ApplicationController
     @credit_client_general = Credit::Client::General.new
     @credit_client_general.build_intermediary
     @credit_client_general.documents_build
+    @credit_client_general.partners.build
   end
 
   # GET /credit/client/generals/1/edit
   def edit
-    @credit_client_general.documents_build
   end
 
   # POST /credit/client/generals
@@ -74,6 +75,24 @@ class Credit::Client::GeneralsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_credit_client_general
       @credit_client_general = Credit::Client::General.find(params[:id])
+    end
+
+    def set_partners_documents
+      @credit_client_general.partners.each do |partner|
+        partner.documents_build
+      end
+    end
+
+    def set_warranties_documents
+      @credit_client_general.warranties.each do |warranty|
+        warranty.documents_build
+      end
+    end
+
+    def hidrateEdit
+      @credit_client_general.documents_build
+      set_partners_documents
+      set_warranties_documents
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

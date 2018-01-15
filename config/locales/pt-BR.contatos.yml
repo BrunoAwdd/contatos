@@ -34,6 +34,12 @@ pt-BR:
       credit/client/phone: 'Telefone'
       credit/client/intermediary: 'Intermediário'
       credit/client/document: 'Documentos do Cliente'
+      credit/client/partner/base: 'Sócio'
+      credit/client/partner/document: 'Dcoumento do Sócio'
+      credit/client/partner/document_list: 'Lista de Documentos'
+      credit/client/warranty/base: 'Garantia'
+      credit/client/warranty/document: 'Dcoumento do Sócio'
+      credit/client/warranty/document_list: 'Lista de Documentos'
       credit/line: 'Linha de Crédito'
       credit/document: 'Documentos'
       usuario/general: 'Informação de Usuário'
@@ -100,6 +106,28 @@ pt-BR:
         credit_bank_general: 'Banco'
         date: 'Data'
         note: 'Anotações'
+      credit/client/partner/base:
+        name: 'Nome'
+      credit/client/partner/document:
+        document_list: 'Nome do Documento'
+        status: 'Enviado?'
+        exemption: 'Isento?'
+        date: 'Data'
+      credit/client/partner/document_list:
+        name: 'Nome do Documento'
+        frequency_unity: 'Periodicidade'
+        frequency_number: 'Intervalo'
+      credit/client/warranty/base:
+        name: 'Nome da Garantia'
+      credit/client/warranty/document:
+        document_list: 'Nome do Documento'
+        status: 'Enviado?'
+        exemption: 'Isento?'
+        date: 'Data'
+      credit/client/warranty/document_list:
+        name: 'Nome do Documento'
+        frequency_unity: 'Periodicidade'
+        frequency_number: 'Intervalo'
       usuario/general:
         name: 'Nome'
         last_name: 'Sobrenome'
@@ -209,6 +237,12 @@ pt-BR:
           legal: 'Jurídico'
           documents: 'Documentação'
           intermediary: 'Intermediario'
+          partner: 'Sócios'
+          warranty: 'Garantia'
+        warranty_fields:
+          documents: 'Documentação'
+        partner_fields:
+          documents: 'Documentação'
     documents:
       index:
         add_document: 'Adicionar Documento'

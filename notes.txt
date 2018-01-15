@@ -1,3 +1,8 @@
 bundle exec rake assets:precompile
 
 gem install mongrel
+
+I solve it with uninstall all bcrypt gem versions with gem uninstall bcrypt and select option 3 (if exist)
+and uninstall all bcrypt-ruby gem versions with gem uninstall bcrypt-ruby and select option 3 (if exist)
+then install bcrypt using gem install bcrypt --platform=ruby then add this line gem 'bcrypt', platforms: :ruby
+to Gemfile, that is it :D.

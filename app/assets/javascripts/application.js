@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require tinymce
 //= require jquery.validate
+//= #require cocoon
 //= require jquery.validate.localization/messages_pt_BR
 //= require_tree .
 

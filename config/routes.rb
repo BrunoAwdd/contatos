@@ -34,6 +34,12 @@ Rails.application.routes.draw do
       resources :generals do
         get 'find_expired'
       end
+      namespace :partner do
+        resources :document_lists
+      end
+      namespace :warranty do
+        resources :document_lists
+      end
     end
   end
 
