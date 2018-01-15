@@ -1,0 +1,1 @@
+json.array! @credit_client_warranty_documents_lists, partial: 'credit_client_warranty_documents_lists/credit_client_warranty_documents_list', as: :credit_client_warranty_documents_list

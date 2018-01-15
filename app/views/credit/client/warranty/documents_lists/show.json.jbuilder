@@ -1,0 +1,1 @@
+json.partial! "credit_client_warranty_documents_lists/credit_client_warranty_documents_list", credit_client_warranty_documents_list: @credit_client_warranty_documents_list

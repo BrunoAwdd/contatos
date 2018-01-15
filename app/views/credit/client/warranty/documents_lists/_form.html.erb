@@ -1,9 +1,10 @@
-<%= simple_form_for(@credit_client_partner_basis) do |f| %>
+<%= simple_form_for(@credit_client_warranty_documents_list) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.association :credit_client_general %>
+    <%= f.input :frequency_unity %>
+    <%= f.input :frequency_number %>
   </div>
 
   <div class="form-actions">

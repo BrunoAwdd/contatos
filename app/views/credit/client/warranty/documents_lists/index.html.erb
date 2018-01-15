@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Credit Client Warranty Documents Lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Frequency unity</th>
+      <th>Frequency number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @credit_client_warranty_documents_lists.each do |credit_client_warranty_documents_list| %>
+      <tr>
+        <td><%= credit_client_warranty_documents_list.name %></td>
+        <td><%= credit_client_warranty_documents_list.frequency_unity %></td>
+        <td><%= credit_client_warranty_documents_list.frequency_number %></td>
+        <td><%= link_to 'Show', credit_client_warranty_documents_list %></td>
+        <td><%= link_to 'Edit', edit_credit_client_warranty_documents_list_path(credit_client_warranty_documents_list) %></td>
+        <td><%= link_to 'Destroy', credit_client_warranty_documents_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Credit Client Warranty Documents List', new_credit_client_warranty_documents_list_path %>
