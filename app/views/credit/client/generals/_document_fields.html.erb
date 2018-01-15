@@ -2,7 +2,8 @@
   <%= f.hidden_field :id %>
 
   <div class="col-md-4">
-    <%= f.association :credit_document, :label_method => :name, placeholder: true, :readonly => true %>
+    <%= f.hidden_field :credit_document_id %>
+    <h5><%= f.object.credit_document.name%></h5>
   </div>
 
   <div class="form-group col-md-2">

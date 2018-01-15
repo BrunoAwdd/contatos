@@ -22,9 +22,11 @@
       <li class="active"><a class="tablink " href="#data" data-turbolinks="false">Dados Cadastrais</a></li>
       <li><a class="tablink" href="#line" data-turbolinks="false"><%= t('.lines') %></a></li>
       <li><a class="tablink" href="#document" data-turbolinks="false"><%= t('.documents') %></a></li>
+      <li><a class="tablink" href="#partner" data-turbolinks="false"><%= t('.partner') %></a></li>
+      <li><a class="tablink" href="#warranty" data-turbolinks="false"><%= t('.warranty') %></a></li>
+      <li><a class="tablink" href="#intermediary" data-turbolinks="false"><%= t('.intermediary') %></a></li>
       <li><a class="tablink" href="#note" data-turbolinks="false"><%= t('.notes') %></a></li>
       <li><a class="tablink" href="#legal" data-turbolinks="false"><%= t('.legal') %></a></li>
-      <li><a class="tablink" href="#intermediary" data-turbolinks="false"><%= t('.intermediary') %></a></li>
     </ul>
 
     <div class="tab-content clearfix" style="color: #555555;
@@ -130,6 +132,7 @@
           </div>
         </fieldset>
       </div>
+
       <div class="tab-pane" id="note">
 
         <fieldset id="notes" class="col-md-12">
@@ -161,6 +164,40 @@
           <div class="fields row">
             <%= f.simple_fields_for :legals do |legal| %>
                 <%= render 'legal_fields', :f => legal %>
+            <% end %>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <div class="tab-pane" id="partner">
+        <fieldset id="partners" class="col-md-12">
+          <div class="col-md-12">
+            <h4><button class="btn" id="btn_partners">
+              <%= link_to_add_association '+', f, :partners %>
+            </button>
+              <%= t('.partner') %></h4>
+          </div><br>
+          <div class="fields row">
+            <%= f.simple_fields_for :partners do |partner| %>
+                <%= render 'partner_fields', :f => partner %>
+            <% end %>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <div class="tab-pane" id="warranty">
+        <fieldset id="warrantys" class="col-md-12">
+          <div class="col-md-12">
+            <h4><button class="btn" id="btn_warrantys">
+              <%= link_to_add_association '+', f, :warranties %>
+            </button>
+              <%= t('.warranty') %></h4>
+          </div><br>
+          <div class="fields row">
+            <%= f.simple_fields_for :warranties do |warranty| %>
+                <%= render 'warranty_fields', :f => warranty %>
             <% end %>
           </div>
 
