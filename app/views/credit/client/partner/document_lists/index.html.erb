@@ -1,13 +1,11 @@
-<p id="notice"><%= notice %></p>
+<h1><%= t('.title') %></h1>
 
-<h1>Credit Client Partner Document Lists</h1>
-
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Frequency unity</th>
-      <th>Frequency number</th>
+      <th><%= t('activerecord.attributes.credit/document.name') %></th>
+      <th><%= t('activerecord.attributes.credit/document.frequency_unity') %></th>
+      <th><%= t('activerecord.attributes.credit/document.frequency_number') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,11 +14,11 @@
     <% @credit_client_partner_document_lists.each do |credit_client_partner_document_list| %>
       <tr>
         <td><%= credit_client_partner_document_list.name %></td>
-        <td><%= credit_client_partner_document_list.frequency_unity %></td>
+        <td><%= credit_client_partner_document_list.frequencyUnityText %></td>
         <td><%= credit_client_partner_document_list.frequency_number %></td>
-        <td><%= link_to 'Show', credit_client_partner_document_list %></td>
-        <td><%= link_to 'Edit', edit_credit_client_partner_document_list_path(credit_client_partner_document_list) %></td>
-        <td><%= link_to 'Destroy', credit_client_partner_document_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('show'), credit_client_partner_document_list %></td>
+        <td><%= link_to t('edit'), edit_credit_client_partner_document_list_path(credit_client_partner_document_list) %></td>
+        <td><%= link_to t('destroy'), credit_client_partner_document_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Credit Client Partner Document List', new_credit_client_partner_document_list_path %>
+<%= link_to t('.add'), new_credit_client_partner_document_list_path %>
