@@ -57,6 +57,13 @@ gem 'bcrypt', platforms: [:ruby, :x64_mingw, :mingw]
 
 #Jquery Validaton
 gem 'jquery-validation-rails'
+#Jquery Mask
+gem 'jquery_mask_rails'
+#country select
+gem 'country_select'
+
+
+#
 
 # Use Unicorn as the app server
 # gem 'unicorn'
