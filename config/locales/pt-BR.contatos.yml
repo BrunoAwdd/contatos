@@ -37,9 +37,14 @@ pt-BR:
       credit/client/partner/base: 'Sócio'
       credit/client/partner/document: 'Dcoumento do Sócio'
       credit/client/partner/document_list: 'Lista de Documentos'
+      credit/client/warranty/address: 'Endereço'
       credit/client/warranty/base: 'Garantia'
       credit/client/warranty/document: 'Dcoumento do Sócio'
       credit/client/warranty/document_list: 'Lista de Documentos'
+      credit/client/warranty/info: 'Informações da Garantia'
+      credit/client/contact/base: 'Contato'
+      credit/client/contact/email: 'Email'
+      credit/client/contact/phone: 'Telefone'
       credit/line: 'Linha de Crédito'
       credit/document: 'Documentos'
       usuario/general: 'Informação de Usuário'
@@ -58,6 +63,7 @@ pt-BR:
         name: 'Banco'
       credit/bank/address:
         country: 'País'
+        city: 'Cidade'
         neighborhood: 'Bairro'
         number: 'Número'
         state: 'Estado'
@@ -81,6 +87,15 @@ pt-BR:
         state: 'Estado'
         street: 'Endereço'
         zipcode: 'CEP'
+      credit/client/contact/base:
+        name: 'Nome'
+        last_name: 'Sobrenome'
+      credit/client/contact/email:
+        email: 'Email'
+      credit/client/contact/phone:
+        ddd: 'DDD'
+        phone: 'Telefone'
+        model: 'Tipo'
       credit/client/document:
         credit_document: 'Nome do documento'
         status: 'Enviado?'
@@ -117,6 +132,14 @@ pt-BR:
         name: 'Nome do Documento'
         frequency_unity: 'Periodicidade'
         frequency_number: 'Intervalo'
+      credit/client/warranty/address:
+        country: 'País'
+        city: 'Cidade'
+        neighborhood: 'Bairro'
+        number: 'Número'
+        state: 'Estado'
+        street: 'Endereço'
+        zipcode: 'CEP'
       credit/client/warranty/base:
         name: 'Nome da Garantia'
       credit/client/warranty/document:
@@ -128,6 +151,11 @@ pt-BR:
         name: 'Nome do Documento'
         frequency_unity: 'Periodicidade'
         frequency_number: 'Intervalo'
+      credit/client/warranty/info:
+        value: 'Valor'
+        price: 'Preço'
+        condition: 'Condições'
+        notes: 'Observações'
       usuario/general:
         name: 'Nome'
         last_name: 'Sobrenome'
@@ -137,10 +165,14 @@ pt-BR:
       add_banco: 'Adicionar Banco'
       add_cliente: 'Adicionar Cliente'
       add_documents: 'Adicionar Documento'
+      add_partner_documents: 'Adicionar Documentação dos Sócios'
+      add_warranty_documents: 'Adicionar Documentação das Garantias'
       bancos: 'Ver Bancos'
       clientes: 'Ver Clientes'
       credito:  'Crédito'
-      documents: 'Documentos'
+      documents: 'Documentação'
+      partner_documents: 'Documentação dos Sócios'
+      warranty_documents: 'Documentação da Garantia'
   business:
     generals:
       index:
@@ -204,6 +236,20 @@ pt-BR:
           edit: 'Editar'
           name: 'Banco'
     client:
+      partner:
+        document_lists:
+          index:
+            title: 'Documentação dos Sócios'
+            add: 'Adicionar Documento a Lista'
+      warranty:
+        document_lists:
+          index:
+            title: 'Documentação da Garantia'
+            add: 'Adicionar Documento a Lista'
+          new:
+            title: 'Novo Documento'
+          edit:
+            title: 'Editar Documento'
       generals:
         index:
           brand: 'Nome Fantasia'
@@ -272,6 +318,8 @@ pt-BR:
   About: Sobre
   Are_you_sure?: Você tem certeza?
   Back: Voltar
+  back: 'Voltar'
+  currency: 'R$'
   Destroy: Deletar
   destroy: 'Deletar'
   Edit: Editar
