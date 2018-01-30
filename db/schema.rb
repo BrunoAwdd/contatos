@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102162928) do
+ActiveRecord::Schema.define(version: 20180129130414) do
 
   create_table "business_generals", force: :cascade do |t|
     t.datetime "date_entry"
@@ -109,6 +109,33 @@ ActiveRecord::Schema.define(version: 20180102162928) do
     t.index ["credit_client_general_id"], name: "index_credit_client_addresses_on_credit_client_general_id"
   end
 
+  create_table "credit_client_contact_bases", force: :cascade do |t|
+    t.string   "name"
+    t.string   "last_name"
+    t.integer  "credit_client_general_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["credit_client_general_id"], name: "index_credit_client_contact_bases_on_credit_client_general_id"
+  end
+
+  create_table "credit_client_contact_emails", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "contact_base_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["contact_base_id"], name: "index_credit_client_contact_emails_on_contact_base_id"
+  end
+
+  create_table "credit_client_contact_phones", force: :cascade do |t|
+    t.string   "ddd"
+    t.string   "phone"
+    t.string   "model"
+    t.integer  "contact_base_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["contact_base_id"], name: "index_credit_client_contact_phones_on_contact_base_id"
+  end
+
   create_table "credit_client_documents", force: :cascade do |t|
     t.integer  "status"
     t.integer  "exemption"
@@ -169,6 +196,34 @@ ActiveRecord::Schema.define(version: 20180102162928) do
     t.index ["credit_client_general_id"], name: "index_credit_client_notes_on_credit_client_general_id"
   end
 
+  create_table "credit_client_partner_bases", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "credit_client_general_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["credit_client_general_id"], name: "index_credit_client_partner_bases_on_credit_client_general_id"
+  end
+
+  create_table "credit_client_partner_document_lists", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "frequency_unity"
+    t.integer  "frequency_number"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "credit_client_partner_documents", force: :cascade do |t|
+    t.integer  "status"
+    t.integer  "exemption"
+    t.date     "date"
+    t.integer  "document_list_id"
+    t.integer  "partner_base_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["document_list_id"], name: "index_credit_client_partner_documents_on_document_list_id"
+    t.index ["partner_base_id"], name: "index_credit_client_partner_documents_on_partner_base_id"
+  end
+
   create_table "credit_client_phones", force: :cascade do |t|
     t.string   "ddd"
     t.string   "phone"
@@ -177,6 +232,59 @@ ActiveRecord::Schema.define(version: 20180102162928) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["credit_client_general_id"], name: "index_credit_client_phones_on_credit_client_general_id"
+  end
+
+  create_table "credit_client_warranty_addresses", force: :cascade do |t|
+    t.string   "street"
+    t.string   "number"
+    t.string   "neighborhood"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "zipcode"
+    t.integer  "warranty_base_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["warranty_base_id"], name: "index_credit_client_warranty_addresses_on_warranty_base_id"
+  end
+
+  create_table "credit_client_warranty_bases", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "credit_client_general_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["credit_client_general_id"], name: "index_credit_client_warranty_bases_on_credit_client_general_id"
+  end
+
+  create_table "credit_client_warranty_document_lists", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "frequency_unity"
+    t.integer  "frequency_number"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "credit_client_warranty_documents", force: :cascade do |t|
+    t.integer  "status"
+    t.integer  "exemption"
+    t.date     "date"
+    t.integer  "document_list_id"
+    t.integer  "warranty_base_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["document_list_id"], name: "index_credit_client_warranty_documents_on_document_list_id"
+    t.index ["warranty_base_id"], name: "index_credit_client_warranty_documents_on_warranty_base_id"
+  end
+
+  create_table "credit_client_warranty_infos", force: :cascade do |t|
+    t.integer  "value"
+    t.text     "notes"
+    t.integer  "price"
+    t.text     "condition"
+    t.integer  "warranty_base_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["warranty_base_id"], name: "index_credit_client_warranty_infos_on_warranty_base_id"
   end
 
   create_table "credit_documents", force: :cascade do |t|
