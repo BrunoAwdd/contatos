@@ -2,7 +2,7 @@
 <div class="row form-item">
   <%= f.hidden_field :id %>
   <div class="form-group col-md-2">
-    <div class=""><%= f.text_field :country, class: 'form-control', placeholder:true %></div>
+    <div class=""><%= f.country_select :country ,{ priority_countries: ["BR"], selected: "BR" }, {class: 'form-control select'} %></div>
   </div>
   <div class="form-group col-md-2">
     <%= f.text_field :state, class: 'form-control', placeholder:true %>
@@ -33,7 +33,7 @@
   </div>
 
   <div class="form-group col-md-4">
-    <div class=""><%= f.text_field :zipcode, class: 'form-control', placeholder:true %></div>
+    <div class=""><%= f.text_field :zipcode, class: 'form-control cep', placeholder:true %></div>
   </div>
 
 </div>
