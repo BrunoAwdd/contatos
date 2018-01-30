@@ -16,9 +16,14 @@
                 <li><%= link_to t('.add_cliente'), new_credit_client_general_path %></li>
                 <li role="separator" class="divider"></li>
                 <li><%= link_to t('.bancos'), credit_bank_generals_path %></li>
-                <li><%= link_to t('.add_banco'), new_credit_bank_general_path %></li><li role="separator" class="divider"></li>
+                <li><%= link_to t('.add_banco'), new_credit_bank_general_path %></li>
+                <li role="separator" class="divider"></li>
                 <li><%= link_to t('.documents'), credit_documents_path %></li>
                 <li><%= link_to t('.add_documents'), new_credit_document_path %></li>
+                <li><%= link_to t('.partner_documents'), credit_client_partner_document_lists_path %></li>
+                <li><%= link_to t('.add_partner_documents'), new_credit_client_partner_document_list_path %></li>
+                <li><%= link_to t('.warranty_documents'), credit_client_warranty_document_lists_path%></li>
+                <li><%= link_to t('.add_warranty_documents'), new_credit_client_warranty_document_list_path %></li>
               </ul>
             </li>
 
