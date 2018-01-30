@@ -7,12 +7,24 @@
     });
 </script>
 <%= simple_form_for(@credit_client_general) do |f| %>
-  <%= f.error_notification %>
+    <% if @credit_client_general.errors.any? %>
+        <div class="error_explanation">
+          <h2><%= pluralize(@credit_client_general.errors.count, "error") %> prevented this record from being saved:</h2>
+          <ul>
+            <% @credit_client_general.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
     <ul class="nav nav-tabs" id="myTabs">
       <li class="active"><a class="tablink " href="#data" data-turbolinks="false">Dados Cadastrais</a></li>
       <li><a class="tablink" href="#line" data-turbolinks="false"><%= t('.lines') %></a></li>
       <li><a class="tablink" href="#document" data-turbolinks="false"><%= t('.documents') %></a></li>
+      <li><a class="tablink" href="#partner" data-turbolinks="false"><%= t('.partner') %></a></li>
+      <li><a class="tablink" href="#warrantie" data-turbolinks="false"><%= t('.warranty') %></a></li>
+      <li><a class="tablink" href="#intermediary" data-turbolinks="false"><%= t('.intermediary') %></a></li>
       <li><a class="tablink" href="#note" data-turbolinks="false"><%= t('.notes') %></a></li>
       <li><a class="tablink" href="#legal" data-turbolinks="false"><%= t('.legal') %></a></li>
     </ul>
@@ -27,7 +39,7 @@
         <div class="row">
           <div class="col-md-6"><%= f.input :name%></div>
           <div class="col-md-6"><%= f.input :brand%></div>
-          <div class="col-md-6"><%= f.input :cnpj%></div>
+          <div class="col-md-6"><%= f.input :cnpj,  input_html: { class: 'cnpj' }%></div>
           <div class="col-md-6"><%= f.association :contato, :label_method => :full_name %></div>
         </div>
 
@@ -44,6 +56,23 @@
           <div class="fields">
             <%= f.simple_fields_for :addresses do |endereco| %>
                 <%= render 'address_fields', :f => endereco %>
+            <% end %>
+          </div>
+        </fieldset>
+
+        <fieldset id="contacts">
+          <div class="col-md-12">
+            <h4>
+              <button class="btn" id="btn_contacts">
+                <%= link_to_add_association '+', f, :contacts %>
+              </button>
+              <%= I18n.t('Contact.view.Add_Contact') %>
+            </h4>
+            <hr>
+          </div><br>
+          <div class="fields">
+            <%= f.simple_fields_for :contacts do |contact| %>
+                <%= render 'contact_fields', :f => contact %>
 
             <% end %>
           </div>
@@ -64,7 +93,6 @@
                 <%= render 'email_fields', :f => email %>
             <% end %>
           </div>
-
         </fieldset>
 
         <fieldset id="phones">
@@ -82,7 +110,6 @@
                 <%= render 'phone_fields', :f => phone %>
             <% end %>
           </div>
-
         </fieldset>
 
       </div>
@@ -110,9 +137,6 @@
         <fieldset id="documents">
           <div class="col-md-12">
             <h4>
-              <button class="btn" id="btn_documents">
-                <%= link_to_add_association '+', f, :documents %>
-              </button>
               <%= t('.documents') %>
             </h4>
           </div><br>
@@ -123,12 +147,15 @@
           </div>
         </fieldset>
       </div>
+
       <div class="tab-pane" id="note">
+
         <fieldset id="notes" class="col-md-12">
           <div class="col-md-12">
             <h4><button class="btn" id="btn_notes">
               <%= link_to_add_association '+', f, :notes %>
-            </button><%= t('.notes') %>
+            </button>
+              <%= t('.notes') %>
             </h4>
           </div><br>
           <div class="fields row">
@@ -146,7 +173,8 @@
           <div class="col-md-12">
             <h4><button class="btn" id="btn_legals">
               <%= link_to_add_association '+', f, :legals %>
-            </button><%= t('.legal') %></h4>
+            </button>
+              <%= t('.legal') %></h4>
           </div><br>
           <div class="fields row">
             <%= f.simple_fields_for :legals do |legal| %>
@@ -154,6 +182,56 @@
             <% end %>
           </div>
 
+        </fieldset>
+      </div>
+
+      <div class="tab-pane" id="partner">
+        <fieldset id="partners" class="col-md-12">
+          <div class="col-md-12">
+            <h4><button class="btn" id="btn_partners">
+              <%= link_to_add_association '+', f, :partners %>
+            </button>
+              <%= t('.partner') %></h4>
+          </div><br>
+          <div class="fields row">
+            <%= f.simple_fields_for :partners do |partner| %>
+                <%= render 'partner_fields', :f => partner %>
+            <% end %>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <div class="tab-pane" id="warrantie">
+        <fieldset id="warranties" class="col-md-12">
+          <div class="col-md-12">
+            <h4><button class="btn" id="btn_warranties">
+              <%= link_to_add_association '+', f, :warranties %>
+            </button>
+              <%= t('.warranty') %></h4>
+          </div><br>
+          <div class="fields row">
+            <%= f.simple_fields_for :warranties do |warranty| %>
+                <%= render 'warranty_fields', :f => warranty %>
+            <% end %>
+          </div>
+
+        </fieldset>
+      </div>
+
+      <div class="tab-pane" id="intermediary">
+        <fieldset id="intermediarys" class="col-md-12">
+          <div class="row">
+            <%= f.simple_fields_for :intermediary do |inter| %>
+                <div class="form-group col-md-12">
+                  <%= inter.hidden_field :id %>
+                  <%= inter.input :name, placeholder:true %>
+                </div>
+                <div class="form-group col-md-12">
+                  <%= inter.text_area :note, rows: "5", class: 'form-control', placeholder:true%>
+                </div>
+            <% end %>
+          </div>
         </fieldset>
       </div>
     </div>

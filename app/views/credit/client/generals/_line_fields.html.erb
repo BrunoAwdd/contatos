@@ -1,12 +1,11 @@
-
 <div class="row form-item">
   <%= f.hidden_field :id %>
   <div class="form-group col-md-6">
     <div class=""><%= f.input :name, placeholder:true %></div>
   </div>
 
-  <div class="form-group col-md-4">
-    <%= f.input :value, placeholder:true %>
+  <div class="col-md-4">
+      <%= f.input :value, as: :currency, input_html: { class: 'money' }, placeholder:true %>
   </div>
 
   <div class="checkbox col-md-2">
