@@ -4,7 +4,68 @@
     <div class=""><%= f.input :name, placeholder:true %></div>
   </div>
   <div class="form-group col-md-12">
-    <fieldset id="documents_partner">
+
+    <fieldset id="warranty_address">
+      <% if f.object.warranty_address.nil? %>
+        <% f.object.build_warranty_address %>
+      <% end %>
+      <%= f.simple_fields_for :warranty_address do |address| %>
+        <div class="row form-item">
+          <%= address.hidden_field :id %>
+          <div class="form-group col-md-3">
+            <div class=""><%= address.input :country, priority: ["BR"], selected: "BR", input_html: {class: 'form-control select'} %></div>
+          </div>
+          <div class="form-group col-md-2">
+            <%= address.input :state, class: 'form-control', placeholder:true %>
+          </div>
+          <div class="form-group col-md-3">
+            <div class=""><%= address.input :city, class: 'form-control', placeholder:true %></div>
+          </div>
+          <div class="form-group col-md-4">
+            <div class=""><%= address.input :neighborhood, class: 'form-control', placeholder:true %></div>
+          </div>
+        </div>
+        <div class="row form-item">
+          <div class="form-group col-md-5">
+            <%= address.input :street, class: 'form-control', placeholder:true %>
+          </div>
+          <div class="form-group col-md-2">
+            <div class=""><%= address.input :number, class: 'form-control', placeholder:true %></div>
+          </div>
+          <div class="form-group col-md-5">
+            <div class=""><%= address.input :zipcode, input_html: { class: 'cep' }  %></div>
+          </div>
+        </div>
+      <% end %>
+    </fieldset>
+    <fieldset id="warranty_info">
+      <% if f.object.warranty_info.nil? %>
+          <% f.object.build_warranty_info %>
+      <% end %>
+      <%= f.simple_fields_for :warranty_info do |info| %>
+        <div class="row form-item">
+          <%= info.hidden_field :id %>
+          <div class="form-group col-md-6">
+            <%= info.input :value, as: :currency, input_html: { class: 'money' } %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= info.input :price, as: :currency, input_html: { class: 'money' } %>
+          </div>
+        </div>
+        <div class="row form-item">
+          <div class="form-group col-md-12">
+            <%= info.input :condition %>
+          </div>
+          <div class="form-group col-md-12">
+            <%= info.input :notes %>
+          </div>
+        </div>
+
+      <% end %>
+
+    </fieldset>
+
+    <fieldset id="warranty_documents">
       <div class="col-md-12">
         <h4>
           <%= t('.documents') %>
