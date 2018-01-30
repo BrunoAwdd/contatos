@@ -1,7 +1,7 @@
 class Credit::Client::GeneralsController < ApplicationController
   before_action :set_credit_client_general, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :hidrateEdit, only: [:new, :edit]
+  before_action :hidrateEdit, only: [:edit]
 
   # GET /credit/client/generals
   # GET /credit/client/generals.json
@@ -16,10 +16,12 @@ class Credit::Client::GeneralsController < ApplicationController
 
   # GET /credit/client/generals/new
   def new
+    Rails.logger.debug "Year: #{Time.now.year}"
     @credit_client_general = Credit::Client::General.new
     @credit_client_general.build_intermediary
     @credit_client_general.documents_build
     @credit_client_general.partners.build
+    hidrateEdit
   end
 
   # GET /credit/client/generals/1/edit
@@ -99,6 +101,10 @@ class Credit::Client::GeneralsController < ApplicationController
     def credit_client_general_params
       params.require(:credit_client_general).permit(:id, :name, :brand, :cnpj, :contato_id,
                   addresses_attributes: [:id, :street, :number, :neighborhood, :city, :state, :country, :zipcode, :_destroy],
+                  contacts_attributes: [:id, :name, :last_name,  :_destroy,
+                                        email_attributes: [:id, :email],
+                                        phone_attributes: [:id, :ddd, :phone, :model]
+                  ],
                   phones_attributes: [:id, :ddd, :phone, :model, :_destroy],
                   emails_attributes: [:id, :email, :contact, :_destroy],
                   lines_attributes: [:id, :name, :value, :credit_bank_general_id, :date, :status, :note, :_destroy],
@@ -107,11 +113,13 @@ class Credit::Client::GeneralsController < ApplicationController
                             partner_documents_attributes: [:id, :document_list_id, :status, :exemption, :date, :_destroy]
                   ],
                   warranties_attributes: [:id, :name,
-                            warranty_documents_attributes: [:id, :document_list_id, :status, :exemption, :date, :_destroy]
+                            warranty_address_attributes: [:id, :street, :number, :neighborhood, :city, :state, :country, :zipcode, :_destroy],
+                            warranty_documents_attributes: [:id, :document_list_id, :status, :exemption, :date, :_destroy],
+                            warranty_info_attributes: [:id, :value, :price, :condition, :notes]
                   ],
                   notes_attributes: [:id, :date, :note, :_destroy],
                   legals_attributes: [:id, :number, :date, :_destroy, :note],
-                  intermediary_attributes: [:name, :note]
+                  intermediary_attributes: [:id, :name, :note]
       )
     end
 end
