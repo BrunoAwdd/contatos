@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'static_pages#home'
   get 'about', controller:  :static_pages
   get 'vcard/upload'
@@ -9,7 +8,7 @@ Rails.application.routes.draw do
     get 'send_newsletter'
     post 'send_mail'
   end
-  devise_for :users
+  devise_for :users, controllers: {sessions: "usuario/sessions"}
 
   resources :contatos do
     get 'migrate'
@@ -18,6 +17,7 @@ Rails.application.routes.draw do
     end
     resources :notes, :only => [:edit, :create, :index, :destroy]
   end
+  resources :ajaxcontatos
 
   namespace :usuario do
     resources :generals
