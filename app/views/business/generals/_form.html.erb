@@ -1,4 +1,12 @@
-<%= form_for(business_general) do |f| %>
+<script>
+    $( document ).ready(function() {
+        $('#myTabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    });
+</script>
+<%= simple_form_for(business_general) do |f| %>
   <% if business_general.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(business_general.errors.count, "error") %> prohibited this business_general from being saved:</h2>
@@ -10,66 +18,126 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group row">
-    <div class="col-md-12">
-        <%= f.label :subject, class: 'control-label' %>
-        <%= f.text_field :subject, class: 'form-control col-md-10'%>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="form-inline col-md-3">
-      <%= f.label :date_entry %>
-      <%= f.date_select :date_entry, {:order => [:day, :month, :year],
-                                      :use_month_numbers => true,
-                                      :start_year => 2000,
-                                      :end_year => Time.current.year},
-                        {:class => 'form-control'} %>
-    </div>
-      <div class="form-inline col-md-5">
-        <%= f.label :contato_id, class: 'control-label'  %>
-        <%= f.select( :contato_id, Contato.all.collect {|p| [ p.full_name, p.id ] }, {prompt: t('.select_contato')}, class: 'form-control') %>
+  <ul class="nav nav-tabs" id="myTabs">
+    <li class="active"><a class="tablink " href="#data" data-turbolinks="false">Dados Cadastrais</a></li>
+    <li><a class="tablink" href="#intermediary" data-turbolinks="false"><%= t('.intermediary') %></a></li>
+  </ul>
+  <div class="tab-content clearfix" style="color: #555555;
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      margin-bottom: 40px;
+      border-top-color: transparent;">
+    <div class="tab-pane active" id="data">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <%= f.input :name %>
+        </div>
+        <div class="col-md-12">
+          <%= f.input :subject %>
+        </div>
       </div>
-      <div class="col-md-4">
-
-        <%= f.label :product_id, class: 'control-label' %>
-        <%= f.select( :product_id, Product.all.collect {|p| [ p.nome, p.id ] }, {prompt: t('.select_product')}, class: 'form-control') %>
+      <div class="form-group row">
+        <div class="form-inline col-md-3">
+          <%= f.label :date_entry, class: "form-label" %>
+          <%= f.date_field :date_entry, class: 'form-control'  %>
+        </div>
+        <div class="col-md-4">
+          <%= f.label :product_id, class: 'control-label' %>
+          <%= f.select( :product_id, Product::General.all.collect {|p| [ p.nome, p.id ] }, {prompt: t('.select_product')}, class: 'form-control') %>
+        </div>
+        <div class="col-md-12">
+          <%= f.input :condition %>
+        </div>
       </div>
-  </div>
 
 
-  <hr>
-  <fieldset id="notes">
-    <div class="col-md-12">
-      <h4><%= t('.add_note') %></h4>
+      <hr>
+      <fieldset id="notes">
+        <div class="col-md-12">
+          <h4><%= t('.add_note') %></h4>
 
-    </div><br>
-    <div class="fields">
-      <%= f.fields_for :notes do |note| %>
-          <%= render 'note_fields', :f => note %>
-      <% end %>
-    </div>
-    <div class='links'>
-      <button class="btn" id="btn_notes"><%= link_to_add_association t('.add_note'), f, :notes %></button>
-    </div>
-    <hr>
-  </fieldset>
-  <hr>
-  <fieldset id="histories">
-    <div class="col-md-12">
-      <h4><%= t('.add_history') %></h4>
-    </div><br>
-    <div class="fields">
-      <%= f.fields_for :histories do |history| %>
-          <%= render 'history_fields', :f => history %>
-      <% end %>
-    </div>
-    <div class='links'>
-      <button class="btn" id="btn_histories"><%= link_to_add_association t('.add_history'), f, :histories %></button>
-    </div>
-    <hr>
-  </fieldset>
+        </div><br>
+        <div class="fields">
+          <%= f.fields_for :notes do |note| %>
+              <%= render 'note_fields', :f => note %>
+          <% end %>
+        </div>
+        <div class='links'>
+          <button class="btn" id="btn_notes"><%= link_to_add_association t('.add_note'), f, :notes %></button>
+        </div>
+        <hr>
+      </fieldset>
+      <hr>
+      <fieldset id="histories">
+        <div class="col-md-12">
+          <h4><%= t('.add_history') %></h4>
+        </div><br>
+        <div class="fields">
+          <%= f.fields_for :histories do |history| %>
+              <%= render 'history_fields', :f => history %>
+          <% end %>
+        </div>
+        <div class='links'>
+          <button class="btn" id="btn_histories"><%= link_to_add_association t('.add_history'), f, :histories %></button>
+        </div>
+        <hr>
+      </fieldset>
 
-  <div class="actions">
-    <%= f.submit %>
+      <div id="contato">
+        <fieldset id="contatos">
+          <div class="col-md-12">
+            <h4>
+              <%= t('.contacts') %>
+            </h4>
+            <hr>
+          </div><br>
+          <div class="contato_menu" id="alfa">
+            <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                        :remote => true, data: { modal: true } %>
+            <%= f.association :contatos, label_method: :full_name, input_html: {class: 'contato'}  %>
+          </div>
+
+          <table class="table table-stripped fields"></table>
+
+        </fieldset>
+      </div>
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    </div>
+    <div class="tab-pane" id="intermediary">
+      <fieldset id="intermediarys" class="col-md-12">
+        <div class="row">
+          <%= f.simple_fields_for :intermediary do |inter| %>
+              <div class="form-group col-md-12">
+                <%= inter.hidden_field :id %>
+                <div id="contato">
+                  <fieldset id="contatos">
+                    <div class="col-md-12">
+                      <h4>
+                        <%= t('.contacts') %>
+                      </h4>
+                      <hr>
+                    </div><br>
+                    <div class="contato_menu" id="alfa">
+                      <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                                  :remote => true, data: { modal: true } %>
+                      <%= inter.association :contato, label_method: :full_name, input_html: {class: 'contato'} %>
+                    </div>
+
+                    <table class="table table-stripped fields"></table>
+
+                  </fieldset>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <%= inter.input :note, rows: "5", class: 'form-control', placeholder:true%>
+              </div>
+          <% end %>
+        </div>
+      </fieldset>
+    </div>
   </div>
 <% end %>
