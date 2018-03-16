@@ -1,13 +1,15 @@
 
 <div class="jumbotron">
   <div class="row">
-    <div class="col-xs-4"><strong>De: </strong><%= @usuario_message.from.myName %></div>
-    <div class="col-xs-4"><strong>Para: </strong><%= @usuario_message.to.blank? ? 'Mensagem para todos' : @usuario_message.to.myName %></div>
-    <div class="col-xs-4"><strong>Data: </strong><%= @usuario_message.updated_at.strftime("%d/%m/%Y") %></div>
+    <div class="col-xs-4"><h4><strong>De: </strong><%= @usuario_message.from.myName %></h4></div>
+    <div class="col-xs-4"><h4><strong>Para: </strong><%= @usuario_message.to.blank? ? 'Mensagem para todos' : @usuario_message.to.myName %></h4></div>
+    <div class="col-xs-4"><h4><strong>Data: </strong><%= @usuario_message.updated_at.strftime("%d/%m/%Y") %></h4></div>
   </div>
   <div class="row">
-    <div class="col-xs-8"><strong>Assunto: </strong><%= @usuario_message.subject.html_safe %></div>
-    <div class="col-xs-4"><strong>Status: </strong><%= @usuario_message.statusText %></div>
+    <div class="col-xs-8"><h4><strong>Assunto: </strong><%= @usuario_message.subject.html_safe %></h4></div>
+    <div class="col-xs-4"><h4><strong>Status: </strong><%= @usuario_message.statusText %></h4></div>
+  </div>
+  <div class="row">
     <br><br>
     <div class="col-xs-12"> <%= @usuario_message.message.html_safe %></div>
   </div>
