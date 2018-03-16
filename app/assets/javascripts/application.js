@@ -17,6 +17,7 @@
 //= require tinymce
 //= require jquery.validate
 //= require jquery.mask
+//= require chosen-jquery
 //= #require cocoon
 //= require jquery.validate.localization/messages_pt_BR
 //= require_tree .
