@@ -128,3 +128,19 @@ footer {
   border-style: solid;
   border-width: 1px;
 }
+
+.chosen-container {
+  position: relative;
+  width: 100% !important;
+  display: block !important;
+  vertical-align: middle;
+  font-size: 13px;
+  user-select: none;
+}
+
+.modal-dialog{
+  width: 70%;
+}
+.modal-content{
+  padding: 0 50px;
+}
