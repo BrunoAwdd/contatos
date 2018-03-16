@@ -1,4 +1,6 @@
-<%= form_for @contato,  html: {class: 'form-horizontal'} do |f| %>
+
+<% #@TODO Adicionar Destroy aos contatos %>
+<%= simple_form_for(@contato, remote: request.xhr?, html: { class: 'form-horizontal', data: { modal: true } }) do |f| %>
   <% if @contato.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@contato.errors.count, 'error') %> <%= I18n.t('cant_save', model: t('Contact.model.Contact'))%></h2>
@@ -10,47 +12,42 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="row">
   <div class="col-md-12">
     <h4><%= I18n.t('Contact.view.Contact_Information') %></h4>
     <hr>
   </div><br>
-
-  <div class="form-group">
-    <%= f.label :first_name, I18n.t('Contact.model.First_name'), class: 'col-md-2 control-label'%>
-    <div class="col-md-10"><%= f.text_field :first_name, class: 'form-control' %></div>
+  <div class="row">
+    <%- f.hidden_field :id %>
+    <%= f.input :first_name%>
+    <%= f.input :last_name%>
+    <%= f.input :web_page %>
   </div>
-  <div class="form-group">
-    <%= f.label :last_name, I18n.t('Contact.model.Last_name'), class: 'col-md-2 control-label' %><br>
-    <div class="col-md-10"><%= f.text_field :last_name, class: 'form-control' %></div>
-  </div>
-    <div class="form-group">
-      <%= f.label :web_page, class: 'col-md-2 control-label' %>
-      <div class="col-md-10"><%= f.text_field :web_page, class: 'form-control' %></div>
-    </div>
 
-  <fieldset id="enderecos">
-    <div class="col-md-12">
-      <h4>
-        <button class="btn" id="btn_enderecos"><%= link_to_add_association '+', f, :enderecos %></button>
-        <%= I18n.t('Contact.view.Add_Address') %>
-      </h4>
+  <div class="row">
+    <fieldset id="enderecos">
+      <div class="col-md-12">
+        <h4>
+          <button class="btn" id="btn_enderecos"><%= link_to_add_association '+', f, :enderecos %></button>
+          <%= I18n.t('Contact.view.Add_Address') %>
+        </h4>
+        <hr>
+      </div><br>
+      <div class="fields">
+        <%= f.simple_fields_for :enderecos do |endereco| %>
+            <%= render 'endereco_fields', :f => endereco %>
+        <% end %>
+      </div>
+
       <hr>
-    </div><br>
-    <div class="fields">
-      <%= f.simple_fields_for :enderecos do |endereco| %>
-          <%= render 'endereco_fields', :f => endereco %>
-      <% end %>
-    </div>
-
-    <hr>
-  </fieldset>
+    </fieldset>
+  </div>
 
   <fieldset id="emails">
     <div class="col-md-12">
       <h4>
         <button class="btn" id="btn_emails">
-          <%= link_to_add_association '+', f, :emails, :render_options => { :wrapper => 'inline' }  %>
+          <%= link_to_add_association '+', f, :emails  %>
         </button>
         <%= I18n.t('Contact.model.Emails') %>
       </h4>
@@ -68,7 +65,7 @@
     <div class="col-md-12">
       <h4>
         <button class="btn" id="btn_telefones">
-          <%= link_to_add_association '+', f, :telefones, :render_options => { :wrapper => 'inline' } %>
+          <%= link_to_add_association '+', f, :telefones %>
         </button>
         <%= I18n.t('Contact.model.Phones') %>
       </h4>
@@ -79,22 +76,16 @@
           <%= render 'telefone_fields', :f => telefone %>
       <% end %>
     </div>
-
     <hr>
   </fieldset>
   <h4>Produtos</h4>
   <div class="checkbox">
-
     <%= f.collection_check_boxes(:product_general_ids, Product::General.all, :id, :nome,  class: 'form-control', :item_wrapper_class => 'checkbox_container') do |product| %>
         <%=  product.label  { product.check_box + product.text} %>
     <% end %>
   </div>
     <hr>
-
-
   <div class="actions">
     <%= f.submit I18n.t('Send'), class: 'btn btn-primary' %>
   </div>
 <% end %>
-
-

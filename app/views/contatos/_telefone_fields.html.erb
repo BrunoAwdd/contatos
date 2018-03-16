@@ -1,27 +1,12 @@
-
-    <%= f.hidden_field :id %>
-    <div class="row form-item">
-
-      <%= f.label :ddd, I18n.t('Telefone.model.STD'), class: 'col-md-2 control-label' %>
-      <div class="form-group col-md-1">
-        <div class=""><%= f.text_field :ddd, class: 'form-control' %></div>
-      </div>
-
-
-      <%= f.label :telefone, I18n.t('Telefone.model.Phone'), class: 'col-md-1 control-label' %>
-      <div class="form-group col-md-2">
-        <%= f.text_field :telefone, class: 'form-control' %>
-      </div>
-
-      <%= f.label :tipo, I18n.t('Telefone.model.Type'), class: 'col-md-1 control-label' %>
-      <div class="form-group col-md-2">
-        <div class=""><%= f.text_field :tipo, class: 'form-control' %></div>
-      </div>
-
-      <div class="checkbox col-md-3">
-        <label>
-          <%= f.check_box :_destroy %>
-          <%= f.label :_destroy, I18n.t('remove') %>
-        </label>
-      </div>
-    </div>
+<%= f.hidden_field :id %>
+<div class="row form-item">
+  <div class="col-md-2"><%= f.input :ddd%></div>
+  <div class="col-md-4"><%= f.input :telefone%></div>
+  <div class="col-md-4"><%= f.input :tipo%></div>
+  <div class="checkbox col-md-2">
+    <label>
+      <%= f.check_box :_destroy %>
+      <%= f.label :_destroy, I18n.t('remove') %>
+    </label>
+  </div>
+</div>

@@ -1,12 +1,12 @@
 <div class="form-group form-item">
   <%= f.hidden_field :id %>
-  <%= f.label :email, I18n.t('Email.model.Email'), class: 'col-md-2 control-label' %>
-  <div class="col-md-6"><%= f.email_field :email, class: 'form-control' %></div>
-  <div class="checkbox col-md-4">
+  <div class="col-md-9">
+    <%= f.input :email%>
+  </div>
+  <div class="checkbox col-md-3">
     <label>
       <%= f.check_box :_destroy %>
       <%= f.label :_destroy, I18n.t('remove') %>
-
     </label>
   </div>
 </div>

@@ -1,21 +1,12 @@
 
 <div class="row form-item">
   <%= f.hidden_field :id %>
-  <%= f.label :pais, I18n.t('Address.model.Country'), class: 'col-md-2 control-label' %>
-  <div class="form-group col-md-1">
-    <div class=""><%= f.text_field :pais, class: 'form-control' %></div>
-  </div>
-
-  <%= f.label :estado, I18n.t('Address.model.State'), class: "col-md-1 control-label" %>
-  <div class="form-group col-md-1">
-    <%= f.text_field :estado, class: 'form-control' %>
-  </div>
-
-  <%= f.label :cidade,I18n.t('Address.model.City'), class: "col-md-1 control-label" %>
   <div class="form-group col-md-3">
-    <div class=""><%= f.text_field :cidade, class: 'form-control' %></div>
+    <%= f.label :pais %>
+    <div class=""><%= f.country_select :pais,{ priority_countries: ["BR"], selected: "BR" }, {class: 'form-control select'} %></div>
   </div>
-
+  <div class="col-md-3"><%= f.input :estado%></div>
+  <div class="col-md-3"><%= f.input :cidade %></div>
   <div class="checkbox col-md-3">
     <label>
       <%= f.check_box :_destroy %>
