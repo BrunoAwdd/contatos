@@ -26,7 +26,10 @@
   </div>
 
   <div class="form-group col-md-2">
-    <div class=""><%= f.input :status, :collection => [[ 'Pendente', 0], [ 'Aprovado', 1]],include_blank: t('Contact.view.none') %></div>
+    <div class=""><%= f.input :status, :collection =>
+        [[ 'Análise', 0], ['Documentação Pendente', 1], ['Restrição', 2],
+         ['Comitê', 3], ['Negado', 4], ['Bloqueado', 5], ['Liberado', 6] ],
+                              include_blank: t('Contact.view.none') %></div>
 
   </div>
 </div>

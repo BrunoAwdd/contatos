@@ -19,7 +19,8 @@
         <td><%= credit_client_general.name %></td>
         <td><%= credit_client_general.brand %></td>
         <td><%= credit_client_general.cnpj %></td>
-        <td><%= credit_client_general.contato %></td>
+        <td><%= #credit_client_general.contato
+        %></td>
         <td><%= link_to t('.show'), credit_client_general %></td>
         <td><%= link_to t('.edit'), edit_credit_client_general_path(credit_client_general) %></td>
         <td><%= link_to t('.destroy'), credit_client_general, method: :delete, data: { confirm: t('.message') } %></td>

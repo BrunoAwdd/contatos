@@ -40,7 +40,9 @@
   </div>
   <div class="col-xs-4">
     <strong><%= t('.contato') %></strong>
-    <%= @credit_client_general.contato.full_name %>
+    <% if (!@credit_client_general.contato.blank?) %>
+        <%= @credit_client_general.contato.full_name %>
+    <% end %>
   </div>
 </div>
 

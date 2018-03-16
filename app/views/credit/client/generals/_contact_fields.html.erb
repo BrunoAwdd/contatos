@@ -15,7 +15,7 @@
 <div class="row form-item">
   <fieldset id="contact_email">
     <% if f.object.email.nil? %>
-      <% f.object.build_email %>
+        <% f.object.build_email %>
     <% end %>
     <%= f.simple_fields_for :email do |e| %>
         <%= e.hidden_field :id %>
@@ -28,7 +28,7 @@
 <div class="row form-item">
   <fieldset id="contact_phone">
     <% if f.object.phone.nil? %>
-      <% f.object.build_phone%>
+        <% f.object.build_phone%>
     <% end %>
     <%= f.simple_fields_for :phone do |p| %>
         <%= p.hidden_field :id %>

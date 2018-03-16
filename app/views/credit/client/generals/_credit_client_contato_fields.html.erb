@@ -1,0 +1,9 @@
+<div class="form-item">
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :credit_client_id %>
+  <%= f.hidden_field :contato_id %>
+</div>
+<% f.object.build_contato %>
+<%= f.simple_fields_for :contato do |cont| %>
+    <%= render 'contato_fields', :f => cont %>
+<% end %>

@@ -4,8 +4,14 @@
             e.preventDefault()
             $(this).tab('show')
         })
+
+        getContatos();
     });
+    $(document).on('click', '#btnModal', function(){
+        $('.modal').modal();
+    })
 </script>
+
 <%= simple_form_for(@credit_client_general) do |f| %>
     <% if @credit_client_general.errors.any? %>
         <div class="error_explanation">
@@ -37,9 +43,11 @@
         border-top-color: transparent;">
       <div class="tab-pane active" id="data">
         <div class="row">
+          <%= f.hidden_field :name%>
           <div class="col-md-6"><%= f.input :name%></div>
           <div class="col-md-6"><%= f.input :brand%></div>
           <div class="col-md-6"><%= f.input :cnpj,  input_html: { class: 'cnpj' }%></div>
+          <div class="col-md-12"><%= f.input :condition%></div>
         </div>
 
         <fieldset id="addresses">
@@ -58,31 +66,34 @@
             <% end %>
           </div>
         </fieldset>
+        <div id="contato">
+          <fieldset id="contatos">
+            <div class="col-md-12">
+              <h4>
+                <%= t('.contacts') %>
+              </h4>
+              <hr>
+            </div><br>
+            <div class="contato_menu" id="alfa">
+              <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                          :remote => true, data: { modal: true } %>
+              <%= f.association :contatos, label_method: :full_name %>
+            </div>
 
-        <fieldset id="contacts">
-          <div class="col-md-12">
-            <h4>
-              <button class="btn" id="btn_contacts">
-                <%= link_to_add_association '+', f, :contacts %>
-              </button>
-              <%= I18n.t('Contact.view.Add_Contact') %>
-            </h4>
-            <hr>
-          </div><br>
-          <div class="fields">
-            <%= f.simple_fields_for :contacts do |contact| %>
-                <%= render 'contact_fields', :f => contact %>
+            <table class="table table-stripped fields"></table>
 
-            <% end %>
-          </div>
-        </fieldset>
-
+          </fieldset>
+        </div>
       </div>
+
+
+
       <div class="tab-pane" id="line">
         <fieldset id="lines">
           <div class="col-md-12">
             <h4>
               <button class="btn" id="btn_lines">
+                <% #@TODO cruzar informação de documentação %>
                 <%= link_to_add_association '+', f, :lines %>
               </button>
               <%= t('.lines') %>
@@ -134,6 +145,7 @@
       </div>
 
       <div class="tab-pane" id="legal">
+        <% #@TODO nested register %>
         <fieldset id="legals" class="col-md-12">
           <div class="col-md-12">
             <h4><button class="btn" id="btn_legals">
@@ -185,12 +197,30 @@
       </div>
 
       <div class="tab-pane" id="intermediary">
+        <% #@TODO Colocar telefone como campo único%>
         <fieldset id="intermediarys" class="col-md-12">
           <div class="row">
             <%= f.simple_fields_for :intermediary do |inter| %>
                 <div class="form-group col-md-12">
                   <%= inter.hidden_field :id %>
                   <%= inter.input :name, placeholder:true %>
+                  <div id="contato">
+                    <fieldset id="contatos">
+                      <div class="col-md-12">
+                        <h4>
+                          <%= t('.contacts') %>
+                        </h4>
+                        <hr>
+                      </div><br>
+                      <div class="contato_menu" id="alfa">
+                        <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                                    :remote => true, data: { modal: true } %>
+                        <%= inter.association :contato, label_method: :full_name %>
+                      </div>
+                      <table class="table table-stripped fields"></table>
+
+                    </fieldset>
+                  </div>
                 </div>
                 <div class="form-group col-md-12">
                   <%= inter.text_area :note, rows: "5", class: 'form-control', placeholder:true%>

@@ -1,7 +1,23 @@
 <div class="row form-item">
   <%= f.hidden_field :id %>
   <div class="form-group col-md-12">
-    <div class=""><%= f.input :name, placeholder:true %></div>
+    <div id="contato">
+      <fieldset id="contatos">
+        <div class="col-md-12">
+          <h4>
+            <%= t('.contacts') %>
+          </h4>
+          <hr>
+        </div><br>
+        <div class="contato_menu" id="alfa">
+          <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                      :remote => true, data: { modal: true } %>
+          <%= f.association :contato, label_method: :full_name, input_html: {class: 'contato'} %>
+        </div>
+        <table class="table table-stripped fields"></table>
+
+      </fieldset>
+    </div>
   </div>
   <div class="form-group col-md-12">
     <fieldset id="documents_partner">
