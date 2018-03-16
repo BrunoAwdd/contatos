@@ -10,15 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129130414) do
+ActiveRecord::Schema.define(version: 20180301163245) do
 
   create_table "business_generals", force: :cascade do |t|
     t.datetime "date_entry"
     t.string   "subject"
-    t.integer  "contato_id"
     t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
+    t.text     "condition"
+  end
+
+  create_table "business_generals_contacts", id: false, force: :cascade do |t|
+    t.integer "business_generals_id"
+    t.integer "contato_id"
+    t.index ["business_generals_id"], name: "index_business_generals_contacts_on_business_generals_id"
+    t.index ["contato_id"], name: "index_business_generals_contacts_on_contato_id"
   end
 
   create_table "business_histories", force: :cascade do |t|
@@ -28,6 +36,16 @@ ActiveRecord::Schema.define(version: 20180129130414) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.index ["business_general_id"], name: "index_business_histories_on_business_general_id"
+  end
+
+  create_table "business_intermediaries", force: :cascade do |t|
+    t.text     "note"
+    t.integer  "business_general_id"
+    t.integer  "contato_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["business_general_id"], name: "index_business_intermediaries_on_business_general_id"
+    t.index ["contato_id"], name: "index_business_intermediaries_on_contato_id"
   end
 
   create_table "business_notes", force: :cascade do |t|
@@ -109,33 +127,6 @@ ActiveRecord::Schema.define(version: 20180129130414) do
     t.index ["credit_client_general_id"], name: "index_credit_client_addresses_on_credit_client_general_id"
   end
 
-  create_table "credit_client_contact_bases", force: :cascade do |t|
-    t.string   "name"
-    t.string   "last_name"
-    t.integer  "credit_client_general_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["credit_client_general_id"], name: "index_credit_client_contact_bases_on_credit_client_general_id"
-  end
-
-  create_table "credit_client_contact_emails", force: :cascade do |t|
-    t.string   "email"
-    t.integer  "contact_base_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["contact_base_id"], name: "index_credit_client_contact_emails_on_contact_base_id"
-  end
-
-  create_table "credit_client_contact_phones", force: :cascade do |t|
-    t.string   "ddd"
-    t.string   "phone"
-    t.string   "model"
-    t.integer  "contact_base_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["contact_base_id"], name: "index_credit_client_contact_phones_on_contact_base_id"
-  end
-
   create_table "credit_client_documents", force: :cascade do |t|
     t.integer  "status"
     t.integer  "exemption"
@@ -162,10 +153,16 @@ ActiveRecord::Schema.define(version: 20180129130414) do
     t.string   "brand"
     t.string   "cnpj"
     t.string   "status"
-    t.integer  "contato_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["contato_id"], name: "index_credit_client_generals_on_contato_id"
+    t.text     "condition"
+  end
+
+  create_table "credit_client_generals_contacts", force: :cascade do |t|
+    t.integer "credit_client_id"
+    t.integer "contato_id"
+    t.index ["contato_id"], name: "index_credit_client_generals_contacts_on_contato_id"
+    t.index ["credit_client_id"], name: "index_credit_client_generals_contacts_on_credit_client_id"
   end
 
   create_table "credit_client_intermediaries", force: :cascade do |t|
@@ -174,6 +171,8 @@ ActiveRecord::Schema.define(version: 20180129130414) do
     t.integer  "credit_client_general_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "contato_id"
+    t.index ["contato_id"], name: "index_credit_client_intermediaries_on_contato_id"
     t.index ["credit_client_general_id"], name: "index_credit_client_intermediaries_on_credit_client_general_id"
   end
 
@@ -201,6 +200,8 @@ ActiveRecord::Schema.define(version: 20180129130414) do
     t.integer  "credit_client_general_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "contato_id"
+    t.index ["contato_id"], name: "index_credit_client_partner_bases_on_contato_id"
     t.index ["credit_client_general_id"], name: "index_credit_client_partner_bases_on_credit_client_general_id"
   end
 
@@ -433,8 +434,9 @@ ActiveRecord::Schema.define(version: 20180129130414) do
     t.string   "last_name"
     t.integer  "usuario_roles_id"
     t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "messages_count",   default: 0
     t.index ["user_id"], name: "index_usuario_generals_on_user_id"
     t.index ["usuario_roles_id"], name: "index_usuario_generals_on_usuario_roles_id"
   end
