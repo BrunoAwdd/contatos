@@ -24,6 +24,7 @@ pt-BR:
       business/general: 'Negócios'
       business/history: 'Histórico do Negócio'
       business/notes: 'Anotações do Negócio'
+      contato: 'Contato'
       credit/bank/general: 'Banco'
       credit/bank/address: 'Endereço'
       credit/bank/email: 'Email'
@@ -50,13 +51,21 @@ pt-BR:
       usuario/general: 'Informação de Usuário'
     attributes:
       business/general:
+        condition: 'Condições'
         date_entry: 'Data de Entrada'
+        name: 'Nome'
         subject: 'Cliente'
         contato_id: 'Contato'
         product_id: 'Produto'
       business/history:
         date_entry: 'Data de Entrada'
         note: 'Acontecimento'
+      business/intermediary:
+        note: 'Observações'
+      contato:
+        first_name: 'Nome'
+        last_name: 'Sobrenome'
+        web_page: 'Site'
       credit/bank/general:
         agency: 'Agência'
         contato_id: 'Contato'
@@ -205,8 +214,12 @@ pt-BR:
         note: 'Anotação'
         date_entry: 'Data'
       form:
+        name: 'Nome'
+        contacts: 'Contatos'
         add_history: 'Adicionar Histórico'
         add_note: 'Adicionar Anotação'
+        condition: 'Condição'
+        intermediary: 'Intermediário'
         select_product: 'Selecionar Produto'
         select_contato: 'Selectionar Contato'
   credit:
@@ -278,6 +291,7 @@ pt-BR:
           title: 'Lista de Bancos'
           edit: 'Editar'
         form:
+          contacts: 'Contatos'
           lines: 'Linhas de Crédito'
           notes: 'Histórico'
           legal: 'Jurídico'
@@ -289,6 +303,7 @@ pt-BR:
           documents: 'Documentação'
         partner_fields:
           documents: 'Documentação'
+          contacts: 'Contatos'
     documents:
       index:
         add_document: 'Adicionar Documento'
