@@ -2,10 +2,27 @@
   <%= f.error_notification %>
 
   <div class="row">
-    <div class="col-md-4"><%= f.input :name%></div>
-    <div class="col-md-4"><%= f.input :agency%></div>
-    <div class="col-md-4"><%= f.association :contato,  :label_method => :full_name %></div>
+    <div class="col-md-6"><%= f.input :name%></div>
+    <div class="col-md-6"><%= f.input :agency%></div>
   </div>
+    <div id="contato">
+      <fieldset id="contatos">
+        <div class="col-md-12">
+          <h4>
+            <%= t('.contacts') %>
+          </h4>
+          <hr>
+        </div><br>
+        <div class="contato_menu" id="alfa">
+          <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                      :remote => true, data: { modal: true } %>
+          <%= f.association :contato, label_method: :full_name, input_html: {class: 'contato'}  %>
+        </div>
+
+        <table class="table table-stripped fields"></table>
+
+      </fieldset>
+    </div>
     <fieldset id="enderecos">
       <div class="col-md-12">
         <h4>
