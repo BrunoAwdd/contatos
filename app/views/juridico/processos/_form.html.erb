@@ -78,8 +78,10 @@
   </div>
 
     <fieldset id="andamentos" class="col-md-12">
+
       <div class="col-md-12">
         <h4><%= t('.andamento') %></h4>
+        <button class="btn" id="btn_andamentos"><%= link_to_add_association t('.add_andamento'), f, :andamentos %></button>
         <hr>
       </div><br>
       <div class="fields row">
@@ -87,9 +89,7 @@
             <%= render 'andamento_fields', :f => andamento %>
         <% end %>
       </div>
-      <div class='links row'>
-        <button class="btn" id="btn_andamentos"><%= link_to_add_association t('.add_andamento'), f, :andamentos %></button>
-      </div>
+
       <hr>
     </fieldset>
   <div class="col-md-12 form-group">
