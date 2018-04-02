@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     collection do
       post :mass_action
     end
-    resources :notes, :only => [:edit, :create, :index, :destroy]
+    resources :notes, :only => [:edit, :create, :update, :index, :destroy]
   end
   resources :ajaxcontatos
 
