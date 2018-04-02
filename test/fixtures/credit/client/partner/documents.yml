@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 1
+  exemption: 1
+  date: 2018-01-09
+  credit_client_partner_document_list: one
+  credit_client_partner_base: one
+
+two:
+  status: 1
+  exemption: 1
+  date: 2018-01-09
+  credit_client_partner_document_list: two
+  credit_client_partner_base: two

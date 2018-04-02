@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 1
+  exemption: 1
+  date: 2018-01-15
+  document_list: one
+  warranty_base: one
+
+two:
+  status: 1
+  exemption: 1
+  date: 2018-01-15
+  document_list: two
+  warranty_base: two
