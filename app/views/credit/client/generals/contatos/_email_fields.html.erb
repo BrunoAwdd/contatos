@@ -1,0 +1,11 @@
+<div class="row form-item">
+  <%= f.hidden_field :id %>
+  <div class="col-md-7"><%= f.email_field :email, class: 'form-control', placeholder: true %></div>
+  <div class="checkbox col-md-2">
+    <label>
+      <%= f.check_box :_destroy %>
+      <%= f.label :_destroy, I18n.t('remove') %>
+
+    </label>
+  </div>
+</div>
