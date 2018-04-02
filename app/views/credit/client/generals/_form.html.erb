@@ -12,7 +12,7 @@
     })
 </script>
 
-<%= simple_form_for(@credit_client_general) do |f| %>
+<%= simple_form_for(@credit_client_general, html: { novalidate: false }) do |f| %>
     <% if @credit_client_general.errors.any? %>
         <div class="error_explanation">
           <h2><%= pluralize(@credit_client_general.errors.count, "error") %> prevented this record from being saved:</h2>
@@ -127,18 +127,20 @@
       <div class="tab-pane" id="note">
 
         <fieldset id="notes" class="col-md-12">
+
+          <div class="fields row">
+            <%= f.simple_fields_for :notes do |note| %>
+                <%= render 'note_fields', :f => note %>
+            <% end %>
+          </div>
           <div class="col-md-12">
             <h4><button class="btn" id="btn_notes">
               <%= link_to_add_association '+', f, :notes %>
             </button>
               <%= t('.notes') %>
             </h4>
-          </div><br>
-          <div class="fields row">
-            <%= f.simple_fields_for :notes do |note| %>
-                <%= render 'note_fields', :f => note %>
-            <% end %>
           </div>
+
         </fieldset>
 
 
@@ -203,15 +205,8 @@
             <%= f.simple_fields_for :intermediary do |inter| %>
                 <div class="form-group col-md-12">
                   <%= inter.hidden_field :id %>
-                  <%= inter.input :name, placeholder:true %>
                   <div id="contato">
                     <fieldset id="contatos">
-                      <div class="col-md-12">
-                        <h4>
-                          <%= t('.contacts') %>
-                        </h4>
-                        <hr>
-                      </div><br>
                       <div class="contato_menu" id="alfa">
                         <%= link_to '+Novo Contato', new_ajaxcontato_path,
                                     :remote => true, data: { modal: true } %>
