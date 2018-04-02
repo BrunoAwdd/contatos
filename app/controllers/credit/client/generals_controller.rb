@@ -21,6 +21,8 @@ class Credit::Client::GeneralsController < ApplicationController
     @credit_client_general.build_intermediary
     @credit_client_general.documents_build
     @credit_client_general.partners.build
+    @credit_client_general.contatos.build
+    @credit_client_general.credit_client_contatos.build
     hidrateEdit
   end
 
@@ -47,6 +49,7 @@ class Credit::Client::GeneralsController < ApplicationController
   # PATCH/PUT /credit/client/generals/1
   # PATCH/PUT /credit/client/generals/1.json
   def update
+
     respond_to do |format|
       if @credit_client_general.update(credit_client_general_params)
         format.html { redirect_to @credit_client_general, notice: 'General was successfully updated.' }
@@ -92,6 +95,7 @@ class Credit::Client::GeneralsController < ApplicationController
     end
 
     def hidrateEdit
+      @credit_client_general.contatos.build
       @credit_client_general.documents_build
       set_partners_documents
       set_warranties_documents
@@ -99,27 +103,36 @@ class Credit::Client::GeneralsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def credit_client_general_params
-      params.require(:credit_client_general).permit(:id, :name, :brand, :cnpj, :contato_id,
+      params.require(:credit_client_general).permit(:id, :name, :brand, :cnpj, :condition, contato_ids:[],
                   addresses_attributes: [:id, :street, :number, :neighborhood, :city, :state, :country, :zipcode, :_destroy],
-                  contacts_attributes: [:id, :name, :last_name,  :_destroy,
-                                        email_attributes: [:id, :email],
-                                        phone_attributes: [:id, :ddd, :phone, :model]
-                  ],
+                  credit_client_contatos_attributes: [:id, :credit_client_id, :contato_id,
+                                                      contato_attributes: [:id, :first_name, :last_name, :web_page,  :_destroy,
+                                                                      email_attributes: [:id, :email, :_destroy],
+                                                                      phone_attributes: [:id, :ddd, :telefone, :tipo, :_destroy]
+                                                                            ],
+                                                ],
                   phones_attributes: [:id, :ddd, :phone, :model, :_destroy],
                   emails_attributes: [:id, :email, :contact, :_destroy],
                   lines_attributes: [:id, :name, :value, :credit_bank_general_id, :date, :status, :note, :_destroy],
                   documents_attributes: [:id, :status, :date, :exemption, :credit_document_id, :_destroy],
-                  partners_attributes: [:id, :name,
+                  partners_attributes: [:id, :contato_id,
+                            contatos_attributes: [:id, :first_name, :last_name, :web_page,  :_destroy,
+                                                  email_attributes: [:id, :email, :_destroy],
+                                                  phone_attributes: [:id, :ddd, :telefone, :tipo, :_destroy]
+                            ],
                             partner_documents_attributes: [:id, :document_list_id, :status, :exemption, :date, :_destroy]
                   ],
                   warranties_attributes: [:id, :name,
-                            warranty_address_attributes: [:id, :street, :number, :neighborhood, :city, :state, :country, :zipcode, :_destroy],
+                            warranty_address_attributes: [:id, :street, :number, :neighborhood, :city, :state, :country, :zipcode],
                             warranty_documents_attributes: [:id, :document_list_id, :status, :exemption, :date, :_destroy],
                             warranty_info_attributes: [:id, :value, :price, :condition, :notes]
                   ],
                   notes_attributes: [:id, :date, :note, :_destroy],
                   legals_attributes: [:id, :number, :date, :_destroy, :note],
-                  intermediary_attributes: [:id, :name, :note]
+                  intermediary_attributes: [:id, :name, :note, :contato_id, contato_attributes: [:id, :first_name, :last_name, :web_page,  :_destroy,
+                                                                                     email_attributes: [:id, :email, :_destroy],
+                                                                                     phone_attributes: [:id, :ddd, :telefone, :tipo, :_destroy]
+                  ]]
       )
     end
 end
