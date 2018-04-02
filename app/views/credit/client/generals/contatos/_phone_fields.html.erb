@@ -1,0 +1,22 @@
+
+<div class="row form-item">
+  <%= f.hidden_field :id %>
+  <div class="form-group col-md-2">
+    <div class=""><%= f.text_field :ddd, class: 'form-control', placeholder:true %></div>
+  </div>
+
+  <div class="form-group col-md-3">
+    <%= f.text_field :telefone, class: 'form-control', placeholder:true %>
+  </div>
+
+  <div class="form-group col-md-3">
+    <div class=""><%= f.text_field :tipo, class: 'form-control', placeholder:true %></div>
+  </div>
+
+  <div class="checkbox col-md-3">
+    <label>
+      <%= f.check_box :_destroy %>
+      <%= f.label :_destroy, I18n.t('remove') %>
+    </label>
+  </div>
+</div>
