@@ -43,14 +43,30 @@
           <%= f.date_field :date_entry, class: 'form-control'  %>
         </div>
         <div class="col-md-4">
-          <%= f.label :product_id, class: 'control-label' %>
-          <%= f.select( :product_id, Product::General.all.collect {|p| [ p.nome, p.id ] }, {prompt: t('.select_product')}, class: 'form-control') %>
+          <%= f.association :product_general, label_method: :nome %>
         </div>
         <div class="col-md-12">
-          <%= f.input :condition %>
+          <%= f.input :conditions %>
         </div>
       </div>
+      <div id="contato">
+        <fieldset id="contatos">
+          <div class="col-md-12">
+            <h4>
+              <%= t('.contacts') %>
+            </h4>
+            <hr>
+          </div><br>
+          <div class="contato_menu" id="alfa">
+            <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                        :remote => true, data: { modal: true } %>
+            <%= f.association :contatos, label_method: :full_name, input_html: {class: 'contato'}  %>
+          </div>
 
+          <table class="table table-stripped fields"></table>
+
+        </fieldset>
+      </div>
 
       <hr>
       <fieldset id="notes">
@@ -84,28 +100,7 @@
         <hr>
       </fieldset>
 
-      <div id="contato">
-        <fieldset id="contatos">
-          <div class="col-md-12">
-            <h4>
-              <%= t('.contacts') %>
-            </h4>
-            <hr>
-          </div><br>
-          <div class="contato_menu" id="alfa">
-            <%= link_to '+Novo Contato', new_ajaxcontato_path,
-                        :remote => true, data: { modal: true } %>
-            <%= f.association :contatos, label_method: :full_name, input_html: {class: 'contato'}  %>
-          </div>
 
-          <table class="table table-stripped fields"></table>
-
-        </fieldset>
-      </div>
-
-      <div class="actions">
-        <%= f.submit %>
-      </div>
     </div>
     <div class="tab-pane" id="intermediary">
       <fieldset id="intermediarys" class="col-md-12">
@@ -140,4 +135,7 @@
       </fieldset>
     </div>
   </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
