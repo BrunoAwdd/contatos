@@ -38,111 +38,297 @@
     <strong><%= t('.brand') %></strong>
     <%= @credit_client_general.brand %>
   </div>
-  <div class="col-xs-4">
-    <strong><%= t('.contato') %></strong>
-    <% if (!@credit_client_general.contato.blank?) %>
-        <%= @credit_client_general.contato.full_name %>
-    <% end %>
-  </div>
 </div>
 
-<div class="row title_square">
-  <div class="col-xs-6"><h4>Emails</h4></div>
-  <div class="col-xs-6"><h4>Telefones</h4> </div>
-</div>
-
-<div class="row square">
-  <div class="col-xs-6">
-    <%  @credit_client_general.emails.each do |email| %>
-        <p><%= email.email %> - <%= email.contact %></p>
-    <% end %>
-  </div>
-  <div class="col-xs-6">
-    <% @credit_client_general.phones.each do |phone| %>
-        <p><%= "(#{phone.ddd}) #{phone.phone} - #{phone.model}" %></p>
-    <% end %>
-  </div>
-</div>
-
-<div class="row title_square">
-  <div class="col-xs-12"><h4>Endereços</h4></div>
-</div>
-
-<div class="row square">
-  <div class="col-xs-12">
-    <% @credit_client_general.addresses.each do |address| %>
-        <p>
-          <%= "#{address.country} - #{address.state}, #{address.city}.
-      #{address.street} #{address.number} - #{address.neighborhood}, #{address.zipcode}" %>
-        </p>
-    <% end %>
-  </div>
-</div>
-
-<div class="row title_square">
-  <div class="col-xs-12">
-    <h4>Linhas de Crédito</h4>
-  </div>
-</div>
-
-<div class="row square">
-  <% @credit_client_general.lines.each do |line| %>
-      <div class="col-xs-4"><strong> <%= line.name %></strong></div>
-      <div class="col-xs-2"> <%= line.format_number %></div>
-      <div class="col-xs-2"> <%= line.date.strftime("%d/%m/%Y") %></div>
-      <div class="col-xs-2"> <%= line.get_status %></div>
-      </br></br>
-      <div class="col-xs-12"> <%= line.note %></div>
-  <% end %>
-</div>
-
-<div class="row  title_square">
-  <div class="col-xs-12">
-    <h4>Jurídico</h4>
-  </div>
-</div>
-<div class="row square">
-  <% @credit_client_general.legals.each do |legal| %>
-      <div class="col-xs-6">Número do Processo: <%= legal.number %></div>
-      <div class="col-xs-3">Data: <%= legal.date.strftime("%d/%m/%Y")  %></div>
-      <div class="col-xs-12"><h5><strong>Última movimentação</strong></h5></div>
-      <div class="col-xs-12"><%= legal.note %></div>
-  <% end %>
-</div>
-
-<div class="row title_square">
-  <div class="col-xs-12">
-    <h4>Documentação</h4>
-  </div>
-</div>
-<div class="row square">
-  <% @credit_client_general.documents.each do |document| %>
-      <div class="row">
-        <div class="col-xs-4"><%= document.credit_document.name %></div>
-        <div class="col-xs-3">
-          <% if (document.date != nil) %>
-              Data: <%= document.date.strftime("%d/%m/%Y") %>
-              <%= document.expired? %>
-          <% end %>
-        </div>
-        <div class="col-xs-2"><%= document.statusText.html_safe %></div>
-        <div class="col-xs-2"><%= document.exemptionText.html_safe %></div>
+<% if !@credit_client_general.contatos.nil? %>
+    <div class="row  title_square">
+      <div class="col-xs-12">
+        <h4><strong><%= t('.contato') %></strong></h4>
       </div>
+    </div>
+    <div class="row square">
+      <% @credit_client_general.contatos.each do |contato| %>
+        <div class="col-xs-12">Nome: <%= contato.full_name %></div>
+        <div class="col-xs-6">
+          <h5><strong>Telefones</strong></h5>
+          <ul>
+            <% contato.telefones.each do |phone| %>
+                <li><%= "(#{phone.ddd}) #{phone.telefone} - #{phone.tipo}" %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="col-xs-6">
+          <h5><strong>Emails</strong></h5>
+          <ul>
+            <% contato.emails.each do |email| %>
+                <li><%= email.email %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+<% end %>
 
-  <% end %>
-</div>
+<% if !@credit_client_general.addresses.nil? %>
+  <div class="row title_square">
+    <div class="col-xs-12"><h4><strong>Endereços</strong></h4></div>
+  </div>
 
+  <div class="row square">
+    <div class="col-xs-12">
+      <% @credit_client_general.addresses.each do |address| %>
+          <p>
+            <%= "#{address.country} - #{address.state}, #{address.city}.
+        #{address.street} #{address.number} - #{address.neighborhood}, #{address.zipcode}" %>
+          </p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if !@credit_client_general.lines.nil? %>
+  <div class="row title_square">
+    <div class="col-xs-12">
+      <h4><strong>Linhas de Crédito</strong></h4>
+    </div>
+  </div>
+
+  <div class="row square">
+    <% @credit_client_general.lines.each do |line| %>
+        <div class="row top-buffer">
+          <div class="col-xs-4"><strong> <%= line.name %></strong></div>
+          <div class="col-xs-2"> <%= line.format_number %></div>
+          <div class="col-xs-2"> <%= !line.date.nil? ? line.date.strftime("%d/%m/%Y"): 'Data não registrada' %></div>
+          <div class="col-xs-2"> <%= line.get_status %></div>
+          <div class="col-xs-12"> <%= line.note %></div>
+        </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if !@credit_client_general.documents.nil? %>
 <div class="row title_square">
   <div class="col-xs-12">
-    <h4><%= t('.notes') %></h4>
+    <h4><strong>Documentação</strong></h4>
   </div>
 </div>
 <div class="row square">
-  <% @credit_client_general.notes.each do |note| %>
-      <div class="col-xs-3">Data: <%= note.date.strftime("%d/%m/%Y") %></div>
-      <div class="col-xs-9"><%= note.note %></div>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Nome do Documento</td>
+        <td>Data de Entrega</td>
+        <td>Status</td>
+        <td>Expirado?</td>
+        <td>Liberado?</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @credit_client_general.documents.each do |document| %>
+        <tr class="<%= document.expiredClass %>">
+          <td><%= document.credit_document.name %></td>
+          <td>
+            <% if (document.date != nil) %>
+                Data: <%= document.date.strftime("%d/%m/%Y") %>
+            <% end %>
+          </td>
+          <td><%= document.statusText.html_safe %></td>
+          <td><%= document.expiredText.html_safe %></td>
+          <td><%= document.exemptionText.html_safe %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
+<% end %>
+
+<% if !@credit_client_general.partners.nil? %>
+    <div class="row  title_square">
+      <div class="col-xs-12">
+        <h4><strong>Partners</strong></h4>
+      </div>
+    </div>
+
+    <div class="row square">
+      <% @credit_client_general.partners.each do |partner| %>
+
+          <% if !partner.contato.nil? %>
+            <div class="col-xs-12">Nome: <%= partner.contato.full_name %></div>
+            <div class="col-xs-6">
+              <h5><strong>Telefones</strong></h5>
+              <ul>
+                <% partner.contato.telefones.each do |phone| %>
+                    <li><%= "(#{phone.ddd}) #{phone.telefone} - #{phone.tipo}" %></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <h5><strong>Emails</strong></h5>
+              <ul>
+                <% partner.contato.emails.each do |email| %>
+                    <li><%= email.email %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="col-xs-12">
+            <h5><strong>Documentação</strong></h5>
+            <table class="table">
+              <thead>
+              <tr>
+                <td>Nome do Documento</td>
+                <td>Data de Entrega</td>
+                <td>Status</td>
+                <td>Expirado?</td>
+                <td>Liberado?</td>
+              </tr>
+              </thead>
+              <tbody>
+              <% partner.partner_documents.each do |document| %>
+                  <tr class="<%= document.expiredClass %>">
+                    <td><%= document.document_list.name %></td>
+                    <td>
+                      <% if (document.date != nil) %>
+                          Data: <%= document.date.strftime("%d/%m/%Y") %>
+                      <% end %>
+                    </td>
+                    <td><%= document.statusText.html_safe %></td>
+                    <td><%= document.expiredText.html_safe %></td>
+                    <td><%= document.exemptionText.html_safe %></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
+<% if !@credit_client_general.warranties.nil? %>
+    <div class="row  title_square">
+      <div class="col-xs-12">
+        <h4><strong>Garantias</strong></h4>
+      </div>
+    </div>
+    <div class="row square">
+      <% @credit_client_general.warranties.each do |warranty| %>
+          <div class="col-xs-12"><%= warranty.name %></div>
+          <div class="col-xs-12"><%= "#{warranty.warranty_address.country} - #{warranty.warranty_address.state}, #{warranty.warranty_address.city}.
+          #{warranty.warranty_address.street} #{warranty.warranty_address.number} - #{warranty.warranty_address.neighborhood}, #{warranty.warranty_address.zipcode}" %> </div>
+          <div class="col-xs-6">Valor Venda:<%= warranty.warranty_info.format_number(warranty.warranty_info.value) %></div>
+          <div class="col-xs-6">Preço Real: <%= warranty.warranty_info.format_number(warranty.warranty_info.price)  %></div>
+          <div class="col-xs-12"><%= warranty.warranty_info.condition %></div>
+          <div class="col-xs-12"><%= warranty.warranty_info.notes %></div>
+          <div class="col-xs-12">
+            <h5><strong>Documentação</strong></h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <td>Nome do Documento</td>
+                  <td>Data de Entrega</td>
+                  <td>Status</td>
+                  <td>Expirado?</td>
+                  <td>Liberado?</td>
+                </tr>
+              </thead>
+              <tbody>
+                <% warranty.warranty_documents.each do |document| %>
+                    <tr class="<%= document.expiredClass %>">
+                      <td><%= document.document_list.name %></td>
+                      <td>
+                        <% if (document.date != nil) %>
+                            Data: <%= document.date.strftime("%d/%m/%Y") %>
+                        <% end %>
+                      </td>
+                      <td><%= document.statusText.html_safe %></td>
+                      <td><%= document.expiredText.html_safe %></td>
+                      <td><%= document.exemptionText.html_safe %></td>
+                    </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
+<% if !@credit_client_general.intermediary.nil? %>
+  <% intermediary = @credit_client_general.intermediary %>
+  <div class="row  title_square">
+    <div class="col-xs-12">
+      <h4><strong>Intermediário</strong></h4>
+    </div>
+  </div>
+  <div class="row square">
+    <% if !intermediary.contato.nil? %>
+      <div class="col-xs-12">Nome: <%= intermediary.contato.full_name %></div>
+      <div class="col-xs-6">
+        <h5><strong>Telefones</strong></h5>
+        <ul>
+          <% intermediary.contato.telefones.each do |phone| %>
+              <li><%= "(#{phone.ddd}) #{phone.telefone} - #{phone.tipo}" %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-xs-6">
+        <h5><strong>Emails</strong></h5>
+        <ul>
+          <% intermediary.contato.emails.each do |email| %>
+              <li><%= email.email %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-xs-12">
+        <h5><strong>Observações</strong></h5>
+        <%= intermediary.note %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @credit_client_general.legals.nil? %>
+  <div class="row  title_square">
+    <div class="col-xs-12">
+      <h4><strong>Jurídico</strong></h4>
+    </div>
+  </div>
+  <div class="row square">
+    <% @credit_client_general.legals.each do |legal| %>
+        <div class="col-xs-6">Número do Processo: <%= legal.number %></div>
+        <div class="col-xs-3">Data: <%= legal.date.strftime("%d/%m/%Y")  %></div>
+        <div class="col-xs-12"><h5><strong>Última movimentação</strong></h5></div>
+        <div class="col-xs-12"><%= legal.note %></div>
+    <% end %>
+  </div>
+<% end %>
+
+
+<% if !@credit_client_general.notes.nil? %>
+  <div class="row title_square">
+    <div class="col-xs-12">
+      <h4><strong><%= t('.notes') %></strong></h4>
+    </div>
+  </div>
+  <div class="row square">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th scope="col">Acontecimento</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @credit_client_general.notes.each do |note| %>
+        <tr>
+          <td scope="row"><%= note.date.strftime("%d/%m/%Y") %></td>
+          <td><%= note.note %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
 
 
 
