@@ -29,13 +29,19 @@ class ContatosController < ApplicationController
   # GET /contatos/1
   # GET /contatos/1.json
   def show
-    logger.debug "----------------------Show--------------------------:"
   end
 
   # GET /contatos/new
   def new
     @contato = Contato.new
     build_contato
+    #respond_modal_with @contato
+  end
+
+  def newAjax
+    @contato = Contato.new
+    build_contato
+    render :layout => 'modal'
   end
 
   # GET /contatos/1/edit
@@ -44,6 +50,7 @@ class ContatosController < ApplicationController
     @contato.telefones.build
     @contato.enderecos.build
     @contato.product_generals.build
+    #respond_modal_with @contato
   end
 
   # POST /contatos
@@ -166,6 +173,7 @@ class ContatosController < ApplicationController
     end
 
     def filtrar_contatos
+      @session = session
       if session[:pagination]['per_page'] != 'Todos'
         @contatos = Contato.joins(
                                #LEFT JOIN contatos_product_generals ON contatos_products.contato_id = contatos.id
@@ -183,6 +191,7 @@ class ContatosController < ApplicationController
             LEFT JOIN emails ON emails.contato_id = contatos.id ")
                         .where(filterWhere(session[:filter]))
                         .group('contatos.id')
+
       end
     end
 
@@ -254,7 +263,7 @@ class ContatosController < ApplicationController
   def filterWhere(params)
 
     if !params['id'].blank?
-      addWhere("contatos.id LIKE \"%#{params['id']}%\"")
+      addWhere("contatos.id = #{params['id']}")
     end
 
     if !params['name'].blank?
