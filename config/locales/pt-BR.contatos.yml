@@ -54,7 +54,7 @@ pt-BR:
         condition: 'Condições'
         date_entry: 'Data de Entrada'
         name: 'Nome'
-        subject: 'Cliente'
+        subject: 'Assunto'
         contato_id: 'Contato'
         product_id: 'Produto'
       business/history:
@@ -169,19 +169,7 @@ pt-BR:
         name: 'Nome'
         last_name: 'Sobrenome'
         role: 'Função'
-  layouts:
-    header:
-      add_banco: 'Adicionar Banco'
-      add_cliente: 'Adicionar Cliente'
-      add_documents: 'Adicionar Documento'
-      add_partner_documents: 'Adicionar Documentação dos Sócios'
-      add_warranty_documents: 'Adicionar Documentação das Garantias'
-      bancos: 'Ver Bancos'
-      clientes: 'Ver Clientes'
-      credito:  'Crédito'
-      documents: 'Documentação'
-      partner_documents: 'Documentação dos Sócios'
-      warranty_documents: 'Documentação da Garantia'
+
   business:
     generals:
       index:
@@ -327,8 +315,21 @@ pt-BR:
         title: 'Editar Produto'
       new:
         title: 'Adicionar Produto'
-
-
+  layouts:
+    header:
+      business: 'Negócios'
+      add_business: 'Adicionar Negócio'
+      add_banco: 'Adicionar Banco'
+      add_cliente: 'Adicionar Cliente'
+      add_documents: 'Adicionar Documento'
+      add_partner_documents: 'Adicionar Documentação dos Sócios'
+      add_warranty_documents: 'Adicionar Documentação das Garantias'
+      bancos: 'Ver Bancos'
+      clientes: 'Ver Clientes'
+      credito:  'Crédito'
+      documents: 'Documentação'
+      partner_documents: 'Documentação dos Sócios'
+      warranty_documents: 'Documentação da Garantia'
   #Basicos
   About: Sobre
   Are_you_sure?: Você tem certeza?
