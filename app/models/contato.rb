@@ -1,26 +1,29 @@
 class Contato < ActiveRecord::Base
   #One-to-Many
-    #One Contato has many emails
-    has_many :emails, inverse_of: :contato, dependent: :destroy
-    accepts_nested_attributes_for :emails, reject_if: proc { |attributes| attributes['email'].blank? }, :allow_destroy => true
+  #One Contato has many emails
+  has_many :emails, inverse_of: :contato, dependent: :destroy
+  accepts_nested_attributes_for :emails, reject_if: proc { |attributes| attributes['email'].blank? }, :allow_destroy => true
 
-    #One Contato has many telefones
-    has_many :telefones, inverse_of: :contato, dependent: :destroy
-    accepts_nested_attributes_for :telefones, reject_if: proc { |attributes| attributes['telefone'].blank? }, :allow_destroy => true
+  #One Contato has many telefones
+  has_many :telefones, inverse_of: :contato, dependent: :destroy
+  accepts_nested_attributes_for :telefones, reject_if: proc { |attributes| attributes['telefone'].blank? }, :allow_destroy => true
 
-    #One Contato has many endereços
-    has_many :enderecos, inverse_of: :contato, dependent: :destroy
-    accepts_nested_attributes_for :enderecos, reject_if: :reject_enderecos, :allow_destroy => true
+  #One Contato has many endereços
+  has_many :enderecos, inverse_of: :contato, dependent: :destroy
+  accepts_nested_attributes_for :enderecos, reject_if: :reject_enderecos, :allow_destroy => true
 
-    #One Contato
-    has_many :notes
+  #One Contato
+  has_many :notes
 
-    has_many :business, class_name: 'Business::General'
+  has_many :business, class_name: 'Business::General'
 
   #Many-to-Many
-    has_and_belongs_to_many :product_generals, class_name:'Product::General',
-                            association_foreign_key: 'product_generals_id'
+  has_and_belongs_to_many :product_generals, class_name:'Product::General',
+                          association_foreign_key: 'product_generals_id'
 
+  has_and_belongs_to_many :credit_client_general, foreign_key: "contato_id", association_foreign_key: "credit_client_id",  join_table: "credit_client_generals_contacts"
+
+  validates :first_name, presence: :true
 
 
   #Cria o full_name do Contato
@@ -70,7 +73,7 @@ class Contato < ActiveRecord::Base
   end
 
   def reject_enderecos(attributes)
-    if attributes['pais'].blank? && attributes['estado'].blank? && attributes['cidade'].blank?
+    if attributes['estado'].blank? && attributes['cidade'].blank?
       true
     else
       false
