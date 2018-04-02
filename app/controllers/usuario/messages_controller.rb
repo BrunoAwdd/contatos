@@ -56,6 +56,7 @@ class Usuario::MessagesController < ApplicationController
       if @usuario_message.update(usuario_message_params)
         format.html { redirect_to @usuario_message, notice: 'Message was successfully updated.' }
         format.json { render :show, status: :ok, location: @usuario_message }
+        format.json { render :show, status: :ok, location: @usuario_message }
       else
         format.html { render :edit }
         format.json { render json: @usuario_message.errors, status: :unprocessable_entity }
