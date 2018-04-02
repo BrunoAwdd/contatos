@@ -17,7 +17,7 @@ class Juridico::ProcessosController < ApplicationController
   # GET /juridico/processos/new
   def new
     @juridico_processo = Juridico::Processo.new
-    build_processo
+
   end
 
   # GET /juridico/processos/1/edit
