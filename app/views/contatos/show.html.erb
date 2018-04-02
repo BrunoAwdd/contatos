@@ -90,6 +90,7 @@
 <hr>
 
 <section id="ObservaçõesForm">
+  <% #@TODO nested notes in contato form?? %>
   <%= form_for([@contato, @contato.notes.build]) do |f| %>
       <div class="form-group">
         <%= f.label :observacao, t('Contact.view.Add_Note'), class: "control-label" %>
