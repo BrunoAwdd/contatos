@@ -35,7 +35,7 @@
 </div>
 <div class="row form-item">
   <div class="form-group col-md-12">
-    <div class=""><%= f.input :note, rows: "5", class: 'form-control', placeholder:true %></div>
+    <div class=""><%= f.input :note, :input_html => { 'rows' => 5}, class: 'form-control', placeholder:true %></div>
   </div>
 </div>
 <hr>
