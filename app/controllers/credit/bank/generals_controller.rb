@@ -73,6 +73,11 @@ class Credit::Bank::GeneralsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def credit_bank_general_params
-      params.require(:credit_bank_general).permit(:name, :agency, :contato_id)
+      params.require(:credit_bank_general).permit(:name, :agency, :contato_id,
+                                          addresses_attributes: [:id, :street, :number, :neighborhood, :city, :state, :country, :zipcode, :_destroy],
+                                          email_attributes: [:id, :email, :_destroy],
+                                          phone_attributes: [:id, :ddd, :telefone, :tipo, :_destroy]
+      )
+
     end
 end
