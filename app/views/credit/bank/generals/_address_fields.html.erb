@@ -3,7 +3,7 @@
   <%= f.hidden_field :id %>
   <%= f.label :country, class: 'col-md-1 control-label' %>
   <div class="form-group col-md-1">
-    <div class=""><%= f.text_field :country, class: 'form-control' %></div>
+    <div class=""><%= f.country_select :country,{ priority_countries: ["BR"], selected: "BR" }, {class: 'form-control select'} %></div>
   </div>
 
   <%= f.label :state, class: "col-md-1 control-label" %>
