@@ -24,6 +24,7 @@ pt-BR:
       business/general: 'Negócios'
       business/history: 'Histórico do Negócio'
       business/notes: 'Anotações do Negócio'
+      business/international: 'Operações Internacionais'
       contato: 'Contato'
       credit/bank/general: 'Banco'
       credit/bank/address: 'Endereço'
@@ -165,11 +166,28 @@ pt-BR:
         price: 'Preço'
         condition: 'Condições'
         notes: 'Observações'
+      product/general:
+        nome: 'Nome'
+        type: 'Tipo'
+        date_entry: 'Data de Entrada'
+        contatos: 'Intermediários'
+        sellers: 'Vendedores'
+      product/international:
+        nome: 'Nome'
+        type: 'Tipo'
+        date_entry: 'Data de Entrada'
+        contatos: 'Intermediários'
+        sellers: 'Vendedores'
+      product/national:
+        nome: 'Nome'
+        type: 'Tipo'
+        date_entry: 'Data de Entrada'
+        contatos: 'Intermediários'
+        sellers: 'Vendedores'
       usuario/general:
         name: 'Nome'
         last_name: 'Sobrenome'
         role: 'Função'
-
   business:
     generals:
       index:
@@ -198,6 +216,84 @@ pt-BR:
         product: 'Produto'
         subject: 'Negócio'
         title: 'Lista de Negócios'
+      history_fields:
+        note: 'Anotação'
+        date_entry: 'Data'
+      form:
+        name: 'Nome'
+        contacts: 'Contatos'
+        add_history: 'Adicionar Histórico'
+        add_note: 'Adicionar Anotação'
+        condition: 'Condição'
+        intermediary: 'Intermediário'
+        select_product: 'Selecionar Produto'
+        select_contato: 'Selectionar Contato'
+    internationals:
+      index:
+        contato: 'Contato'
+        date_entry: 'Data de Entrada'
+        destroy: 'Deletar'
+        destroy_msg: 'Tem certeza que deseja deletar'
+        edit: 'Editar'
+        new: 'Novo Negócio'
+        product: 'Produto'
+        show: 'Ver'
+        subject: 'Negócio'
+        title: 'Operações Internacionais'
+      new:
+        back: 'Voltar'
+        title: 'Nova Operação'
+      edit:
+        back: 'Voltar'
+        show: 'Ver'
+        title: 'Editar Operação'
+      show:
+        back: 'Voltar'
+        contato: 'Contato'
+        date_entry: 'Data de Entrada'
+        edit: 'Editar'
+        product: 'Produto'
+        subject: 'Operação'
+        title: 'Lista de Operações'
+      history_fields:
+        note: 'Anotação'
+        date_entry: 'Data'
+      form:
+        name: 'Nome'
+        contacts: 'Contatos'
+        add_history: 'Adicionar Histórico'
+        add_note: 'Adicionar Anotação'
+        condition: 'Condição'
+        intermediary: 'Intermediário'
+        select_product: 'Selecionar Produto'
+        select_contato: 'Selectionar Contato'
+    nationals:
+      index:
+        contato: 'Contato'
+        date_entry: 'Data de Entrada'
+        destroy: 'Deletar'
+        destroy_msg: 'Tem certeza que deseja deletar'
+        edit: 'Editar'
+        new: 'Novo Negócio'
+        product: 'Produto'
+        show: 'Ver'
+        subject: 'Negócio'
+        title: 'Negócios'
+      new:
+        back: 'Voltar'
+        title: 'Novo Negócio'
+      edit:
+        back: 'Voltar'
+        show: 'Ver'
+        title: 'Editar Negócio'
+      show:
+        back: 'Voltar'
+        contato: 'Contato'
+        date_entry: 'Data de Entrada'
+        edit: 'Editar'
+        product: 'Produto'
+        subject: 'Operação'
+        title: 'Lista de Negócio'
       history_fields:
         note: 'Anotação'
         date_entry: 'Data'
@@ -269,7 +365,7 @@ pt-BR:
         edit:
           back: 'Voltar'
           show: 'Ver Cliente'
-          title: 'Adicionar Cliente'
+          title: 'Editar Cliente'
         show:
           brand: 'Nome Fantasia'
           contato: 'Contato'
@@ -311,6 +407,22 @@ pt-BR:
         to: 'Para'
   product:
     generals:
+      form:
+        note: 'Observações'
+      edit:
+        title: 'Editar Produto'
+      new:
+        title: 'Adicionar Produto'
+    internationals:
+      form:
+        note: 'Observações'
+      edit:
+        title: 'Editar Produto Internacional'
+      new:
+        title: 'Adicionar Produto Internacional'
+    nationals:
+      form:
+        note: 'Observações'
       edit:
         title: 'Editar Produto'
       new:
@@ -322,13 +434,22 @@ pt-BR:
       add_banco: 'Adicionar Banco'
       add_cliente: 'Adicionar Cliente'
       add_documents: 'Adicionar Documento'
+      add_international: 'Adicionar Operação Internacional'
       add_partner_documents: 'Adicionar Documentação dos Sócios'
+      add_product_international: 'Adicionar Produto Internacional'
+      add_product_national: 'Adicionar Produto'
+      add_site: 'Adicionar Contato Site'
       add_warranty_documents: 'Adicionar Documentação das Garantias'
       bancos: 'Ver Bancos'
       clientes: 'Ver Clientes'
       credito:  'Crédito'
       documents: 'Documentação'
+      international: 'Op. Internacionais'
       partner_documents: 'Documentação dos Sócios'
+      product: 'Produto'
+      product_international: 'Operações Internacionais'
+      product_national: 'Produtos'
+      site: 'Contato Via Site'
       warranty_documents: 'Documentação da Garantia'
   #Basicos
   About: Sobre
@@ -441,7 +562,6 @@ pt-BR:
     form:
       add_document: 'Adicionar Documento'
       documents: 'Documentação Padrão'
-
   newsletters:
     model:
       status:
@@ -475,7 +595,6 @@ pt-BR:
       title: "Adicionar Email"
       show: 'Ver'
       back: 'Voltar'
-
   helpers:
     label:
       newsletter:
