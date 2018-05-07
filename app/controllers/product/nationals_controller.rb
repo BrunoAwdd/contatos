@@ -1,11 +1,11 @@
-class Product::GeneralsController < ApplicationController
+class Product::NationalsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product::General.all
+    @products = Product::National.all
   end
 
   # GET /products/1
@@ -15,7 +15,7 @@ class Product::GeneralsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product::General.new
+    @product = Product::National.new
   end
 
   # GET /products/1/edit
@@ -25,7 +25,7 @@ class Product::GeneralsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product::General.new(product_params)
+    @product = Product::National.new(product_params)
 
     respond_to do |format|
       if @product.save
@@ -58,7 +58,7 @@ class Product::GeneralsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to product_generals_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -66,12 +66,12 @@ class Product::GeneralsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product::General.find(params[:id])
+      @product = Product::National.find(params[:id])
       @product.documents.build
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product_general).permit(:nome, :type, :date_entry, {contato_ids:[]}, {seller_ids:[]}, {notes_attributes: [:id, :data, :nota, :_destroy]} )
+      params.require(:product_national).permit(:nome, :type, :date_entry, {contato_ids:[]}, {seller_ids:[]}, {notes_attributes: [:id, :data, :nota, :_destroy]} )
     end
 end
