@@ -1,0 +1,17 @@
+<div class="form-group col-md-12">
+  <%= inter.hidden_field :id %>
+  <div id="contato">
+    <fieldset id="contatos">
+      <div class="contato_menu" id="alfa">
+        <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                    :remote => true, data: { modal: true } %>
+        <%= inter.association :contato, label_method: :full_name %>
+      </div>
+      <table class="table table-stripped fields"></table>
+
+    </fieldset>
+  </div>
+</div>
+<div class="form-group col-md-12">
+  <%= inter.text_area :note, rows: "5", class: 'form-control', placeholder:true%>
+</div>

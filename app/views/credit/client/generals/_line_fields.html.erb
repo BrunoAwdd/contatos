@@ -19,10 +19,8 @@
   <div class="form-group col-md-4">
     <div class=""><%= f.input :credit_bank_general_id, :collection => Credit::Bank::General.all.collect {|p| [p.full_name, p.id]}, include_blank: t('Contact.view.none') %></div>
   </div>
-
   <div class="form-group col-md-3">
-    <label class="control-label date optional" for="credit_client_general_lines_attributes_0_date">Data</label>
-    <div class=""><%= f.date_field :date,  class: 'form-control', placeholder:true%></div>
+    <div class=""><%= f.input :date, as: :date_field %></div>
   </div>
 
   <div class="form-group col-md-2">

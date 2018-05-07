@@ -86,24 +86,36 @@
   </div>
 <% end %>
 
-<% if !@credit_client_general.lines.nil? %>
+<% unless @credit_client_general.lines.nil? %>
   <div class="row title_square">
     <div class="col-xs-12">
       <h4><strong>Linhas de Crédito</strong></h4>
     </div>
   </div>
-
-  <div class="row square">
-    <% @credit_client_general.lines.each do |line| %>
-        <div class="row top-buffer">
-          <div class="col-xs-4"><strong> <%= line.name %></strong></div>
-          <div class="col-xs-2"> <%= line.format_number %></div>
-          <div class="col-xs-2"> <%= !line.date.nil? ? line.date.strftime("%d/%m/%Y"): 'Data não registrada' %></div>
-          <div class="col-xs-2"> <%= line.get_status %></div>
-          <div class="col-xs-12"> <%= line.note %></div>
+  <% variant = '' %>
+  <% conference = 0 %>
+  <% @credit_client_general.lines.sort_by {|line| line.credit_bank_general.name}.each do |line| %>
+    <% if variant != line.credit_bank_general.name %>
+      <% if conference == 0 %>
+        <% conference = 1 %>
+      <% else %>
         </div>
+      <% end %>
+      <div class="row square">
+        <h4><%= line.credit_bank_general.name + ' - ' + line.credit_bank_general.agency %></h4>
+        <% variant = line.credit_bank_general.name %>
+    <% else %>
+
     <% end %>
-  </div>
+    <div class="row top-buffer">
+      <div class="col-xs-4"><strong> <%= line.name %></strong></div>
+      <div class="col-xs-2"> <%= line.format_number %></div>
+      <div class="col-xs-2"> <%= !line.date.nil? ? line.date.strftime("%d/%m/%Y"): 'Data não registrada' %></div>
+      <div class="col-xs-2"> <%= line.get_status %></div>
+      <div class="col-xs-12"> <%= line.note %></div>
+    </div>
+    <% end %>
+    </div>
 <% end %>
 
 <% if !@credit_client_general.documents.nil? %>
@@ -145,7 +157,7 @@
 <% if !@credit_client_general.partners.nil? %>
     <div class="row  title_square">
       <div class="col-xs-12">
-        <h4><strong>Partners</strong></h4>
+        <h4><strong>Sócios</strong></h4>
       </div>
     </div>
 
@@ -253,38 +265,39 @@
     </div>
 <% end %>
 
-<% if !@credit_client_general.intermediary.nil? %>
-  <% intermediary = @credit_client_general.intermediary %>
+<% unless @credit_client_general.intermediaries.nil? %>
   <div class="row  title_square">
     <div class="col-xs-12">
       <h4><strong>Intermediário</strong></h4>
     </div>
   </div>
-  <div class="row square">
-    <% if !intermediary.contato.nil? %>
-      <div class="col-xs-12">Nome: <%= intermediary.contato.full_name %></div>
-      <div class="col-xs-6">
-        <h5><strong>Telefones</strong></h5>
-        <ul>
-          <% intermediary.contato.telefones.each do |phone| %>
-              <li><%= "(#{phone.ddd}) #{phone.telefone} - #{phone.tipo}" %></li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="col-xs-6">
-        <h5><strong>Emails</strong></h5>
-        <ul>
-          <% intermediary.contato.emails.each do |email| %>
-              <li><%= email.email %></li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="col-xs-12">
-        <h5><strong>Observações</strong></h5>
-        <%= intermediary.note %>
-      </div>
-    <% end %>
-  </div>
+  <% @credit_client_general.intermediaries.each do  |intermediary| %>
+    <div class="row square">
+      <% unless intermediary.contato.nil? %>
+        <div class="col-xs-12">Nome: <%= intermediary.contato.full_name %></div>
+        <div class="col-xs-6">
+          <h5><strong>Telefones</strong></h5>
+          <ul>
+            <% intermediary.contato.telefones.each do |phone| %>
+                <li><%= "(#{phone.ddd}) #{phone.telefone} - #{phone.tipo}" %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="col-xs-6">
+          <h5><strong>Emails</strong></h5>
+          <ul>
+            <% intermediary.contato.emails.each do |email| %>
+                <li><%= email.email %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="col-xs-12">
+          <h5><strong>Observações</strong></h5>
+          <%= intermediary.note %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
 <% if @credit_client_general.legals.nil? %>
@@ -319,7 +332,17 @@
         </tr>
       </thead>
       <tbody>
+      <% bank = '' %>
+
+
       <% @credit_client_general.notes.each do |note| %>
+          <% if bank == '' %>
+              <% note.credit_bank_general.nil? ? bank = 0 : bank = note.credit_bank_general.id %>
+              <tr><th colspan="2"><h4>Geral</h4></th></tr>
+          <% elsif bank != note.credit_bank_general_id && bank != 0 %>
+              <% bank = note.credit_bank_general_id %>
+              <tr><th colspan="2"><h4><%= note.credit_bank_general %></h4></th></tr>
+          <% end %>
         <tr>
           <td scope="row"><%= note.date.strftime("%d/%m/%Y") %></td>
           <td><%= note.note %></td>
