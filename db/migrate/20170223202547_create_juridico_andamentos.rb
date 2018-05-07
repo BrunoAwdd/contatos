@@ -1,4 +1,4 @@
-class CreateJuridicoAndamentos < ActiveRecord::Migration
+class CreateJuridicoAndamentos < ActiveRecord::Migration[5.0]
   def change
     create_table :juridico_andamentos do |t|
       t.text :nota

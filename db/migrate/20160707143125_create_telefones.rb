@@ -1,4 +1,4 @@
-class CreateTelefones < ActiveRecord::Migration
+class CreateTelefones < ActiveRecord::Migration[5.0]
   def change
     create_table :telefones do |t|
       t.string :tipo

@@ -1,4 +1,4 @@
-class CreateEnderecos < ActiveRecord::Migration
+class CreateEnderecos < ActiveRecord::Migration[5.0]
   def change
     create_table :enderecos do |t|
       t.string :tipo

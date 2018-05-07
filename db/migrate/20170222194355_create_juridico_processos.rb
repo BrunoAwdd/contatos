@@ -1,4 +1,4 @@
-class CreateJuridicoProcessos < ActiveRecord::Migration
+class CreateJuridicoProcessos < ActiveRecord::Migration[5.0]
   def change
     create_table :juridico_processos do |t|
       t.string :number

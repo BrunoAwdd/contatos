@@ -4,7 +4,7 @@ class CreateBusinessGenerals < ActiveRecord::Migration[5.0]
       t.datetime :date_entry
       t.string :subject
       t.references :contato, foreign_key: true
-      t.references :product_generals, foreign_key: true
+      t.references :product_general, foreign_key: true
 
       t.timestamps
     end

@@ -10,7 +10,7 @@ class AddContatosToBusinessGenerals < ActiveRecord::Migration[5.0]
     end
 
     remove_foreign_key :business_generals, :contatos
-    remove_column :business_generals, :contatos, :integer
+    remove_column :business_generals, :contato_id, :integer
 
   end
 end
