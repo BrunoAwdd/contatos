@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root 'static_pages#home'
   get 'about', controller:  :static_pages
   get 'vcard/upload'
@@ -47,7 +48,15 @@ Rails.application.routes.draw do
     resources :notes
     resources :histories
     resources :generals
+    resources :internationals
+    resources :nationals
+    resources :sites
   end
+
+  namespace :internationals do
+    resources :generals
+  end
+
 
 
   namespace :juridico do
@@ -58,6 +67,11 @@ Rails.application.routes.draw do
   namespace :product do
     resources :documents
     resources :generals
+    resources :internationals
+    resources :nationals
+    namespace :thirdparty do
+      resources :bases
+    end
   end
 
 
