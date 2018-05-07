@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= full_title(yield(:title)) %></title>
+  <%= render 'layouts/rails_default' %>
+  <%= render 'layouts/shim' %>
+</head>
+<body>
+  <%= render 'layouts/header' %>
+  <div style="padding: 0 30px ">
+    <%= render 'layouts/messages' %>
+    <div id="modal-holder"></div>
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  </div>
+</body>
+</html>
