@@ -1,3 +1,5 @@
 class Credit::Client::Intermediary < ApplicationRecord
   belongs_to :credit_client_general
+  belongs_to :contato, foreign_key: 'contato_id', class_name: "::Contato"
+  accepts_nested_attributes_for :contato, :allow_destroy => true, :reject_if => :all_blank
 end

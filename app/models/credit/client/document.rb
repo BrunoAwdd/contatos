@@ -12,7 +12,7 @@ class Credit::Client::Document < ApplicationRecord
 
   def exemptionText
     if (exemption == 0)
-      ''
+      '-'
     else
       'Não exigido'
     end
@@ -32,14 +32,18 @@ class Credit::Client::Document < ApplicationRecord
   end
 
   def expiredText
-    self.expired? ?  'Vencido' : '';
+    self.expired? ?  'Vencido' : '-';
   end
 
   def expiredDays
     return (Date.today-self.date).to_i
   end
 
-
+  def expiredClass
+    if self.expired?
+      return "danger"
+    end
+  end
 
 
 end
