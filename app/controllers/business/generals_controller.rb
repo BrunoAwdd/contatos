@@ -20,7 +20,7 @@ class Business::GeneralsController < ApplicationController
     #@business_general.histories.build
     #@business_general.histories.build
     @business_general.notes.build
-    @business_general.build_intermediary
+    @business_general.intermediaries.build
     @business_general.contatos.build
   end
 
@@ -29,9 +29,7 @@ class Business::GeneralsController < ApplicationController
     @business_general.histories.build
     @business_general.notes.build
     @business_general.contatos.build
-    if     @business_general.intermediary.nil?
-      @business_general.build_intermediary
-    end
+    @business_general.intermediaries.build
   end
 
   # POST /business/generals
@@ -82,7 +80,8 @@ class Business::GeneralsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def business_general_params
-      params.require(:business_general).permit(:id, :name, :date_entry, :subject,  :product_general_id, :conditions,
+      params.require(:business_general).permit(:id, :name, :date_entry, :subject,  :product_general_id, :conditions, :type,
+                                               {intermediary_contato_ids:[]},
                                                {contato_ids:[]},
                                                {histories_attributes: [:id, :date_entry, :note]},
                                                {notes_attributes: [:id, :note]},
