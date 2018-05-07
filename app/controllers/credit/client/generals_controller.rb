@@ -16,12 +16,11 @@ class Credit::Client::GeneralsController < ApplicationController
 
   # GET /credit/client/generals/new
   def new
-    Rails.logger.debug "Year: #{Time.now.year}"
     @credit_client_general = Credit::Client::General.new
-    @credit_client_general.build_intermediary
     @credit_client_general.documents_build
     @credit_client_general.partners.build
     @credit_client_general.contatos.build
+    @credit_client_general.intermediary_contatos.build
     @credit_client_general.credit_client_contatos.build
     hidrateEdit
   end
@@ -34,7 +33,6 @@ class Credit::Client::GeneralsController < ApplicationController
   # POST /credit/client/generals.json
   def create
     @credit_client_general = Credit::Client::General.new(credit_client_general_params)
-
     respond_to do |format|
       if @credit_client_general.save
         format.html { redirect_to @credit_client_general, notice: 'General was successfully created.' }
@@ -49,8 +47,8 @@ class Credit::Client::GeneralsController < ApplicationController
   # PATCH/PUT /credit/client/generals/1
   # PATCH/PUT /credit/client/generals/1.json
   def update
-
     respond_to do |format|
+      @credit_client_general.updated_at = Time.now
       if @credit_client_general.update(credit_client_general_params)
         format.html { redirect_to @credit_client_general, notice: 'General was successfully updated.' }
         format.json { render :show, status: :ok, location: @credit_client_general }
@@ -103,7 +101,7 @@ class Credit::Client::GeneralsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def credit_client_general_params
-      params.require(:credit_client_general).permit(:id, :name, :brand, :cnpj, :condition, contato_ids:[],
+      params.require(:credit_client_general).permit(:id, :name, :brand, :cnpj, :condition, contato_ids:[], intermediary_contato_ids:[],
                   addresses_attributes: [:id, :street, :number, :neighborhood, :city, :state, :country, :zipcode, :_destroy],
                   credit_client_contatos_attributes: [:id, :credit_client_id, :contato_id,
                                                       contato_attributes: [:id, :first_name, :last_name, :web_page,  :_destroy,
@@ -127,7 +125,7 @@ class Credit::Client::GeneralsController < ApplicationController
                             warranty_documents_attributes: [:id, :document_list_id, :status, :exemption, :date, :_destroy],
                             warranty_info_attributes: [:id, :value, :price, :condition, :notes]
                   ],
-                  notes_attributes: [:id, :date, :note, :_destroy],
+                  notes_attributes: [:id, :date, :note, :credit_bank_general_id, :_destroy],
                   legals_attributes: [:id, :number, :date, :_destroy, :note],
                   intermediary_attributes: [:id, :name, :note, :contato_id, contato_attributes: [:id, :first_name, :last_name, :web_page,  :_destroy,
                                                                                      email_attributes: [:id, :email, :_destroy],
