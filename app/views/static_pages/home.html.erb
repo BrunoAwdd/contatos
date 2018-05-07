@@ -1,10 +1,130 @@
 <div class="center jumbotron">
-  <h1>Bem vindo ao cadastro de Contatos</h1>
+  <h1>Bem vindo ao Aplicativo Alternative</h1>
 
   <h2>
-    Página inicial do Cadastro
+    Página inicial
   </h2>
 
   <%= #link_to "Sign up now!", '#', class: "btn btn-lg btn-primary"
   %>
 </div>
+<div class="row">
+  <!-- Credit -->
+  <section class="col-md-6 col-sm-12">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th colspan="3" class="center"><h3>Crédito</h3></th>
+      </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th><%= t('.brand') %></th>
+          <th><%= t('.cnpj') %></th>
+          <th><%= t('.date') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @credit_client_generals.each do |credit_client_general| %>
+          <tr>
+            <td><%= link_to credit_client_general.brand, credit_client_general %></td>
+            <td><%= credit_client_general.format_cnpj %></td>
+            <td><%= credit_client_general.updated_at.strftime("%d/%m/%Y") %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </section>
+  <!-- End of Credit -->
+  <!-- International -->
+  <section class="col-md-6 col-sm-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th colspan="4" class="center"><h3>Internacional</h3></th>
+        </tr>
+      </thead>
+      <thead>
+      <tr>
+        <th><%= t('.name') %></th>
+        <th><%= t('.assunto') %></th>
+        <th><%= t('.produto') %></th>
+        <th><%= t('.date') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @business_internationals.each do |business_international| %>
+          <tr>
+            <td><%= link_to business_international.name, business_international %></td>
+            <td><%= business_international.subject %></td>
+            <td><%= business_international.product_general.nil? ? '' : business_international.product_general.nome%></td>
+            <td><%= business_international.updated_at.strftime("%d/%m/%Y") %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </section>
+  <!-- End of International -->
+  <!-- National -->
+  <section class="col-md-6 col-sm-12">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th colspan="4" class="center"><h3>Negócios</h3></th>
+      </tr>
+      </thead>
+      <thead>
+      <tr>
+        <th><%= t('.name') %></th>
+        <th><%= t('.assunto') %></th>
+        <th><%= t('.produto') %></th>
+        <th><%= t('.date') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @business_nationals.each do |business_national| %>
+          <tr>
+            <td><%= link_to business_national.name, business_national %></td>
+            <td><%= business_national.subject %></td>
+            <td><%= business_national.product_general.nil? ? '' : business_national.product_general.nome%></td>
+            <td><%= business_national.updated_at.strftime("%d/%m/%Y") %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </section>
+  <!-- End of National -->
+  <!-- Site -->
+  <section class="col-md-6 col-sm-12">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th colspan="4" class="center"><h3>Site</h3></th>
+      </tr>
+      </thead>
+      <thead>
+      <tr>
+        <th><%= t('.name') %></th>
+        <th><%= t('.assunto') %></th>
+        <th><%= t('.produto') %></th>
+        <th><%= t('.date') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @business_sites.each do |business_site| %>
+          <tr>
+            <td><%= link_to business_site.name, business_site %></td>
+            <td><%= business_site.subject %></td>
+            <td><%= business_site.product_general.nil? ? '' : business_site.product_general.nome%></td>
+            <td><%= business_site.updated_at.strftime("%d/%m/%Y") %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </section>
+  <!-- End of Site -->
+</div>
+
+
+
+
