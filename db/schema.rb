@@ -359,7 +359,7 @@ ActiveRecord::Schema.define(version: 20180427161423) do
     t.date     "date_entry"
     t.integer  "contato_id"
     t.integer  "intermediary_id"
-    t.         "terms"
+    t.text     "terms"
     t.index ["contato_id"], name: "index_product_generals_on_contato_id"
     t.index ["intermediary_id"], name: "index_product_generals_on_intermediary_id"
   end
