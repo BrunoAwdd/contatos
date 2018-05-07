@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180301163245) do
+ActiveRecord::Schema.define(version: 20180427161423) do
 
   create_table "business_generals", force: :cascade do |t|
     t.datetime "date_entry"
     t.string   "subject"
-    t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "product_general_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "name"
-    t.text     "condition"
+    t.text     "conditions"
+    t.string   "type"
   end
 
   create_table "business_generals_contacts", id: false, force: :cascade do |t|
@@ -86,14 +87,6 @@ ActiveRecord::Schema.define(version: 20180301163245) do
     t.index ["credit_bank_general_id"], name: "index_credit_bank_addresses_on_credit_bank_general_id"
   end
 
-  create_table "credit_bank_emails", force: :cascade do |t|
-    t.string   "email"
-    t.integer  "credit_bank_general_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["credit_bank_general_id"], name: "index_credit_bank_emails_on_credit_bank_general_id"
-  end
-
   create_table "credit_bank_generals", force: :cascade do |t|
     t.string   "name"
     t.string   "agency"
@@ -101,16 +94,6 @@ ActiveRecord::Schema.define(version: 20180301163245) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["contato_id"], name: "index_credit_bank_generals_on_contato_id"
-  end
-
-  create_table "credit_bank_phones", force: :cascade do |t|
-    t.string   "ddd"
-    t.string   "phone"
-    t.string   "model"
-    t.integer  "credit_bank_general_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["credit_bank_general_id"], name: "index_credit_bank_phones_on_credit_bank_general_id"
   end
 
   create_table "credit_client_addresses", force: :cascade do |t|
@@ -139,15 +122,6 @@ ActiveRecord::Schema.define(version: 20180301163245) do
     t.index ["credit_document_id"], name: "index_credit_client_documents_on_credit_document_id"
   end
 
-  create_table "credit_client_emails", force: :cascade do |t|
-    t.string   "email"
-    t.string   "contact"
-    t.integer  "credit_client_general_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["credit_client_general_id"], name: "index_credit_client_emails_on_credit_client_general_id"
-  end
-
   create_table "credit_client_generals", force: :cascade do |t|
     t.string   "name"
     t.string   "brand"
@@ -160,8 +134,6 @@ ActiveRecord::Schema.define(version: 20180301163245) do
 
   create_table "credit_client_generals_contacts", force: :cascade do |t|
     t.integer "credit_client_id"
-    t.integer "contato_id"
-    t.index ["contato_id"], name: "index_credit_client_generals_contacts_on_contato_id"
     t.index ["credit_client_id"], name: "index_credit_client_generals_contacts_on_credit_client_id"
   end
 
@@ -192,6 +164,8 @@ ActiveRecord::Schema.define(version: 20180301163245) do
     t.integer  "credit_client_general_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "credit_bank_general_id"
+    t.index ["credit_bank_general_id"], name: "index_credit_client_notes_on_credit_bank_general_id"
     t.index ["credit_client_general_id"], name: "index_credit_client_notes_on_credit_client_general_id"
   end
 
@@ -223,16 +197,6 @@ ActiveRecord::Schema.define(version: 20180301163245) do
     t.datetime "updated_at",       null: false
     t.index ["document_list_id"], name: "index_credit_client_partner_documents_on_document_list_id"
     t.index ["partner_base_id"], name: "index_credit_client_partner_documents_on_partner_base_id"
-  end
-
-  create_table "credit_client_phones", force: :cascade do |t|
-    t.string   "ddd"
-    t.string   "phone"
-    t.string   "model"
-    t.integer  "credit_client_general_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["credit_client_general_id"], name: "index_credit_client_phones_on_credit_client_general_id"
   end
 
   create_table "credit_client_warranty_addresses", force: :cascade do |t|
@@ -364,11 +328,11 @@ ActiveRecord::Schema.define(version: 20180301163245) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "newsletters_products", force: :cascade do |t|
+  create_table "newsletters_product_generals", force: :cascade do |t|
     t.integer "newsletter_id"
-    t.integer "product_id"
-    t.index ["newsletter_id"], name: "index_newsletters_products_on_newsletter_id"
-    t.index ["product_id"], name: "index_newsletters_products_on_product_id"
+    t.integer "general_id"
+    t.index ["general_id"], name: "index_newsletters_product_generals_on_general_id"
+    t.index ["newsletter_id"], name: "index_newsletters_product_generals_on_newsletter_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -389,8 +353,15 @@ ActiveRecord::Schema.define(version: 20180301163245) do
 
   create_table "product_generals", force: :cascade do |t|
     t.string   "nome"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "type"
+    t.date     "date_entry"
+    t.integer  "contato_id"
+    t.integer  "intermediary_id"
+    t.         "terms"
+    t.index ["contato_id"], name: "index_product_generals_on_contato_id"
+    t.index ["intermediary_id"], name: "index_product_generals_on_intermediary_id"
   end
 
   create_table "product_notes", force: :cascade do |t|
@@ -400,6 +371,32 @@ ActiveRecord::Schema.define(version: 20180301163245) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_notes_on_product_id"
+  end
+
+  create_table "product_thirdparty_bases", force: :cascade do |t|
+    t.string   "name"
+    t.date     "date_entry"
+    t.integer  "contato_id"
+    t.integer  "intermediary_id"
+    t.text     "terms"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["contato_id"], name: "index_product_thirdparty_bases_on_contato_id"
+    t.index ["intermediary_id"], name: "index_product_thirdparty_bases_on_intermediary_id"
+  end
+
+  create_table "product_thirdparty_notes", force: :cascade do |t|
+    t.date     "date"
+    t.text     "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products_sellers", force: :cascade do |t|
+    t.integer "product_general_id"
+    t.integer "contato_id"
+    t.index ["contato_id"], name: "index_products_sellers_on_contato_id"
+    t.index ["product_general_id"], name: "index_products_sellers_on_product_general_id"
   end
 
   create_table "telefones", force: :cascade do |t|
