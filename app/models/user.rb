@@ -12,6 +12,4 @@ class User < ActiveRecord::Base
       return self.usuario_general.full_name
     end
   end
-
-
 end
