@@ -168,7 +168,6 @@ $ ->
 
   #CALL ADD FUNCTION
   startAdd = ()->
-    console.log 'Start'
     fields = [['addresses', false], ['andamentos', false], ['contacts', false], ['contatos', true], ['documents', false], ['emails', false],
       ['enderecos', false], ['histories', false], ['legals', false], ['lines', false], ['notes', false], ['partners', false], ['warranties', false],
       ['phones', false], ['telefones', false]]
@@ -178,7 +177,7 @@ $ ->
   #JQUERY 3RD PARTY CONFIG
   #VALIDATE CONFIG
 
-  $(document).ready ->
+  documentReady = () ->
     $('.date').mask '00/00/0000'
     #$('.date2').mask '0000-00-00'
     $('.time').mask '00:00:00'
@@ -205,6 +204,16 @@ $ ->
         fallback: '/'
       placeholder: '__/__/____'
     $('.selectonfocus').mask '00/00/0000', selectOnFocus: true
+
+    $('#myTabs a').click (e) ->
+      e.preventDefault()
+      $(this).tab 'show'
+    $('#myTabs2 a').click (e) ->
+      e.preventDefault()
+      $(this).tab 'show'
+    $(document).on 'click', '#btnModal', ->
+      $('.modal').modal()
+    getContatos()
     return false
 
   #CHOSEN
@@ -213,6 +222,14 @@ $ ->
       allow_single_deselect: true
   startAdd()
   chose()
+  documentReady()
+
+  $(document).on 'turbolinks:load', ->
+    chose()
+    documentReady()
+    #$('#screen-selection').chosen width: '190px'
+    return
+
   return false
 
 
