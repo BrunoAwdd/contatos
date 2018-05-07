@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= t('.title') %></h1>
+
+<table class="table">
+  <thead class="header-table">
+    <tr>
+      <th><%= t('.date_entry') %></th>
+      <th><%= t('.subject') %></th>
+      <th>Contato</th>
+      <th><%= t('.product') %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @business_generals.each do |business_international| %>
+      <tr>
+        <td><%= business_international.date_entry %></td>
+        <td><%= business_international.subject %></td>
+        <td><% business_international.contatos.each do |contato| %>
+          <%= contato.full_name %>,
+          <% end %></td>
+        <td><%= !business_international.product_general.nil? ? business_international.product_general.nome :  '--'  %></td>
+        <td><%= link_to t('.show'), business_international %></td>
+        <td><%= link_to t('.edit'), edit_business_international_path(business_international) %></td>
+        <td><%= link_to t('.destroy'), business_international, method: :delete, data: { confirm: t('.destroy_msg') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('.new'), new_business_international_path %>

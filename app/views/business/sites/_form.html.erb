@@ -1,0 +1,138 @@
+<script>
+    $( document ).ready(function() {
+        $('#myTabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+        $('#myTabs2 a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    });
+</script>
+<%= simple_form_for(business_general) do |f| %>
+  <% if business_general.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(business_general.errors.count, "error") %> prohibited this business_general from being saved:</h2>
+
+      <ul>
+      <% business_general.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <ul class="nav nav-tabs" id="myTabs">
+    <li class="active"><a class="tablink " href="#data" data-turbolinks="false">Dados Cadastrais</a></li>
+    <li><a class="tablink" href="#intermediary" data-turbolinks="false"><%= t('.intermediary') %></a></li>
+  </ul>
+  <div class="tab-content clearfix" style="color: #555555;
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      margin-bottom: 40px;
+      border-top-color: transparent;">
+    <div class="tab-pane active" id="data">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <%= f.input :name %>
+        </div>
+        <div class="col-md-12">
+          <%= f.input :type, collection:[['Negócio', 'Business::National'], ['Operações Internacionais', 'Business::International'], ['Entrada Via Site', 'Business::Site']]  %>
+        </div>
+        <div class="col-md-12">
+          <%= f.input :subject %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="form-inline col-md-3">
+          <%= f.label :date_entry, class: "form-label" %>
+          <%= f.date_field :date_entry, class: 'form-control'  %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :product_general, label_method: :nome %>
+        </div>
+        <div class="col-md-12">
+          <%= f.input :conditions %>
+        </div>
+      </div>
+      <div id="contato">
+        <fieldset id="contatos">
+          <div class="col-md-12">
+            <h4>
+              <%= t('.contacts') %>
+            </h4>
+            <hr>
+          </div><br>
+          <div class="contato_menu" id="alfa">
+            <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                        :remote => true, data: { modal: true } %>
+            <%= f.association :contatos, label_method: :full_name, input_html: {class: 'contato'}  %>
+          </div>
+
+          <table class="table table-stripped fields"></table>
+
+        </fieldset>
+      </div>
+
+      <hr>
+      <fieldset id="notes">
+        <div class="col-md-12">
+          <h4><%= t('.add_note') %></h4>
+
+        </div><br>
+        <div class="fields">
+          <%= f.fields_for :notes do |note| %>
+              <%= render 'note_fields', :f => note %>
+          <% end %>
+        </div>
+        <div class='links'>
+          <button class="btn" id="btn_notes"><%= link_to_add_association t('.add_note'), f, :notes %></button>
+        </div>
+        <hr>
+      </fieldset>
+      <hr>
+      <fieldset id="histories">
+        <div class="col-md-12">
+          <h4><%= t('.add_history') %></h4>
+        </div><br>
+        <div class="fields">
+          <%= f.fields_for :histories do |history| %>
+              <%= render 'history_fields', :f => history %>
+          <% end %>
+        </div>
+        <div class='links'>
+          <button class="btn" id="btn_histories"><%= link_to_add_association t('.add_history'), f, :histories %></button>
+        </div>
+        <hr>
+      </fieldset>
+
+
+    </div>
+    <div class="tab-pane" id="intermediary">
+      <% #@TODO Colocar telefone como campo único%>
+      <fieldset id="intermediarys" class="col-md-12">
+        <div class="fields row">
+          <fieldset id="contatos">
+            <div class="col-md-12">
+              <h4>
+                <%= t('.contacts') %>
+              </h4>
+              <hr>
+            </div><br>
+            <div class="contato_menu" id="alfa">
+              <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                          :remote => true, data: { modal: true } %>
+              <%= f.association :intermediary_contatos, label_method: :full_name %>
+            </div>
+            <table class="table table-stripped fields"></table>
+          </fieldset>
+
+        </div>
+      </fieldset>
+    </div>
+  </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

@@ -1,0 +1,60 @@
+<div class="form-item">
+  <div class="row">
+    <div class="col-md-12">
+      <h4><%= I18n.t('Contact.view.Contact_Information') %></h4>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :id, label:'Contato', as: :select, collection: Contato.all, :label_method => :full_name,  input_html: {class: 'chosen-select credit_client_general_contato_id'} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :first_name%>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :last_name%>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :web_page%>
+    </div>
+  </div>
+
+  <fieldset id="emails">
+    <div class="col-md-12">
+      <h4>
+        <button class="btn" id="btn_emails">
+          <%= link_to_add_association '+', f, :emails, partial: 'credit/client/generals/contatos/email_fields' %>
+        </button>
+        <%= I18n.t('Contact.model.Emails') %>
+      </h4>
+      <hr>
+    </div><br>
+    <div class="fields">
+      <%= f.simple_fields_for :emails do |email| %>
+          <%= render 'contatos/email_fields', :f => email %>
+      <% end %>
+    </div>
+  </fieldset>
+
+  <fieldset id="telefones">
+    <div class="col-md-12">
+      <h4>
+        <button class="btn" id="btn_telefones">
+          <%= link_to_add_association '+', f, :telefones, partial: 'credit/client/generals/contatos/phone_fields' %>
+        </button>
+        <%= I18n.t('Contact.model.Phones') %>
+      </h4>
+      <hr>
+    </div><br>
+    <div class="fields">
+      <%= f.simple_fields_for :telefones do |telefone| %>
+          <%= render 'contatos/phone_fields', :f => telefone %>
+      <% end %>
+    </div>
+  </fieldset>
+
+</div>
+

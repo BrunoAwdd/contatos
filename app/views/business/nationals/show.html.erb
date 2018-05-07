@@ -1,0 +1,148 @@
+<style>
+  .square{
+    color: #555555;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+  }
+  .top_square{
+    color: #555555;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+  }
+  .title_square{
+    color: #555555;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+  }
+</style>
+<div class="row" style="margin: 40px 0;">
+  <div class="col-xs-12">
+    <img src="<%= request.base_url %>/img/logo.png">
+  </div>
+</div>
+<div class="row top_square">
+  <div class="col-xs-8">
+    <strong>Nome:</strong>
+    <%= @business_general.name %>
+  </div>
+  <div class="col-xs-4">
+    <strong>Assunto:</strong>
+    <%= @business_general.subject %>
+  </div>
+  <div class="col-xs-8">
+    <strong>Data de Entrada: </strong>
+    <%= @business_general.date_entry %>
+  </div>
+  <div class="col-xs-4">
+    <strong>Produto:</strong>
+    <%= !@business_general.product_general.nil? ? @business_general.product_general.nome :  '--'  %>
+  </div>
+  <div class="col-xs-12">
+    <strong>Condições</strong>
+    <%= @business_general.conditions %>
+  </div>
+</div>
+
+<% if !@business_general.contatos.nil? %>
+    <div class="row  title_square">
+      <div class="col-xs-12">
+        <h4><strong><%= t('.contato') %></strong></h4>
+      </div>
+    </div>
+    <div class="row square">
+      <% @business_general.contatos.each do |contato| %>
+          <div class="col-xs-12">Nome: <%= contato.full_name %></div>
+          <div class="col-xs-6">
+            <h5><strong>Telefones</strong></h5>
+            <ul>
+              <% contato.telefones.each do |phone| %>
+                  <li><%= "(#{phone.ddd}) #{phone.telefone} - #{phone.tipo}" %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="col-xs-6">
+            <h5><strong>Emails</strong></h5>
+            <ul>
+              <% contato.emails.each do |email| %>
+                  <li><%= email.email %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
+<% if (!@business_general.intermediaries.nil?) %>
+  <div class="row  title_square">
+    <div class="col-xs-12">
+      <h4><strong>Intermediário</strong></h4>
+    </div>
+  </div>
+  <% @business_general.intermediaries.each do  |intermediary| %>
+    <div class="row square">
+      <% if !intermediary.contato.nil? %>
+          <div class="col-xs-12">Nome: <%= intermediary.contato.full_name %></div>
+          <div class="col-xs-6">
+            <h5><strong>Telefones</strong></h5>
+            <ul>
+              <% intermediary.contato.telefones.each do |phone| %>
+                  <li><%= "(#{phone.ddd}) #{phone.telefone} - #{phone.tipo}" %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="col-xs-6">
+            <h5><strong>Emails</strong></h5>
+            <ul>
+              <% intermediary.contato.emails.each do |email| %>
+                  <li><%= email.email %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="col-xs-12">
+            <h5><strong>Observações</strong></h5>
+            <%= intermediary.note %>
+          </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if (!@business_general.notes.nil?) %>
+  <div class="row title_square">
+    <div class="col-xs-12">
+      <h4><strong>Anotacões</strong></h4>
+    </div>
+  </div>
+  <div class="row square">
+    <% @business_general.notes.each do |note| %>
+        <div class="col-xs-12"><%= note.note %></div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if (!@business_general.histories.nil?) %>
+<div class="row title_square">
+  <div class="col-xs-12">
+    <h4><strong>Histórico</strong></h4>
+  </div>
+</div>
+<div class="row square">
+  <% @business_general.histories.each do |history| %>
+      <div class="col-xs-3">Data: <%= history.date_entry.strftime("%d/%m/%Y") %></div>
+      <div class="col-xs-9"><%= history.note %></div>
+  <% end %>
+</div>
+<% end %>
+
+
+
+<div class="hidden-print">
+  <%= link_to t('.edit'), edit_business_national_path(@business_general) %> |
+  <%= link_to t('.back'), business_nationals_path %>
+</div>
+
