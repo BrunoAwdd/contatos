@@ -1,11 +1,3 @@
-<script>
-    $( document ).ready(function() {
-        $('#myTabs a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
-    });
-</script>
 <%= simple_form_for(business_general) do |f| %>
   <% if business_general.errors.any? %>
     <div id="error_explanation">
@@ -32,6 +24,9 @@
       <div class="form-group row">
         <div class="col-md-12">
           <%= f.input :name %>
+        </div>
+        <div class="col-md-12">
+          <%= f.input :type, collection:[['Negócio', 'Business::National'], ['Operações Internacionais', 'Business::International'], ['Entrada Via Site', 'Business::Site']]  %>
         </div>
         <div class="col-md-12">
           <%= f.input :subject %>
@@ -103,34 +98,24 @@
 
     </div>
     <div class="tab-pane" id="intermediary">
+      <% #@TODO Colocar telefone como campo único%>
       <fieldset id="intermediarys" class="col-md-12">
-        <div class="row">
-          <%= f.simple_fields_for :intermediary do |inter| %>
-              <div class="form-group col-md-12">
-                <%= inter.hidden_field :id %>
-                <div id="contato">
-                  <fieldset id="contatos">
-                    <div class="col-md-12">
-                      <h4>
-                        <%= t('.contacts') %>
-                      </h4>
-                      <hr>
-                    </div><br>
-                    <div class="contato_menu" id="alfa">
-                      <%= link_to '+Novo Contato', new_ajaxcontato_path,
-                                  :remote => true, data: { modal: true } %>
-                      <%= inter.association :contato, label_method: :full_name, input_html: {class: 'contato'} %>
-                    </div>
+        <div class="fields row">
+          <fieldset id="contatos">
+            <div class="col-md-12">
+              <h4>
+                <%= t('.contacts') %>
+              </h4>
+              <hr>
+            </div><br>
+            <div class="contato_menu" id="alfa">
+              <%= link_to '+Novo Contato', new_ajaxcontato_path,
+                          :remote => true, data: { modal: true } %>
+              <%= f.association :intermediary_contatos, label_method: :full_name %>
+            </div>
+            <table class="table table-stripped fields"></table>
+          </fieldset>
 
-                    <table class="table table-stripped fields"></table>
-
-                  </fieldset>
-                </div>
-              </div>
-              <div class="form-group col-md-12">
-                <%= inter.input :note, rows: "5", class: 'form-control', placeholder:true%>
-              </div>
-          <% end %>
         </div>
       </fieldset>
     </div>

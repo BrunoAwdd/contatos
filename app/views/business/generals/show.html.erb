@@ -77,13 +77,13 @@
     </div>
 <% end %>
 
-<% if (!@business_general.intermediary.nil?) %>
-    <% intermediary = @business_general.intermediary %>
-    <div class="row  title_square">
-      <div class="col-xs-12">
-        <h4><strong>Intermediário</strong></h4>
-      </div>
+<% if (!@business_general.intermediaries.nil?) %>
+  <div class="row  title_square">
+    <div class="col-xs-12">
+      <h4><strong>Intermediário</strong></h4>
     </div>
+  </div>
+  <% @business_general.intermediaries.each do  |intermediary| %>
     <div class="row square">
       <% if !intermediary.contato.nil? %>
           <div class="col-xs-12">Nome: <%= intermediary.contato.full_name %></div>
@@ -109,6 +109,7 @@
           </div>
       <% end %>
     </div>
+  <% end %>
 <% end %>
 
 <% if (!@business_general.notes.nil?) %>
