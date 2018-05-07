@@ -1,4 +1,4 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-fixed-top  navbar-inverse">
   <div class="container">
     <%= link_to 'Alternative', root_path, id: 'logo' %>
     <nav>
@@ -28,13 +28,22 @@
             </li>
 
             <li class="dropdown">
-              <%= link_to contatos_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
-                  <%= t('Contact.model.Contact') %> <span class="caret"></span>
+              <%= link_to business_internationals_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do %>
+                  <%= t('.international') %> <span class="caret"></span>
               <% end %>
               <ul class="dropdown-menu">
-                <li><%= link_to t('Contact.view.List_Contacts'), contatos_path %></li>
-                <li role="separator" class="divider"></li>
-                <li><%= link_to t('Contact.view.Add_Contact'), new_contato_path %></li>
+                <li><%= link_to t('.international'), business_internationals_path %></li>
+                <li><%= link_to t('.add_international'), new_business_international_path %></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <%= link_to business_sites_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do %>
+                  <%= t('.site') %> <span class="caret"></span>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li><%= link_to t('.site'), business_sites_path %></li>
+                <li><%= link_to t('.add_site'), new_business_site_path %></li>
               </ul>
             </li>
             
@@ -43,26 +52,21 @@
                   <%= t('.business') %> <span class="caret"></span>
               <% end %>
               <ul class="dropdown-menu">
-                <li><%= link_to t('.business'), business_generals_path %></li>
-                <li><%= link_to t('.add_business'), new_business_general_path %></li>
-                <li role="separator" class="divider"></li>
-                <li><%= link_to  t('Product.view.List_Products'), product_generals_path %></li>
-                <li><%= link_to t('Product.view.Add_Products'), new_product_general_path %></li>
+                <li><%= link_to t('.business'), business_nationals_path %></li>
+                <li><%= link_to t('.add_business'), new_business_national_path %></li>
               </ul>
-
-
             </li>
 
             <li class="dropdown">
-              <%= link_to newsletters_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
-                  <%= t('Newsletter.model.Newsletter') %> <span class="caret"></span>
+              <%= link_to product_generals_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+                  <%= t('.product') %> <span class="caret"></span>
               <% end %>
-
-
               <ul class="dropdown-menu">
-                <li><%= link_to t('Newsletter.view.List_Newsletter'), newsletters_path %></li>
+                <li><%= link_to  t('.product_international'), product_internationals_path %></li>
+                <li><%= link_to t('.add_product_international'), new_product_international_path %></li>
                 <li role="separator" class="divider"></li>
-                <li><%= link_to t('Newsletter.view.Add_Newsletter'), new_newsletter_path %></li>
+                <li><%= link_to  t('.product_national'), product_nationals_path %></li>
+                <li><%= link_to t('.add_product_national'), new_product_national_path %></li>
               </ul>
             </li>
 
@@ -79,9 +83,24 @@
 
             <li class="dropdown">
               <%= link_to contatos_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
-                  <%= current_user.email %> <span class="caret"></span>
+                  <%= t('Contact.model.Contact') %> <span class="caret"></span>
               <% end %>
               <ul class="dropdown-menu">
+                <li><%= link_to t('Contact.view.List_Contacts'), contatos_path %></li>
+                <li><%= link_to t('Contact.view.Add_Contact'), new_contato_path %></li>
+
+                <li><%= link_to t('Newsletter.view.List_Newsletter'), newsletters_path %></li>
+                <li><%= link_to t('Newsletter.view.Add_Newsletter'), new_newsletter_path %></li>
+              </ul>
+            </li>
+
+            <li class="dropdown bg-primary">
+              <%= link_to contatos_path, :class => 'dropdown-toggle', :'data-toggle' => 'dropdown', :role => 'button', :'aria-haspopup' => 'true', :'aria-expanded' => 'true' do  %>
+                   <span class="caret"></span>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li><a href="#" data-turbolinks="false"><%= current_user.email %></a></li>
+                <li role="separator" class="divider"></li>
                 <li> <%= link_to('Editar Informações', edit_usuario_general_path(current_user.id) )%></li>
                 <li> <%= link_to('Mensagens', usuario_messages_path )%></li>
                 <li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
