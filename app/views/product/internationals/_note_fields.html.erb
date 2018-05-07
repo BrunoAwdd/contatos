@@ -1,0 +1,15 @@
+<div class="form-group form-item row">
+  <%= f.hidden_field :id %>
+  <div class="col-md-4">
+    <%= f.input :data, as: :date_field,  input_html: {'maxlength' => "8", max: Date.today} %>
+  </div>
+  <div class="checkbox col-md-2">
+    <label>
+      <%= f.check_box :_destroy %>
+      <%= f.label :_destroy, I18n.t('remove') %>
+    </label>
+  </div>
+  <div class="col-md-12">
+    <%= f.input :nota, as: :text,  class: 'form-control'%>
+  </div>
+</div><hr>

@@ -1,0 +1,62 @@
+<%= simple_form_for(@product) do |f| %>
+    <ul class="nav nav-tabs" id="myTabs">
+      <li class="active"><a class="tablink " href="#data" data-turbolinks="false">Dados Cadastrais</a></li>
+      <li><a class="tablink" href="#note" data-turbolinks="false"><%= t('.note') %></a></li>
+    </ul>
+    <div class="tab-content clearfix" style="color: #555555;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        margin-bottom: 40px;
+        border-top-color: transparent;">
+      <div class="tab-pane active" id="data">
+        <div class="row">
+          <div class="col-md-8"><%= f.input :nome%></div>
+          <div class="col-md-4"><%= f.input :date_entry, as: :date_field %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-6"><%= f.association :contatos, label_method: :full_name %></div>
+          <div class="col-md-6"><%= f.association :sellers,  label_method: :full_name %></div>
+        </div>
+        <hr>
+
+
+
+        <% if (1 == 0) %>
+            <fieldset id="telefones">
+              <div class="col-md-12">
+                <h4><%= t('.documents') %></h4>
+              </div><br><br><br>
+              <div class="fields">
+                <%= f.fields_for :documents do |document| %>
+                    <%= render 'document_fields', :f => document %>
+                <% end %>
+              </div>
+              <div class='links'>
+                <button class="btn " id="btn_telefones"><%= link_to_add_association t('.add_document'), f, :documents %></button>
+              </div>
+              <hr>
+            </fieldset>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="note">
+        <% #@TODO nested register %>
+        <fieldset id="notes" class="col-md-12">
+          <div class="col-md-12">
+            <h4><button class="btn" id="btn_notes">
+              <%= link_to_add_association '+', f, :notes %>
+            </button>
+              <%= t('.note') %></h4>
+          </div><br>
+          <div class="fields row">
+            <%= f.simple_fields_for :notes do |note| %>
+                <%= render 'note_fields', :f => note %>
+            <% end %>
+          </div>
+        </fieldset>
+      </div>
+      <div class="actions">
+        <%= f.submit I18n.t('Send'), class: 'btn btn-primary' %>
+      </div>
+    </div>
+<% end %>

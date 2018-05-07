@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t('Product.model.Name') %>:</strong>
+  <%= @product.nome %>
+</p>
+
+<%= link_to I18n.t('Edit'), edit_product_national_path(@product) %> |
+<%= link_to I18n.t('Back'), product_nationals_path %>

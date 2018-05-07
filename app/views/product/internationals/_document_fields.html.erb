@@ -1,0 +1,11 @@
+<div class="form-group form-item">
+  <%= f.hidden_field :id %>
+  <%= f.label :name, t('.document_fields.name'), class: 'col-md-2 control-label' %>
+  <div class="col-md-6"><%= f.text_field :name, class: 'form-control' %></div>
+  <div class="checkbox col-md-4">
+    <label>
+      <%= f.check_box :_destroy %>
+      <%= f.label :_destroy, t('remove') %>
+    </label>
+  </div>
+</div>
